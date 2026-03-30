@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hubungi Kami — PT Trinity Berkah Mandiri</title>
+    <link rel="icon" type="image/png" href="../logo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { 950: '#020c1b', 900: '#0a192f', 800: '#112240', 50: '#f0f4f8', 100: '#e8edf5' },
+                        gold: { 400: '#D4AF37', 300: '#F4C430', 500: '#C5A028' },
+                    },
+                    fontFamily: {
+                        sans:   ['Inter', 'sans-serif'],
+                        header: ['Montserrat', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'gold-gradient': 'linear-gradient(135deg, #D4AF37 0%, #F4C430 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #f8f9fa; color: #374151; }
+
+        .glass-nav {
+            background: rgba(10, 25, 47, 0.97);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .reveal-text    { opacity: 0; transform: translateY(24px); transition: all 0.7s ease-out; }
+        .reveal-visible { opacity: 1; transform: translateY(0); }
+
+        .btn-gold { position: relative; overflow: hidden; }
+        .btn-gold::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        .btn-gold:hover::after { left: 100%; }
+
+        .contact-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        }
+        .contact-card:hover {
+            border-color: #D4AF37;
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .form-input {
+            background: white;
+            border: 1px solid #e5e7eb;
+            color: #374151;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #D4AF37;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+        .form-input::placeholder { color: #9ca3af; }
+
+        .map-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 py-4 glass-nav">
+        <div class="container mx-auto px-6 md:px-12 flex justify-between items-center">
+            <a href="/" class="flex items-center gap-3 group">
+                <img src="../logo.png" alt="Trinity Logo" class="h-10 w-auto md:h-11 object-contain drop-shadow-[0_0_8px_rgba(212,175,55,0.3)] transition-transform duration-300 group-hover:scale-105">
+                <div class="flex flex-col">
+                    <span class="font-header font-bold text-lg text-white tracking-widest leading-none">TRINITY</span>
+                    <span class="font-header font-medium text-[10px] text-gold-400 tracking-[0.22em] leading-none mt-0.5">BERKAH MANDIRI</span>
+                </div>
+            </a>
+
+            <ul class="hidden md:flex gap-8 items-center">
+                <li><a href="/"        class="text-xs font-semibold text-gray-300 hover:text-gold-400 transition duration-300 tracking-widest uppercase">Beranda</a></li>
+                <li><a href="/#about"  class="text-xs font-semibold text-gray-300 hover:text-gold-400 transition duration-300 tracking-widest uppercase">Tentang</a></li>
+                <li><a href="/#divisi" class="text-xs font-semibold text-gray-300 hover:text-gold-400 transition duration-300 tracking-widest uppercase">Divisi</a></li>
+                <li><a href="/contact" class="text-xs font-semibold text-gold-400 tracking-widest uppercase border-b border-gold-400 pb-0.5">Kontak</a></li>
+                <li>
+                    <a href="/profile" class="px-5 py-2 text-xs font-bold text-navy-950 bg-gold-gradient rounded-sm hover:brightness-110 transition duration-300 tracking-wider shadow-[0_0_12px_rgba(212,175,55,0.35)]">
+                        COMPANY PROFILE
+                    </a>
+                </li>
+            </ul>
+
+            <button id="mobile-menu-btn" class="md:hidden text-gold-400 text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-navy-900 border-t border-navy-800 absolute w-full shadow-2xl">
+            <ul class="flex flex-col p-6 gap-4 text-center">
+                <li><a href="/"        class="block text-gray-300 hover:text-gold-400 text-sm tracking-widest uppercase">Beranda</a></li>
+                <li><a href="/#about"  class="block text-gray-300 hover:text-gold-400 text-sm tracking-widest uppercase">Tentang</a></li>
+                <li><a href="/#divisi" class="block text-gray-300 hover:text-gold-400 text-sm tracking-widest uppercase">Divisi</a></li>
+                <li><a href="/contact" class="block text-gold-400 text-sm tracking-widest uppercase">Kontak</a></li>
+                <li><a href="/profile" class="block text-gold-400 font-bold text-sm tracking-widest uppercase border border-gold-400 py-2 rounded">Company Profile</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Hero — light -->
+    <section class="pt-36 pb-16 bg-white border-b border-gray-100">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="max-w-2xl reveal-on-scroll">
+                <div class="flex items-center gap-4 mb-5">
+                    <span class="h-[2px] w-12 bg-gold-400"></span>
+                    <span class="text-gold-500 font-header text-xs font-bold tracking-[0.28em] uppercase">Get In Touch</span>
+                </div>
+                <h1 class="font-header font-extrabold text-5xl md:text-6xl text-navy-900 mb-5 leading-tight">
+                    Hubungi<br>
+                    <span class="text-transparent bg-clip-text bg-gold-gradient">Kami.</span>
+                </h1>
+                <p class="text-gray-500 text-lg leading-relaxed">
+                    Siap berdiskusi tentang kebutuhan bisnis Anda? Tim kami siap merespons dalam <span class="text-gold-500 font-semibold">1&times;24 jam</span>. Konsultasi pertama selalu <span class="text-gold-500 font-semibold">gratis</span>.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Cards -->
+    <section class="py-14 bg-gray-50">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <a href="https://wa.me/6281317819567" target="_blank"
+                   class="contact-card p-8 rounded-2xl reveal-on-scroll flex flex-col items-center text-center group no-underline">
+                    <div class="w-14 h-14 rounded-full bg-green-50 border border-green-100 flex items-center justify-center mb-5 text-2xl text-green-500 group-hover:bg-green-100 transition duration-300">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3 class="font-header font-bold text-navy-900 mb-1 tracking-wide uppercase text-sm">WhatsApp</h3>
+                    <p class="text-gray-400 text-xs uppercase tracking-widest mb-3">Chat Langsung</p>
+                    <span class="text-navy-900 font-bold text-base group-hover:text-gold-500 transition">+62 813-1781-9567</span>
+                    <span class="mt-4 text-xs text-gray-400 border border-gray-200 rounded-full px-4 py-1.5 group-hover:border-gold-400 group-hover:text-gold-500 transition">Chat Sekarang →</span>
+                </a>
+
+                <a href="mailto:trinityberkahmandiri@gmail.com"
+                   class="contact-card p-8 rounded-2xl reveal-on-scroll flex flex-col items-center text-center group no-underline">
+                    <div class="w-14 h-14 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center mb-5 text-2xl text-blue-400 group-hover:bg-blue-100 transition duration-300">
+                        <i class="far fa-envelope"></i>
+                    </div>
+                    <h3 class="font-header font-bold text-navy-900 mb-1 tracking-wide uppercase text-sm">Email</h3>
+                    <p class="text-gray-400 text-xs uppercase tracking-widest mb-3">Surat Elektronik</p>
+                    <span class="text-navy-900 font-bold text-sm group-hover:text-gold-500 transition break-all">trinityberkahmandiri@gmail.com</span>
+                    <span class="mt-4 text-xs text-gray-400 border border-gray-200 rounded-full px-4 py-1.5 group-hover:border-gold-400 group-hover:text-gold-500 transition">Kirim Email →</span>
+                </a>
+
+                <div class="contact-card p-8 rounded-2xl reveal-on-scroll flex flex-col items-center text-center">
+                    <div class="w-14 h-14 rounded-full bg-red-50 border border-red-100 flex items-center justify-center mb-5 text-2xl text-red-400 transition duration-300">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3 class="font-header font-bold text-navy-900 mb-1 tracking-wide uppercase text-sm">Kantor Pusat</h3>
+                    <p class="text-gray-400 text-xs uppercase tracking-widest mb-3">PT Trinity Berkah Mandiri</p>
+                    <span class="text-gray-600 text-sm leading-relaxed text-center">
+                        Kp. Rawaburung RT.01/RW.06,<br>
+                        Kel. Rawaburung, Kec. Kosambi,<br>
+                        Kab. Tangerang, Banten.
+                    </span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Form + Map -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
+
+                <!-- Form -->
+                <div class="reveal-on-scroll">
+                    <div class="flex items-center gap-4 mb-8">
+                        <span class="h-[2px] w-12 bg-gold-400"></span>
+                        <span class="font-header text-xs font-bold text-gold-500 tracking-widest uppercase">Kirim Pesan</span>
+                    </div>
+                    <h2 class="font-header text-3xl font-bold text-navy-900 mb-3 leading-tight">
+                        Ceritakan Kebutuhan <span class="text-gold-400">Anda.</span>
+                    </h2>
+                    <p class="text-gray-500 text-sm mb-10 leading-relaxed">
+                        Isi formulir di bawah — tim kami akan menghubungi Anda segera untuk mendiskusikan solusi terbaik.
+                    </p>
+
+                    <form id="contact-form" class="flex flex-col gap-5" onsubmit="handleSubmit(event)">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div class="flex flex-col gap-2">
+                                <label class="text-xs font-semibold text-gray-600 uppercase tracking-widest">Nama Lengkap</label>
+                                <input type="text" id="nama" placeholder="John Doe" required
+                                    class="form-input rounded-lg px-4 py-3 text-sm w-full">
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <label class="text-xs font-semibold text-gray-600 uppercase tracking-widest">Perusahaan</label>
+                                <input type="text" id="perusahaan" placeholder="PT. Contoh Maju"
+                                    class="form-input rounded-lg px-4 py-3 text-sm w-full">
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col gap-2">
+                            <label class="text-xs font-semibold text-gray-600 uppercase tracking-widest">Email</label>
+                            <input type="email" id="email" placeholder="nama@perusahaan.com" required
+                                class="form-input rounded-lg px-4 py-3 text-sm w-full">
+                        </div>
+
+                        <div class="flex flex-col gap-2">
+                            <label class="text-xs font-semibold text-gray-600 uppercase tracking-widest">Layanan yang Diminati</label>
+                            <select id="layanan" class="form-input rounded-lg px-4 py-3 text-sm w-full">
+                                <option value="">— Pilih Layanan —</option>
+                                <option value="company-profile">Company Profile</option>
+                                <option value="video">Video Korporasi</option>
+                                <option value="branding">Branding Identity</option>
+                                <option value="sosmed">Social Media</option>
+                                <option value="dokumentasi">Dokumentasi &amp; Fotografi</option>
+                                <option value="talentcore">TalentCore (HR &amp; ERP)</option>
+                                <option value="perizinan">Perizinan &amp; Pelaporan</option>
+                                <option value="outsourcing">Outsourcing</option>
+                                <option value="lainnya">Lainnya</option>
+                            </select>
+                        </div>
+
+                        <div class="flex flex-col gap-2">
+                            <label class="text-xs font-semibold text-gray-600 uppercase tracking-widest">Pesan</label>
+                            <textarea id="pesan" rows="5" placeholder="Ceritakan kebutuhan atau pertanyaan Anda..." required
+                                class="form-input rounded-lg px-4 py-3 text-sm w-full resize-none"></textarea>
+                        </div>
+
+                        <button type="submit"
+                            class="btn-gold mt-2 w-full py-4 bg-gold-gradient text-navy-950 font-bold text-xs tracking-widest uppercase rounded-lg hover:brightness-110 transition duration-300 shadow-[0_4px_20px_rgba(212,175,55,0.25)] flex items-center justify-center gap-3">
+                            <i class="fab fa-whatsapp text-base"></i>
+                            Kirim via WhatsApp
+                        </button>
+
+                        <p class="text-center text-xs text-gray-400">
+                            Pesan akan dikirim langsung ke WhatsApp kami untuk respons lebih cepat.
+                        </p>
+                    </form>
+                </div>
+
+                <!-- Map -->
+                <div class="reveal-on-scroll flex flex-col gap-6">
+                    <div class="flex items-center gap-4">
+                        <span class="h-[2px] w-12 bg-gold-400"></span>
+                        <span class="font-header text-xs font-bold text-gold-500 tracking-widest uppercase">Lokasi Kami</span>
+                    </div>
+                    <h2 class="font-header text-3xl font-bold text-navy-900 leading-tight">
+                        Temukan <span class="text-gold-400">Kami.</span>
+                    </h2>
+                    <p class="text-gray-500 text-sm leading-relaxed -mt-2">
+                        Kp. Rawaburung RT.01/RW.06, Kel. Rawaburung,<br>Kec. Kosambi, Kab. Tangerang, Banten.
+                    </p>
+
+                    <div class="map-container" style="height:420px;">
+                        <iframe
+                            src="https://maps.google.com/maps?q=Rawaburung,+Kosambi,+Tangerang,+Banten,+Indonesia&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                            width="100%" height="100%"
+                            style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Lokasi PT Trinity Berkah Mandiri">
+                        </iframe>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <a href="https://maps.google.com/maps?q=Rawaburung,+Kosambi,+Tangerang,+Banten,+Indonesia"
+                           target="_blank"
+                           class="flex items-center justify-center gap-2 py-3 px-4 border border-gray-200 text-gray-600 hover:border-gold-400 hover:text-gold-500 transition duration-300 rounded-xl text-xs font-semibold tracking-widest uppercase">
+                            <i class="fas fa-directions"></i> Petunjuk Arah
+                        </a>
+                        <a href="https://wa.me/6281317819567?text=Halo%20Trinity%2C%20saya%20ingin%20berkonsultasi"
+                           target="_blank"
+                           class="flex items-center justify-center gap-2 py-3 px-4 bg-gold-gradient text-navy-950 hover:brightness-110 transition duration-300 rounded-xl text-xs font-bold tracking-widest uppercase shadow-[0_4px_16px_rgba(212,175,55,0.25)]">
+                            <i class="fab fa-whatsapp"></i> Chat Langsung
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy-950 border-t border-navy-800 py-14">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+                <div>
+                    <a href="/" class="flex items-center gap-3 mb-4 group">
+                        <img src="../logo.png" alt="Trinity" class="h-9 w-auto opacity-90 group-hover:opacity-100 transition">
+                        <div class="flex flex-col">
+                            <span class="font-header font-bold text-white tracking-widest text-base leading-none">TRINITY</span>
+                            <span class="font-header text-[10px] text-gold-400 tracking-[0.2em] leading-none mt-0.5">BERKAH MANDIRI</span>
+                        </div>
+                    </a>
+                    <p class="text-gray-500 text-sm leading-relaxed">Holding group yang hadir untuk mendukung pertumbuhan bisnis Anda secara menyeluruh dan berkelanjutan.</p>
+                </div>
+                <div>
+                    <h4 class="font-header font-bold text-white text-xs tracking-widest uppercase mb-5">Divisi Usaha</h4>
+                    <ul class="flex flex-col gap-2.5 text-sm text-gray-500">
+                        <li><a href="/visual-creative" class="hover:text-gold-400 transition">Trinity Visual Creative</a></li>
+                        <li><a href="/talentcore" class="hover:text-gold-400 transition">TalentCore (HR &amp; ERP)</a></li>
+                        <li><span class="text-gray-600">Perizinan &amp; Pelaporan <span class="text-amber-600 text-xs ml-1">(soon)</span></span></li>
+                        <li><span class="text-gray-600">Outsourcing <span class="text-amber-600 text-xs ml-1">(soon)</span></span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-header font-bold text-white text-xs tracking-widest uppercase mb-5">Kontak</h4>
+                    <ul class="flex flex-col gap-3 text-sm text-gray-500">
+                        <li class="flex items-center gap-3"><i class="fab fa-whatsapp text-gold-400 w-4 text-base"></i><a href="https://wa.me/6281317819567" target="_blank" class="hover:text-gold-400 transition">+62 813-1781-9567</a></li>
+                        <li class="flex items-center gap-3"><i class="far fa-envelope text-gold-400 w-4 text-base"></i><a href="mailto:trinityberkahmandiri@gmail.com" class="hover:text-gold-400 transition break-all">trinityberkahmandiri@gmail.com</a></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-map-marker-alt text-gold-400 w-4 text-base mt-0.5"></i><span>Kp. Rawaburung RT.01/RW.06,<br>Kosambi, Tangerang, Banten.</span></li>
+                    </ul>
+                    <div class="flex gap-3 mt-5">
+                        <a href="#" class="w-9 h-9 rounded-full bg-navy-800 border border-navy-700 flex items-center justify-center text-gray-400 hover:border-gold-400 hover:text-gold-400 transition text-sm"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-navy-800 border border-navy-700 flex items-center justify-center text-gray-400 hover:border-gold-400 hover:text-gold-400 transition text-sm"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="mailto:trinityberkahmandiri@gmail.com" class="w-9 h-9 rounded-full bg-navy-800 border border-navy-700 flex items-center justify-center text-gray-400 hover:border-gold-400 hover:text-gold-400 transition text-sm"><i class="far fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-navy-800 pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 gap-2">
+                <p>&copy; 2026 PT Trinity Berkah Mandiri. All Rights Reserved.</p>
+                <p>Designed with <span class="text-gold-400">&hearts;</span> and Excellence.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg');
+                nav.classList.replace('py-4', 'py-2');
+            } else {
+                nav.classList.remove('shadow-lg');
+                nav.classList.replace('py-2', 'py-4');
+            }
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+            el.classList.add('reveal-text');
+            observer.observe(el);
+        });
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            const nama       = document.getElementById('nama').value.trim();
+            const perusahaan = document.getElementById('perusahaan').value.trim();
+            const email      = document.getElementById('email').value.trim();
+            const layanan    = document.getElementById('layanan').value;
+            const pesan      = document.getElementById('pesan').value.trim();
+
+            const layananLabel = {
+                'company-profile': 'Company Profile',
+                'video':           'Video Korporasi',
+                'branding':        'Branding Identity',
+                'sosmed':          'Social Media',
+                'dokumentasi':     'Dokumentasi & Fotografi',
+                'talentcore':      'TalentCore (HR & ERP)',
+                'perizinan':       'Perizinan & Pelaporan',
+                'outsourcing':     'Outsourcing',
+                'lainnya':         'Lainnya'
+            };
+
+            const msg = `Halo Trinity Berkah Mandiri 👋\n\n*Nama:* ${nama}\n*Perusahaan:* ${perusahaan || '-'}\n*Email:* ${email}\n*Layanan:* ${layananLabel[layanan] || '-'}\n\n*Pesan:*\n${pesan}`;
+            window.open(`https://wa.me/6281317819567?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+    </script>
+
+</body>
+</html>

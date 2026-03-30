@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity Visual Creative — Divisi Kreatif PT Trinity Berkah Mandiri</title>
+    <link rel="icon" type="image/png" href="../logo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { 950: '#020c1b', 900: '#0a192f', 800: '#112240', 50: '#f0f4f8', 100: '#e8edf5' },
+                        gold: { 400: '#D4AF37', 300: '#F4C430', 500: '#C5A028' },
+                    },
+                    fontFamily: {
+                        sans:   ['Inter', 'sans-serif'],
+                        header: ['Montserrat', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'gold-gradient': 'linear-gradient(135deg, #D4AF37 0%, #F4C430 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #f8f9fa; color: #374151; }
+
+        .glass-nav {
+            background: rgba(10, 25, 47, 0.97);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .reveal-text    { opacity: 0; transform: translateY(24px); transition: all 0.7s ease-out; }
+        .reveal-visible { opacity: 1; transform: translateY(0); }
+
+        .btn-gold { position: relative; overflow: hidden; }
+        .btn-gold::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        .btn-gold:hover::after { left: 100%; }
+
+        /* Service cards */
+        .service-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        }
+        .service-card:hover {
+            transform: translateY(-6px);
+            border-color: #D4AF37;
+            box-shadow: 0 16px 36px -8px rgba(212, 175, 55, 0.18);
+        }
+        .service-card:hover .service-icon {
+            background: #0a192f;
+        }
+
+        /* Portfolio cards */
+        .portfolio-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        }
+        .portfolio-card:hover {
+            border-color: #D4AF37;
+            box-shadow: 0 12px 32px -6px rgba(212, 175, 55, 0.15);
+            transform: translateY(-4px);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 py-4 glass-nav">
+        <div class="container mx-auto px-6 md:px-12 flex justify-between items-center">
+            <a href="/" class="flex items-center gap-3 group">
+                <img src="../logo.png" alt="Trinity Logo" class="h-10 w-auto md:h-11 object-contain drop-shadow-[0_0_8px_rgba(212,175,55,0.3)] transition-transform duration-300 group-hover:scale-105">
+                <div class="flex flex-col">
+                    <span class="font-header font-bold text-lg text-white tracking-widest leading-none">TRINITY</span>
+                    <span class="font-header font-medium text-[10px] text-gold-400 tracking-[0.22em] leading-none mt-0.5">BERKAH MANDIRI</span>
+                </div>
+            </a>
+
+            <ul class="hidden md:flex gap-8 items-center">
+                <li><a href="/"        class="text-xs font-semibold text-gray-300 hover:text-gold-400 transition duration-300 tracking-widest uppercase">Beranda</a></li>
+                <li><a href="/#about"  class="text-xs font-semibold text-gray-300 hover:text-gold-400 transition duration-300 tracking-widest uppercase">Tentang</a></li>
+                <li><a href="/#divisi" class="text-xs font-semibold text-gray-300 hover:text-gold-400 transition duration-300 tracking-widest uppercase">Divisi</a></li>
+                <li><a href="/contact" class="text-xs font-semibold text-gray-300 hover:text-gold-400 transition duration-300 tracking-widest uppercase">Kontak</a></li>
+                <li>
+                    <a href="/profile" class="px-5 py-2 text-xs font-bold text-navy-950 bg-gold-gradient rounded-sm hover:brightness-110 transition duration-300 tracking-wider shadow-[0_0_12px_rgba(212,175,55,0.35)]">
+                        COMPANY PROFILE
+                    </a>
+                </li>
+            </ul>
+
+            <button id="mobile-menu-btn" class="md:hidden text-gold-400 text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-navy-900 border-t border-navy-800 absolute w-full shadow-2xl">
+            <ul class="flex flex-col p-6 gap-4 text-center">
+                <li><a href="/"        class="block text-gray-300 hover:text-gold-400 text-sm tracking-widest uppercase">Beranda</a></li>
+                <li><a href="/#about"  class="block text-gray-300 hover:text-gold-400 text-sm tracking-widest uppercase">Tentang</a></li>
+                <li><a href="/#divisi" class="block text-gray-300 hover:text-gold-400 text-sm tracking-widest uppercase">Divisi</a></li>
+                <li><a href="/contact" class="block text-gray-300 hover:text-gold-400 text-sm tracking-widest uppercase">Kontak</a></li>
+                <li><a href="/profile" class="block text-gold-400 font-bold text-sm tracking-widest uppercase border border-gold-400 py-2 rounded">Company Profile</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════════
+         HERO — navy gelap dengan aksen kreatif
+    ═══════════════════════════════════════ -->
+    <section class="bg-navy-950 pt-36 pb-24 relative overflow-hidden">
+        <div style="position:absolute;top:-200px;right:-150px;width:600px;height:600px;background:radial-gradient(circle,rgba(212,175,55,0.07) 0%,transparent 65%);pointer-events:none;border-radius:50%"></div>
+        <div style="position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(212,175,55,0.04) 0%,transparent 65%);pointer-events:none;border-radius:50%"></div>
+
+        <div class="container mx-auto px-6 md:px-12 relative">
+            <!-- Breadcrumb -->
+            <div class="flex items-center gap-2 mb-10 reveal-on-scroll">
+                <a href="/" class="text-gray-500 hover:text-gold-400 transition text-xs tracking-widest uppercase">Trinity Berkah Mandiri</a>
+                <i class="fas fa-chevron-right text-gray-600 text-[10px]"></i>
+                <span class="text-gold-400 text-xs tracking-widest uppercase font-semibold">Trinity Visual Creative</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal-on-scroll">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-gold-400/10 border border-gold-400/20 rounded-full mb-6">
+                        <span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>
+                        <span class="text-gold-400 text-xs font-semibold tracking-widest uppercase">Divisi Aktif</span>
+                    </div>
+                    <h1 class="font-header font-extrabold text-4xl md:text-6xl text-white mb-6 leading-tight">
+                        Trinity<br>
+                        <span class="text-transparent bg-clip-text bg-gold-gradient">Visual Creative</span>
+                    </h1>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                        Divisi kreatif PT Trinity Berkah Mandiri yang menghadirkan identitas visual profesional untuk perusahaan Anda — dari company profile, video korporasi, branding identity, hingga strategi konten digital.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="/contact" class="btn-gold px-7 py-3.5 bg-gold-gradient text-navy-950 font-bold rounded-lg hover:brightness-110 transition duration-300 tracking-wide text-sm shadow-[0_4px_20px_rgba(212,175,55,0.3)] inline-flex items-center gap-2">
+                            <i class="fab fa-whatsapp"></i> Konsultasi Gratis
+                        </a>
+                        <a href="/profile" class="px-7 py-3.5 border border-white/25 text-white font-bold rounded-lg hover:border-gold-400 hover:text-gold-400 transition duration-300 tracking-wide text-sm inline-flex items-center gap-2">
+                            <i class="fas fa-file-alt"></i> Lihat Portfolio
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Stats visual -->
+                <div class="reveal-on-scroll grid grid-cols-2 gap-4">
+                    <div class="bg-navy-800/60 border border-white/5 rounded-2xl p-6 text-center">
+                        <div class="font-header text-4xl font-bold text-white mb-1">50<span class="text-gold-400 text-2xl">+</span></div>
+                        <div class="text-gray-400 text-xs font-semibold tracking-widest uppercase mt-1">Klien Puas</div>
+                    </div>
+                    <div class="bg-navy-800/60 border border-white/5 rounded-2xl p-6 text-center">
+                        <div class="font-header text-4xl font-bold text-white mb-1">5<span class="text-gold-400 text-2xl">+</span></div>
+                        <div class="text-gray-400 text-xs font-semibold tracking-widest uppercase mt-1">Tahun Pengalaman</div>
+                    </div>
+                    <div class="bg-navy-800/60 border border-white/5 rounded-2xl p-6 text-center">
+                        <div class="font-header text-4xl font-bold text-white mb-1">100<span class="text-gold-400 text-2xl">+</span></div>
+                        <div class="text-gray-400 text-xs font-semibold tracking-widest uppercase mt-1">Proyek Selesai</div>
+                    </div>
+                    <div class="bg-navy-800/60 border border-white/5 rounded-2xl p-6 text-center">
+                        <div class="font-header text-4xl font-bold text-white mb-1">24<span class="text-gold-400 text-xl">/7</span></div>
+                        <div class="text-gray-400 text-xs font-semibold tracking-widest uppercase mt-1">Siap Konsultasi</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         LAYANAN — light background
+    ═══════════════════════════════════════ -->
+    <section id="layanan" class="py-24 bg-white">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="text-center mb-16 reveal-on-scroll">
+                <div class="flex items-center justify-center gap-4 mb-4">
+                    <span class="h-[1px] w-12 bg-gold-400"></span>
+                    <span class="font-header text-xs font-bold text-gold-500 tracking-widest uppercase">Layanan Kami</span>
+                    <span class="h-[1px] w-12 bg-gold-400"></span>
+                </div>
+                <h2 class="font-header text-3xl md:text-4xl font-bold text-navy-900 mb-4">Apa yang Kami Kerjakan</h2>
+                <p class="text-gray-500 max-w-xl mx-auto text-base leading-relaxed">Setiap layanan dirancang untuk membangun citra profesional yang kuat dan berkesan bagi bisnis Anda.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Company Profile -->
+                <div class="service-card rounded-2xl p-8 reveal-on-scroll">
+                    <div class="service-icon w-14 h-14 bg-navy-50 rounded-xl flex items-center justify-center mb-6 transition duration-300">
+                        <i class="fas fa-file-alt text-gold-400 text-2xl"></i>
+                    </div>
+                    <h3 class="font-header font-bold text-xl text-navy-900 mb-3">Company Profile</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-5">Penyusunan narasi dan visual profil perusahaan yang kuat — memikat investor, klien, dan mitra strategis dengan presentasi yang presisi dan elegan.</p>
+                    <ul class="flex flex-col gap-2 text-sm text-gray-500">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-gold-400 text-xs"></i> Desain dokumen premium</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-gold-400 text-xs"></i> Narasi brand yang kuat</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-gold-400 text-xs"></i> Format print & digital</li>
+                    </ul>
+                </div>
+
+                <!-- Video Korporasi -->
+                <div class="service-card rounded-2xl p-8 reveal-on-scroll">
+                    <div class="service-icon w-14 h-14 bg-navy-50 rounded-xl flex items-center justify-center mb-6 transition duration-300">
+                        <i class="fas fa-video text-gold-400 text-2xl"></i>
+                    </div>
+                    <h3 class="font-header font-bold text-xl text-navy-900 mb-3">Video Korporasi</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-5">Sinematografi profesional yang merepresentasikan skala operasional, budaya perusahaan, dan kredibilitas brand Anda kepada audiens yang tepat.</p>
+                    <ul class="flex flex-col gap-2 text-sm text-gray-500">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-gold-400 text-xs"></i> Company profile video</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-gold-400 text-xs"></i> Video produk & promosi</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-gold-400 text-xs"></i> Dokumentasi event</li>
+                    </ul>
+                </div>
+
+                <!-- Branding Identity -->
+                <div class="service-card rounded-2xl p-8 reveal-on-scroll">
+                    <div class="service-icon w-14 h-14 bg-navy-50 rounded-xl flex items-center justify-center mb-6 transition duration-300">
+                        <i class="fas fa-pencil-ruler text-gold-400 text-2xl"></i>
+                    </div>
+                    <h3 class="font-header font-bold text-xl text-navy-900 mb-3">Branding Identity</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-5">Pengembangan identitas visual yang menyeluruh — logo, palet warna, tipografi, dan panduan brand yang selaras dengan positioning market Anda.</p>
+                    <ul class="flex flex-col gap-2 text-sm text-gray-500">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-gold-400 text-xs"></i> Logo & visual identity</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-gold-400 text-xs"></i> Brand guideline</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-gold-400 text-xs"></i> Stationery design</li>
+                    </ul>
+                </div>
+
+                <!-- Social Media -->
+                <div class="service-card rounded-2xl p-8 reveal-on-scroll">
+                    <div class="service-icon w-14 h-14 bg-navy-50 rounded-xl flex items-center justify-center mb-6 transition duration-300">
+                        <i class="fas fa-hashtag text-gold-400 text-2xl"></i>
+                    </div>
+                    <h3 class="font-header font-bold text-xl text-navy-900 mb-3">Social Media Content</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-5">Strategi konten digital, reels, dan desain feed yang estetis, terjadwal, dan berorientasi pada engagement serta pertumbuhan audiens organik.</p>
+                    <ul class="flex flex-col gap-2 text-sm text-gray-500">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-gold-400 text-xs"></i> Konten visual & copywriting</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-gold-400 text-xs"></i> Reels & story design</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-gold-400 text-xs"></i> Jadwal posting teratur</li>
+                    </ul>
+                </div>
+
+                <!-- Fotografi & Dokumentasi -->
+                <div class="service-card rounded-2xl p-8 reveal-on-scroll">
+                    <div class="service-icon w-14 h-14 bg-navy-50 rounded-xl flex items-center justify-center mb-6 transition duration-300">
+                        <i class="fas fa-camera text-gold-400 text-2xl"></i>
+                    </div>
+                    <h3 class="font-header font-bold text-xl text-navy-900 mb-3">Fotografi & Dokumentasi</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-5">Fotografi event dan operasional dengan standar jurnalistik dan komersial — abadikan momen penting perusahaan Anda secara profesional.</p>
+                    <ul class="flex flex-col gap-2 text-sm text-gray-500">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-gold-400 text-xs"></i> Foto event korporasi</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-gold-400 text-xs"></i> Foto produk & tim</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-gold-400 text-xs"></i> Editing profesional</li>
+                    </ul>
+                </div>
+
+                <!-- CTA Card -->
+                <div class="rounded-2xl p-8 reveal-on-scroll flex flex-col justify-center items-center text-center border-2 border-dashed border-gold-400/30 bg-gold-400/5 hover:border-gold-400/60 hover:bg-gold-400/8 transition duration-300 cursor-pointer group"
+                     onclick="window.location='/contact'">
+                    <div class="w-14 h-14 bg-gold-400/15 rounded-xl flex items-center justify-center mb-5 group-hover:bg-gold-400/25 transition">
+                        <i class="fas fa-comments text-gold-500 text-2xl"></i>
+                    </div>
+                    <h3 class="font-header font-bold text-xl text-navy-900 mb-2">Konsultasi Gratis?</h3>
+                    <p class="text-gray-500 text-sm mb-5 leading-relaxed">Diskusikan kebutuhan visual Anda bersama tim kami. Tanpa biaya, tanpa komitmen.</p>
+                    <span class="inline-flex items-center gap-2 text-navy-900 font-bold text-sm hover:text-gold-500 transition group-hover:text-gold-500">
+                        Hubungi Kami <i class="fas fa-arrow-right text-gold-400 transition-transform group-hover:translate-x-1"></i>
+                    </span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         PORTFOLIO — abu muda
+    ═══════════════════════════════════════ -->
+    <section id="portfolio" class="py-24 bg-gray-50">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="text-center mb-16 reveal-on-scroll">
+                <div class="flex items-center justify-center gap-4 mb-4">
+                    <span class="h-[1px] w-12 bg-gold-400"></span>
+                    <span class="font-header text-xs font-bold text-gold-500 tracking-widest uppercase">Portofolio</span>
+                    <span class="h-[1px] w-12 bg-gold-400"></span>
+                </div>
+                <h2 class="font-header text-3xl md:text-4xl font-bold text-navy-900 mb-4">Hasil Karya Kami</h2>
+                <p class="text-gray-500 max-w-xl mx-auto text-base leading-relaxed">Lihat langsung karya-karya terbaik Trinity Visual Creative dalam company profile interaktif kami.</p>
+            </div>
+
+            <!-- Canva Embed (sama seperti /profile) -->
+            <div class="reveal-on-scroll max-w-5xl mx-auto">
+                <div class="bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden" style="height: 600px; position: relative;">
+                    <iframe
+                        src="https://www.canva.com/design/DAHFcDUZZe4/vwMMiUEPDDBL52DzYRuVDg/view?embed"
+                        allowfullscreen="allowfullscreen"
+                        allow="fullscreen"
+                        style="width:100%; height:100%; border:none;"
+                        title="Portfolio Trinity Visual Creative">
+                    </iframe>
+                </div>
+                <div class="flex justify-center mt-6">
+                    <a href="/profile" class="btn-gold px-8 py-3.5 bg-gold-gradient text-navy-950 font-bold rounded-lg hover:brightness-110 transition duration-300 tracking-wide text-sm shadow-[0_4px_20px_rgba(212,175,55,0.25)] inline-flex items-center gap-2">
+                        <i class="fas fa-external-link-alt"></i> Buka Company Profile Lengkap
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         PROSES KERJA — putih
+    ═══════════════════════════════════════ -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="text-center mb-16 reveal-on-scroll">
+                <div class="flex items-center justify-center gap-4 mb-4">
+                    <span class="h-[1px] w-12 bg-gold-400"></span>
+                    <span class="font-header text-xs font-bold text-gold-500 tracking-widest uppercase">Cara Kerja</span>
+                    <span class="h-[1px] w-12 bg-gold-400"></span>
+                </div>
+                <h2 class="font-header text-3xl md:text-4xl font-bold text-navy-900">Proses yang Transparan,<br>Hasil yang Memuaskan.</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+
+                <div class="text-center reveal-on-scroll">
+                    <div class="w-14 h-14 bg-navy-900 rounded-full flex items-center justify-center mx-auto mb-5 shadow-lg relative">
+                        <span class="font-header font-bold text-white text-lg">01</span>
+                        <div class="hidden md:block absolute top-7 left-full w-full h-[2px] bg-gradient-to-r from-navy-900 to-gray-200"></div>
+                    </div>
+                    <h3 class="font-header font-bold text-navy-900 mb-2">Konsultasi</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Diskusi awal untuk memahami kebutuhan, tujuan, dan visi bisnis Anda.</p>
+                </div>
+
+                <div class="text-center reveal-on-scroll">
+                    <div class="w-14 h-14 bg-navy-900 rounded-full flex items-center justify-center mx-auto mb-5 shadow-lg relative">
+                        <span class="font-header font-bold text-white text-lg">02</span>
+                        <div class="hidden md:block absolute top-7 left-full w-full h-[2px] bg-gradient-to-r from-navy-900 to-gray-200"></div>
+                    </div>
+                    <h3 class="font-header font-bold text-navy-900 mb-2">Proposal</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Kami siapkan proposal detail dengan timeline, scope, dan estimasi biaya yang transparan.</p>
+                </div>
+
+                <div class="text-center reveal-on-scroll">
+                    <div class="w-14 h-14 bg-navy-900 rounded-full flex items-center justify-center mx-auto mb-5 shadow-lg relative">
+                        <span class="font-header font-bold text-white text-lg">03</span>
+                        <div class="hidden md:block absolute top-7 left-full w-full h-[2px] bg-gradient-to-r from-navy-900 to-gray-200"></div>
+                    </div>
+                    <h3 class="font-header font-bold text-navy-900 mb-2">Produksi</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Tim kreatif kami mengerjakan proyek dengan update berkala dan revisi terbuka.</p>
+                </div>
+
+                <div class="text-center reveal-on-scroll">
+                    <div class="w-14 h-14 bg-gold-400 rounded-full flex items-center justify-center mx-auto mb-5 shadow-lg shadow-gold-400/30">
+                        <span class="font-header font-bold text-navy-950 text-lg">04</span>
+                    </div>
+                    <h3 class="font-header font-bold text-navy-900 mb-2">Serah Terima</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Hasil final diserahkan lengkap dengan file sumber dan dukungan purna layanan.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         CTA — navy gelap
+    ═══════════════════════════════════════ -->
+    <section class="bg-navy-900 py-24 relative overflow-hidden">
+        <div style="position:absolute;top:-200px;right:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(212,175,55,0.06) 0%,transparent 65%);pointer-events:none;border-radius:50%"></div>
+
+        <div class="container mx-auto px-6 md:px-12 text-center relative">
+            <div class="reveal-on-scroll">
+                <p class="text-gold-400 font-mono text-xs tracking-[0.25em] uppercase mb-4">Mulai Sekarang</p>
+                <h2 class="font-header text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                    Siap Tampil Lebih<br>Profesional?
+                </h2>
+                <p class="text-gray-400 text-base max-w-md mx-auto mb-10 leading-relaxed">
+                    Konsultasi pertama gratis. Tim Trinity Visual Creative siap membantu Anda membangun citra terbaik.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="https://wa.me/6281317819567?text=Halo%20Trinity%20Visual%20Creative%2C%20saya%20ingin%20konsultasi%20layanan%20kreatif"
+                       target="_blank"
+                       class="btn-gold px-8 py-4 bg-gold-gradient text-navy-950 font-bold rounded-lg hover:brightness-110 transition duration-300 tracking-wide text-sm shadow-[0_0_25px_rgba(212,175,55,0.35)] inline-flex items-center justify-center gap-2">
+                        <i class="fab fa-whatsapp text-base"></i> Chat via WhatsApp
+                    </a>
+                    <a href="/contact"
+                       class="px-8 py-4 border border-white/25 text-white font-bold rounded-lg hover:border-gold-400 hover:text-gold-400 transition duration-300 tracking-wide text-sm inline-flex items-center justify-center gap-2">
+                        <i class="fas fa-envelope"></i> Kirim Pesan
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy-950 border-t border-navy-800 py-14">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+                <div>
+                    <a href="/" class="flex items-center gap-3 mb-4 group">
+                        <img src="../logo.png" alt="Trinity" class="h-9 w-auto opacity-90 group-hover:opacity-100 transition">
+                        <div class="flex flex-col">
+                            <span class="font-header font-bold text-white tracking-widest text-base leading-none">TRINITY</span>
+                            <span class="font-header text-[10px] text-gold-400 tracking-[0.2em] leading-none mt-0.5">BERKAH MANDIRI</span>
+                        </div>
+                    </a>
+                    <p class="text-gray-500 text-sm leading-relaxed">Holding group yang hadir untuk mendukung pertumbuhan bisnis Anda secara menyeluruh dan berkelanjutan.</p>
+                </div>
+                <div>
+                    <h4 class="font-header font-bold text-white text-xs tracking-widest uppercase mb-5">Divisi Usaha</h4>
+                    <ul class="flex flex-col gap-2.5 text-sm text-gray-500">
+                        <li><a href="/visual-creative" class="text-gold-400 font-semibold">Trinity Visual Creative</a></li>
+                        <li><a href="/talentcore" class="hover:text-gold-400 transition">TalentCore (HR &amp; ERP)</a></li>
+                        <li><span class="text-gray-600">Perizinan &amp; Pelaporan <span class="text-amber-600 text-xs ml-1">(soon)</span></span></li>
+                        <li><span class="text-gray-600">Outsourcing <span class="text-amber-600 text-xs ml-1">(soon)</span></span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-header font-bold text-white text-xs tracking-widest uppercase mb-5">Kontak</h4>
+                    <ul class="flex flex-col gap-3 text-sm text-gray-500">
+                        <li class="flex items-center gap-3"><i class="fab fa-whatsapp text-gold-400 w-4 text-base"></i><a href="https://wa.me/6281317819567" target="_blank" class="hover:text-gold-400 transition">+62 813-1781-9567</a></li>
+                        <li class="flex items-center gap-3"><i class="far fa-envelope text-gold-400 w-4 text-base"></i><a href="mailto:trinityberkahmandiri@gmail.com" class="hover:text-gold-400 transition break-all">trinityberkahmandiri@gmail.com</a></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-map-marker-alt text-gold-400 w-4 text-base mt-0.5"></i><span>Kp. Rawaburung RT.01/RW.06,<br>Kosambi, Tangerang, Banten.</span></li>
+                    </ul>
+                    <div class="flex gap-3 mt-5">
+                        <a href="#" class="w-9 h-9 rounded-full bg-navy-800 border border-navy-700 flex items-center justify-center text-gray-400 hover:border-gold-400 hover:text-gold-400 transition text-sm"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-navy-800 border border-navy-700 flex items-center justify-center text-gray-400 hover:border-gold-400 hover:text-gold-400 transition text-sm"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="mailto:trinityberkahmandiri@gmail.com" class="w-9 h-9 rounded-full bg-navy-800 border border-navy-700 flex items-center justify-center text-gray-400 hover:border-gold-400 hover:text-gold-400 transition text-sm"><i class="far fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-navy-800 pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 gap-2">
+                <p>&copy; 2026 PT Trinity Berkah Mandiri. All Rights Reserved.</p>
+                <p>Bagian dari <a href="/" class="text-gold-400 hover:underline">Trinity Berkah Mandiri Group</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg');
+                nav.classList.replace('py-4', 'py-2');
+            } else {
+                nav.classList.remove('shadow-lg');
+                nav.classList.replace('py-2', 'py-4');
+            }
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+            el.classList.add('reveal-text');
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>

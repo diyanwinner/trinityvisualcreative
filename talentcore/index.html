@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TalentCore — Sistem HR & ERP Enterprise | PT Trinity Berkah Mandiri</title>
+<link rel="icon" type="image/png" href="../logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    navy: { 950: '#020c1b', 900: '#0a192f', 800: '#112240', 700: '#1a3a5c', 50: '#f0f4f8', 100: '#e8edf5' },
+                    gold: { 400: '#D4AF37', 300: '#F4C430', 500: '#C5A028' },
+                },
+                fontFamily: {
+                    sans:   ['Inter', 'sans-serif'],
+                    header: ['Montserrat', 'sans-serif'],
+                    serif:  ['Cormorant Garamond', 'serif'],
+                },
+                backgroundImage: {
+                    'gold-gradient': 'linear-gradient(135deg, #D4AF37 0%, #F4C430 100%)',
+                }
+            }
+        }
+    }
+</script>
+
+<style>
+    body { background-color: #f8f9fa; color: #374151; }
+
+    .glass-nav {
+        background: rgba(10, 25, 47, 0.97);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+    }
+
+    /* Hero */
+    .slide { opacity: 0; transition: opacity 1.5s ease-in-out, transform 8s ease; transform: scale(1.05); z-index: 0; }
+    .slide.active { opacity: 1; transform: scale(1); z-index: 10; }
+
+    /* Typewriter cursor */
+    #twc { color: #D4AF37; animation: blink 1s step-end infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* Reveal */
+    .reveal-text    { opacity: 0; transform: translateY(24px); transition: all 0.7s ease-out; }
+    .reveal-visible { opacity: 1; transform: translateY(0); }
+
+    /* Btn shine */
+    .btn-gold { position: relative; overflow: hidden; }
+    .btn-gold::after { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: 0.5s; }
+    .btn-gold:hover::after { left: 100%; }
+
+    /* Ticker */
+    .ticker-track { display: flex; gap: 80px; white-space: nowrap; animation: ticker 26s linear infinite; }
+    .ticker-track:hover { animation-play-state: paused; }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* Module cards */
+    .module-card {
+        background: white;
+        border: 1px solid #e5e7eb;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        position: relative;
+        overflow: hidden;
+    }
+    .module-card::before {
+        content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+        background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+        transform: scaleX(0); transform-origin: left;
+        transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+    }
+    .module-card:hover { border-color: #D4AF37; transform: translateY(-8px); box-shadow: 0 24px 60px -12px rgba(212,175,55,0.2); }
+    .module-card:hover::before { transform: scaleX(1); }
+
+    /* Bento cards */
+    .bento-card {
+        background: white;
+        border: 1px solid #e5e7eb;
+        transition: all 0.35s ease;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .bento-card:hover { border-color: #D4AF37; transform: translateY(-5px); box-shadow: 0 12px 32px -6px rgba(212,175,55,0.15); }
+
+    /* Testimonial cards */
+    .testi-card {
+        background: white;
+        border: 1px solid #e5e7eb;
+        transition: all 0.35s ease;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .testi-card:hover { border-color: #D4AF37; transform: translateY(-4px); box-shadow: 0 12px 32px -6px rgba(212,175,55,0.12); }
+
+    /* Stats */
+    .stat-box { border-right: 1px solid #e5e7eb; transition: background 0.3s; }
+    .stat-box:last-child { border-right: none; }
+    .stat-box:hover { background: rgba(212,175,55,0.04); }
+
+    /* Bars chart */
+    .bar { flex: 1; background: #e5e7eb; border-radius: 2px; }
+    .bar.on { background: #D4AF37; opacity: 0.7; }
+    .bento-card:hover .bar.on { opacity: 1; }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+</style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+<!-- ═══ NAVBAR ═══ -->
+<nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 py-4 glass-nav">
+    <div class="container mx-auto px-6 md:px-12 flex justify-between items-center">
+        <a href="/" class="flex items-center gap-3 group">
+            <img src="../logo.png" alt="Trinity Logo" class="h-10 w-auto md:h-11 object-contain drop-shadow-[0_0_8px_rgba(212,175,55,0.3)] transition-transform duration-300 group-hover:scale-105">
+            <div class="flex flex-col">
+                <span class="font-header font-bold text-base text-white tracking-widest leading-none">TALENTCORE</span>
+                <span class="font-header font-medium text-[9px] text-gold-400 tracking-[0.22em] leading-none mt-0.5">by Trinity Berkah Mandiri</span>
+            </div>
+        </a>
+
+        <ul class="hidden md:flex gap-8 items-center">
+            <li><a href="#modul"  class="text-xs font-semibold text-gray-300 hover:text-gold-400 transition duration-300 tracking-widest uppercase">Modul</a></li>
+            <li><a href="#fitur"  class="text-xs font-semibold text-gray-300 hover:text-gold-400 transition duration-300 tracking-widest uppercase">Fitur</a></li>
+            <li><a href="#klien"  class="text-xs font-semibold text-gray-300 hover:text-gold-400 transition duration-300 tracking-widest uppercase">Klien</a></li>
+            <li><a href="/"       class="text-xs font-semibold text-gray-500 hover:text-gold-400 transition duration-300 tracking-widest uppercase">← Trinity</a></li>
+            <li>
+                <a href="/demo" class="px-5 py-2 text-xs font-bold text-navy-950 bg-gold-gradient rounded-sm hover:brightness-110 transition duration-300 tracking-wider shadow-[0_0_12px_rgba(212,175,55,0.35)]">
+                    JADWALKAN DEMO
+                </a>
+            </li>
+        </ul>
+
+        <button id="mobile-menu-btn" class="md:hidden text-gold-400 text-2xl focus:outline-none">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+
+    <div id="mobile-menu" class="hidden md:hidden bg-navy-900 border-t border-navy-800 absolute w-full shadow-2xl">
+        <ul class="flex flex-col p-6 gap-4 text-center">
+            <li><a href="#modul"  class="block text-gray-300 hover:text-gold-400 text-sm tracking-widest uppercase">Modul</a></li>
+            <li><a href="#fitur"  class="block text-gray-300 hover:text-gold-400 text-sm tracking-widest uppercase">Fitur</a></li>
+            <li><a href="#klien"  class="block text-gray-300 hover:text-gold-400 text-sm tracking-widest uppercase">Klien</a></li>
+            <li><a href="/"       class="block text-gray-500 hover:text-gold-400 text-sm tracking-widest uppercase">← Kembali ke Trinity</a></li>
+            <li><a href="/demo"   class="block text-navy-950 bg-gold-gradient font-bold text-sm tracking-widest uppercase py-3 rounded">Jadwalkan Demo</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<div id="home" class="relative h-screen w-full overflow-hidden flex items-center justify-center">
+    <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-900/75 to-navy-950/50 z-20 pointer-events-none"></div>
+
+    <div class="absolute inset-0 w-full h-full">
+        <div class="slide active absolute inset-0 bg-cover bg-center" style="background-image:url('https://res.cloudinary.com/dsyo0e3fu/image/upload/v1770630085/slide1_xknizx.png')"></div>
+        <div class="slide absolute inset-0 bg-cover bg-center" style="background-image:url('https://res.cloudinary.com/dsyo0e3fu/image/upload/v1770630230/slide2_wplm4l.png')"></div>
+        <div class="slide absolute inset-0 bg-cover bg-center" style="background-image:url('https://res.cloudinary.com/dsyo0e3fu/image/upload/v1770630283/slide3_jg2aw3.png')"></div>
+    </div>
+
+    <div class="relative z-30 text-center max-w-5xl px-6 mt-16">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 border border-gold-400/25 rounded-full bg-navy-800/50 backdrop-blur-sm mb-6">
+            <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+            <span class="text-gold-400 font-mono text-xs tracking-[0.2em] uppercase">Inovasi HR &amp; ERP — PT Trinity Berkah Mandiri</span>
+        </div>
+
+        <h1 class="font-serif text-5xl md:text-7xl text-white mb-4 leading-tight drop-shadow-xl">
+            Sistem Manajemen<br>
+            Yang <em class="text-gold-400 not-italic"><span id="twt">Cerdas</span><span id="twc">|</span></em>
+        </h1>
+        <p class="text-gray-300 text-lg md:text-xl italic mb-4 font-serif">Kelas Enterprise. Estetika Tanpa Kompromi.</p>
+        <p class="text-gray-400 text-base max-w-xl mx-auto mb-10 leading-relaxed">
+            TalentCore meredefinisi cara mengelola SDM dan operasional bisnis Anda. Integrasi cerdas, data real-time, dan presisi tanpa celah dalam satu ekosistem.
+        </p>
+
+        <div class="flex flex-col md:flex-row gap-4 justify-center">
+            <a href="/demo" class="btn-gold px-8 py-4 bg-gold-gradient text-navy-950 font-bold rounded-sm hover:brightness-110 transition duration-300 tracking-wide text-sm shadow-[0_0_25px_rgba(212,175,55,0.4)] inline-flex items-center justify-center gap-2">
+                <i class="fas fa-bolt"></i> Mulai Transformasi Digital
+            </a>
+            <a href="#modul" class="px-8 py-4 border border-white/30 text-white font-bold rounded-sm hover:border-gold-400 hover:text-gold-400 transition duration-300 tracking-wide text-sm inline-flex items-center justify-center gap-2">
+                Jelajahi Modul <i class="fas fa-chevron-down text-xs"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-30 flex flex-col items-center gap-2 animate-bounce">
+        <div class="w-px h-12 bg-gradient-to-b from-gold-400 to-transparent"></div>
+        <span class="text-white/40 text-[9px] tracking-[0.3em] uppercase">Scroll</span>
+    </div>
+</div>
+
+<!-- ═══ TICKER ═══ -->
+<div class="bg-white border-y border-gray-100 py-5 overflow-hidden">
+    <p class="text-center text-xs font-bold tracking-[0.35em] uppercase text-gray-400 mb-3">Dipercaya Perusahaan Konsultan Profesional</p>
+    <div class="overflow-hidden">
+        <div class="ticker-track">
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-300 flex-shrink-0">Konsultan.co</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-300 flex-shrink-0">Bina Karya Group</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-300 flex-shrink-0">Tech Indo</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-300 flex-shrink-0">Prima Solusi</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-300 flex-shrink-0">Artha Konsultan</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-300 flex-shrink-0">Mandiri Advisory</span>
+            <!-- duplicate for seamless loop -->
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-300 flex-shrink-0">Konsultan.co</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-300 flex-shrink-0">Bina Karya Group</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-300 flex-shrink-0">Tech Indo</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-300 flex-shrink-0">Prima Solusi</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-300 flex-shrink-0">Artha Konsultan</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-300 flex-shrink-0">Mandiri Advisory</span>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ STATS ═══ -->
+<section class="bg-gray-50 py-16">
+    <div class="container mx-auto px-6 md:px-12">
+        <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm relative" style="position:relative">
+            <div style="position:absolute;top:0;left:10%;right:10%;height:2px;background:linear-gradient(90deg,transparent,#D4AF37,transparent)"></div>
+            <div class="grid grid-cols-2 md:grid-cols-4">
+                <div class="stat-box py-12 text-center reveal-on-scroll">
+                    <div class="flex items-baseline justify-center gap-1 mb-2">
+                        <span id="c1" class="font-serif text-5xl font-bold text-navy-900">0</span>
+                        <span class="text-gold-400 text-3xl font-bold font-serif">+</span>
+                    </div>
+                    <div class="text-xs font-bold tracking-widest uppercase text-gray-400">Klien Aktif</div>
+                </div>
+                <div class="stat-box py-12 text-center reveal-on-scroll">
+                    <div class="flex items-baseline justify-center gap-1 mb-2">
+                        <span id="c2" class="font-serif text-5xl font-bold text-navy-900">0</span>
+                        <span class="text-gold-400 text-3xl font-bold font-serif">%</span>
+                    </div>
+                    <div class="text-xs font-bold tracking-widest uppercase text-gray-400">Uptime Sistem</div>
+                </div>
+                <div class="stat-box py-12 text-center reveal-on-scroll">
+                    <div class="flex items-baseline justify-center gap-1 mb-2">
+                        <span id="c3" class="font-serif text-5xl font-bold text-navy-900">0</span>
+                        <span class="text-gold-400 text-3xl font-bold font-serif">×</span>
+                    </div>
+                    <div class="text-xs font-bold tracking-widest uppercase text-gray-400">Lebih Efisien</div>
+                </div>
+                <div class="stat-box py-12 text-center reveal-on-scroll">
+                    <div class="flex items-baseline justify-center gap-0.5 mb-2">
+                        <span class="font-serif text-5xl font-bold text-navy-900">24</span>
+                        <span class="text-gold-400 text-3xl font-bold font-serif">/7</span>
+                    </div>
+                    <div class="text-xs font-bold tracking-widest uppercase text-gray-400">Dedicated Support</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ MODUL ═══ -->
+<section id="modul" class="py-24 bg-white">
+    <div class="container mx-auto px-6 md:px-12">
+        <div class="mb-6 reveal-on-scroll">
+            <div class="flex items-center gap-4 mb-4">
+                <span class="h-[2px] w-8 bg-gold-400"></span>
+                <span class="font-header text-xs font-bold text-gold-500 tracking-widest uppercase">Arsitektur Ekosistem</span>
+            </div>
+            <h2 class="font-serif text-4xl md:text-5xl text-navy-900 leading-tight mb-4">
+                Dua Modul.<br><em class="text-gold-400">Satu Ekosistem Utuh.</em>
+            </h2>
+            <p class="text-gray-500 text-base leading-relaxed max-w-lg">Dirancang untuk saling terintegrasi sempurna, dari lapisan SDM hingga operasional inti bisnis Anda.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-14">
+
+            <!-- HR Module -->
+            <a href="/demo" class="module-card rounded-2xl p-10 block group reveal-on-scroll no-underline">
+                <div class="absolute bottom-4 right-6 font-serif text-8xl font-bold text-gray-50 pointer-events-none select-none leading-none">HR</div>
+                <div class="w-14 h-14 border border-gold-400/25 bg-gold-400/8 rounded-xl flex items-center justify-center mb-8 text-gold-400 group-hover:bg-gold-400/15 transition duration-300 relative z-10">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                </div>
+                <div class="relative z-10">
+                    <h3 class="font-serif text-4xl text-navy-900 mb-1">TalentCore<em class="text-gold-400">.hr</em></h3>
+                    <span class="text-xs font-bold tracking-widest uppercase text-gold-500 block mb-4">Manajemen SDM &amp; Payroll</span>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">Otomatisasi intelijen untuk seluruh siklus SDM. Kelola talenta, proses payroll presisi, dan pantau kinerja karyawan dari satu dashboard elegan.</p>
+                    <ul class="flex flex-col gap-2.5 mb-7">
+                        <li class="flex items-center gap-3 text-sm text-gray-600"><span class="text-gold-400 font-bold">—</span> Rekrutmen &amp; onboarding digital</li>
+                        <li class="flex items-center gap-3 text-sm text-gray-600"><span class="text-gold-400 font-bold">—</span> Payroll otomatis dengan kalkulasi pajak</li>
+                        <li class="flex items-center gap-3 text-sm text-gray-600"><span class="text-gold-400 font-bold">—</span> Absensi &amp; manajemen cuti real-time</li>
+                        <li class="flex items-center gap-3 text-sm text-gray-600"><span class="text-gold-400 font-bold">—</span> KPI &amp; evaluasi kinerja karyawan</li>
+                    </ul>
+                    <span class="inline-flex items-center gap-2 font-bold text-xs tracking-widest uppercase text-navy-900 group-hover:text-gold-500 transition group-hover:gap-4">
+                        Eksplorasi Modul HR
+                        <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                    </span>
+                </div>
+            </a>
+
+            <!-- ERP Module -->
+            <a href="/demo" class="module-card rounded-2xl p-10 block group reveal-on-scroll no-underline">
+                <div class="absolute bottom-4 right-6 font-serif text-8xl font-bold text-gray-50 pointer-events-none select-none leading-none">ERP</div>
+                <div class="w-14 h-14 border border-gold-400/25 bg-gold-400/8 rounded-xl flex items-center justify-center mb-8 text-gold-400 group-hover:bg-gold-400/15 transition duration-300 relative z-10">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"/></svg>
+                </div>
+                <div class="relative z-10">
+                    <h3 class="font-serif text-4xl text-navy-900 mb-1">TalentCore<em class="text-gold-400">.erp</em></h3>
+                    <span class="text-xs font-bold tracking-widest uppercase text-gold-500 block mb-4">Operasional &amp; Keuangan</span>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">Tulang punggung operasional tanpa celah. Visibilitas arus kas real-time, manajemen aset, dan sinkronisasi data antar divisi secara instan.</p>
+                    <ul class="flex flex-col gap-2.5 mb-7">
+                        <li class="flex items-center gap-3 text-sm text-gray-600"><span class="text-gold-400 font-bold">—</span> Manajemen keuangan &amp; arus kas</li>
+                        <li class="flex items-center gap-3 text-sm text-gray-600"><span class="text-gold-400 font-bold">—</span> Inventaris &amp; aset perusahaan</li>
+                        <li class="flex items-center gap-3 text-sm text-gray-600"><span class="text-gold-400 font-bold">—</span> Pelaporan otomatis multi-divisi</li>
+                        <li class="flex items-center gap-3 text-sm text-gray-600"><span class="text-gold-400 font-bold">—</span> Sinkronisasi HR ↔ ERP seamless</li>
+                    </ul>
+                    <span class="inline-flex items-center gap-2 font-bold text-xs tracking-widest uppercase text-navy-900 group-hover:text-gold-500 transition group-hover:gap-4">
+                        Eksplorasi Modul ERP
+                        <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                    </span>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══ FITUR BENTO ═══ -->
+<section id="fitur" class="py-24 bg-gray-50">
+    <div class="container mx-auto px-6 md:px-12">
+        <div class="mb-6 reveal-on-scroll">
+            <div class="flex items-center gap-4 mb-4">
+                <span class="h-[2px] w-8 bg-gold-400"></span>
+                <span class="font-header text-xs font-bold text-gold-500 tracking-widest uppercase">Teknologi &amp; Keamanan</span>
+            </div>
+            <h2 class="font-serif text-4xl md:text-5xl text-navy-900 leading-tight mb-4">
+                Infrastruktur<br><em class="text-gold-400">Tingkat Enterprise.</em>
+            </h2>
+            <p class="text-gray-500 text-base leading-relaxed max-w-lg">Dikembangkan tim in-house Trinity dengan standar keamanan dan performa kelas dunia.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-14">
+
+            <div class="bento-card rounded-2xl p-8 reveal-on-scroll">
+                <div class="w-12 h-12 border border-gold-400/20 bg-gold-400/8 rounded-xl flex items-center justify-center mb-6 text-gold-400">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </div>
+                <h3 class="font-header font-bold text-navy-900 text-lg mb-3">Sinkronisasi Real-Time</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">Seluruh divisi melihat data yang sama secara instan. Tidak ada lag, tidak ada duplikasi data.</p>
+            </div>
+
+            <div class="bento-card rounded-2xl p-8 md:col-span-2 reveal-on-scroll">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <div class="font-serif text-6xl font-bold text-navy-900 leading-none mb-1">99<span class="text-gold-400 text-4xl">.9%</span></div>
+                        <p class="text-gray-500 text-sm">Uptime Server Terjamin</p>
+                    </div>
+                    <div class="w-12 h-12 border border-gold-400/20 bg-gold-400/8 rounded-xl flex items-center justify-center text-gold-400 flex-shrink-0">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    </div>
+                </div>
+                <div class="flex items-end gap-1.5 h-14 mt-4">
+                    <div class="bar flex-1 rounded" style="height:35%"></div>
+                    <div class="bar flex-1 rounded" style="height:50%"></div>
+                    <div class="bar on flex-1 rounded" style="height:82%"></div>
+                    <div class="bar flex-1 rounded" style="height:58%"></div>
+                    <div class="bar on flex-1 rounded" style="height:94%"></div>
+                    <div class="bar flex-1 rounded" style="height:64%"></div>
+                    <div class="bar on flex-1 rounded" style="height:100%"></div>
+                    <div class="bar flex-1 rounded" style="height:76%"></div>
+                    <div class="bar flex-1 rounded" style="height:52%"></div>
+                    <div class="bar on flex-1 rounded" style="height:97%"></div>
+                </div>
+            </div>
+
+            <div class="bento-card rounded-2xl p-8 reveal-on-scroll">
+                <div class="w-12 h-12 border border-gold-400/20 bg-gold-400/8 rounded-xl flex items-center justify-center mb-6 text-gold-400">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                </div>
+                <h3 class="font-header font-bold text-navy-900 text-lg mb-3">Enkripsi Bank-Grade</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">Data sensitif diamankan dengan protokol enkripsi setara perbankan. Zero-breach policy.</p>
+            </div>
+
+            <div class="bento-card rounded-2xl p-8 reveal-on-scroll">
+                <div class="w-12 h-12 border border-gold-400/20 bg-gold-400/8 rounded-xl flex items-center justify-center mb-6 text-gold-400">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                </div>
+                <h3 class="font-header font-bold text-navy-900 text-lg mb-3">Analitik Canggih</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">Dashboard visual yang mengubah data mentah menjadi insight bisnis yang langsung bisa dieksekusi.</p>
+            </div>
+
+            <div class="bento-card rounded-2xl p-8 reveal-on-scroll">
+                <div class="w-12 h-12 border border-gold-400/20 bg-gold-400/8 rounded-xl flex items-center justify-center mb-6 text-gold-400">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                </div>
+                <h3 class="font-header font-bold text-navy-900 text-lg mb-3">Mobile-First Design</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">Akses penuh dari smartphone, tablet, atau desktop. UI responsif dan nyaman di semua layar.</p>
+            </div>
+
+            <div class="bento-card rounded-2xl p-8 reveal-on-scroll">
+                <div class="w-12 h-12 border border-gold-400/20 bg-gold-400/8 rounded-xl flex items-center justify-center mb-6 text-gold-400">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                </div>
+                <h3 class="font-header font-bold text-navy-900 text-lg mb-3">Open API</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">Integrasikan dengan sistem existing melalui REST API yang terdokumentasi lengkap.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══ TESTIMONI ═══ -->
+<section id="klien" class="py-24 bg-white">
+    <div class="container mx-auto px-6 md:px-12">
+        <div class="mb-6 reveal-on-scroll">
+            <div class="flex items-center gap-4 mb-4">
+                <span class="h-[2px] w-8 bg-gold-400"></span>
+                <span class="font-header text-xs font-bold text-gold-500 tracking-widest uppercase">Testimoni Klien</span>
+            </div>
+            <h2 class="font-serif text-4xl md:text-5xl text-navy-900 leading-tight">
+                Dipercaya.<br><em class="text-gold-400">Terbukti Hasilnya.</em>
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-14">
+
+            <div class="testi-card rounded-2xl p-8 reveal-on-scroll">
+                <div class="text-gold-400 text-sm tracking-widest mb-4">★★★★★</div>
+                <span class="font-serif text-6xl text-gold-400 opacity-20 leading-none block -mb-2">"</span>
+                <p class="text-gray-600 text-sm leading-relaxed italic mb-6">TalentCore mengubah cara kami mengelola tim secara fundamental. Proses payroll yang dulu 3 hari kini selesai dalam hitungan jam.</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full border border-gold-400/30 bg-gold-400/10 flex items-center justify-center text-gold-500 font-serif font-bold flex-shrink-0">R</div>
+                    <div>
+                        <div class="font-serif font-bold text-navy-900">Reza Firmansyah</div>
+                        <div class="text-xs text-gray-400 mt-0.5">COO · PT Konsultan Prima</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testi-card rounded-2xl p-8 reveal-on-scroll">
+                <div class="text-gold-400 text-sm tracking-widest mb-4">★★★★★</div>
+                <span class="font-serif text-6xl text-gold-400 opacity-20 leading-none block -mb-2">"</span>
+                <p class="text-gray-600 text-sm leading-relaxed italic mb-6">Visibilitas data keuangan dan SDM dalam satu dashboard — ini yang selama ini kami cari. Implementasi jauh lebih cepat dari ekspektasi.</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full border border-gold-400/30 bg-gold-400/10 flex items-center justify-center text-gold-500 font-serif font-bold flex-shrink-0">S</div>
+                    <div>
+                        <div class="font-serif font-bold text-navy-900">Sari Dewi Pratiwi</div>
+                        <div class="text-xs text-gray-400 mt-0.5">HRD Manager · Bina Karya Group</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testi-card rounded-2xl p-8 reveal-on-scroll">
+                <div class="text-gold-400 text-sm tracking-widest mb-4">★★★★★</div>
+                <span class="font-serif text-6xl text-gold-400 opacity-20 leading-none block -mb-2">"</span>
+                <p class="text-gray-600 text-sm leading-relaxed italic mb-6">Sistem sudah 6 bulan berjalan tanpa downtime berarti. Tim support Trinity sangat responsif. Investasi terbaik yang pernah kami buat.</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full border border-gold-400/30 bg-gold-400/10 flex items-center justify-center text-gold-500 font-serif font-bold flex-shrink-0">A</div>
+                    <div>
+                        <div class="font-serif font-bold text-navy-900">Ahmad Fauzi</div>
+                        <div class="text-xs text-gray-400 mt-0.5">Direktur · Mandiri Advisory</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="bg-navy-900 py-24 relative overflow-hidden">
+    <div style="position:absolute;top:-200px;right:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(212,175,55,0.06) 0%,transparent 65%);pointer-events:none;border-radius:50%"></div>
+    <div style="position:absolute;bottom:0;left:20%;right:20%;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,0.3),transparent)"></div>
+
+    <div class="container mx-auto px-6 md:px-12 relative">
+        <div class="max-w-3xl mx-auto bg-navy-800/60 border border-white/5 rounded-2xl p-14 text-center relative overflow-hidden reveal-on-scroll">
+            <div style="position:absolute;top:0;left:20%;right:20%;height:1px;background:linear-gradient(90deg,transparent,#D4AF37,transparent)"></div>
+            <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(212,175,55,0.06),transparent);pointer-events:none"></div>
+
+            <h2 class="font-serif text-4xl md:text-5xl text-white mb-4 leading-tight relative z-10">
+                Siap <em class="text-gold-400">Transformasi</em> Digital?
+            </h2>
+            <p class="text-gray-400 text-base max-w-md mx-auto mb-10 leading-relaxed relative z-10">
+                Jadwalkan sesi demo gratis 30 menit bersama tim ahli Trinity. Kami tunjukkan bagaimana TalentCore bisa disesuaikan untuk bisnis Anda.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
+                <a href="/demo" class="btn-gold px-8 py-4 bg-gold-gradient text-navy-950 font-bold rounded-lg hover:brightness-110 transition duration-300 tracking-wide text-sm shadow-[0_0_25px_rgba(212,175,55,0.35)] inline-flex items-center justify-center gap-2">
+                    Jadwalkan Demo Gratis
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                </a>
+                <a href="https://wa.me/6281317819567" target="_blank" class="px-8 py-4 border border-white/20 text-white font-bold rounded-lg hover:border-gold-400 hover:text-gold-400 transition duration-300 tracking-wide text-sm inline-flex items-center justify-center gap-2">
+                    <i class="fab fa-whatsapp"></i> Chat WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="bg-navy-950 border-t border-navy-800 py-14">
+    <div class="container mx-auto px-6 md:px-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+            <div>
+                <div class="mb-4">
+                    <div class="font-header font-bold text-white tracking-widest text-base leading-none">TALENTCORE</div>
+                    <div class="font-header text-[9px] text-gold-400 tracking-[0.25em] leading-none mt-1">by Trinity Berkah Mandiri</div>
+                </div>
+                <p class="text-gray-500 text-sm leading-relaxed">Inovasi teknologi operasional — produk unggulan PT Trinity Berkah Mandiri untuk manajemen SDM dan ERP kelas enterprise.</p>
+            </div>
+            <div>
+                <h4 class="font-header font-bold text-white text-xs tracking-widest uppercase mb-5">Akses Modul</h4>
+                <ul class="flex flex-col gap-2.5 text-sm text-gray-500">
+                    <li><a href="/demo" class="hover:text-gold-400 transition">TalentCore.hr</a></li>
+                    <li><a href="/demo" class="hover:text-gold-400 transition">TalentCore.erp</a></li>
+                    <li><a href="/demo" class="hover:text-gold-400 transition">Jadwalkan Demo</a></li>
+                    <li><a href="/" class="hover:text-gold-400 transition">← Kembali ke Trinity</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-header font-bold text-white text-xs tracking-widest uppercase mb-5">Trinity Visual HQ</h4>
+                <address class="not-italic text-sm text-gray-500 leading-relaxed">
+                    Kp. Rawaburung RT.01/RW.06,<br>
+                    Kel. Rawaburung, Kec. Kosambi,<br>
+                    Kab. Tangerang, Banten.<br><br>
+                    <a href="mailto:trinityberkahmandiri@gmail.com" class="text-gold-400 hover:underline">trinityberkahmandiri@gmail.com</a>
+                </address>
+            </div>
+        </div>
+        <div class="border-t border-navy-800 pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 gap-2">
+            <p>&copy; 2026 PT Trinity Berkah Mandiri. All Rights Reserved.</p>
+            <a href="/" class="text-gold-400 hover:underline">Kunjungi Trinity Visual &rarr;</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+(function(){
+    /* Hero Slider */
+    var slides = document.querySelectorAll('.slide'), idx = 0;
+    function nextSlide(){
+        slides[idx].classList.remove('active');
+        idx = (idx + 1) % slides.length;
+        slides[idx].classList.add('active');
+        setTimeout(nextSlide, 6000);
+    }
+    if(slides.length) setTimeout(nextSlide, 6000);
+
+    /* Navbar */
+    var nav = document.getElementById('navbar');
+    window.addEventListener('scroll', function(){ nav.classList.toggle('shadow-lg', window.scrollY > 60); if(window.scrollY>60){nav.classList.replace('py-4','py-2')}else{nav.classList.replace('py-2','py-4')} });
+
+    /* Mobile Menu */
+    document.getElementById('mobile-menu-btn').addEventListener('click', function(){ document.getElementById('mobile-menu').classList.toggle('hidden'); });
+
+    /* Typewriter */
+    var words = ['Aman','Adaptif','Cerdas','Terpercaya','Terintegrasi'];
+    var el = document.getElementById('twt');
+    if(el){
+        var wi=2, ci=words[2].length, del=true;
+        function tick(){
+            if(del){ ci--; el.textContent=words[wi].slice(0,ci); if(ci===0){del=false;wi=(wi+1)%words.length;setTimeout(tick,380);return;} setTimeout(tick,58);
+            } else { ci++; el.textContent=words[wi].slice(0,ci); if(ci===words[wi].length){del=true;setTimeout(tick,2100);return;} setTimeout(tick,95); }
+        }
+        setTimeout(tick,1800);
+    }
+
+    /* Counter */
+    function runCounter(id, target, dur){
+        var el=document.getElementById(id); if(!el)return;
+        var st=null;
+        function step(ts){ if(!st)st=ts; var p=Math.min((ts-st)/dur,1); var ease=p===1?1:1-Math.pow(2,-10*p); el.textContent=Math.round(ease*target); if(p<1)requestAnimationFrame(step); else el.textContent=target; }
+        requestAnimationFrame(step);
+    }
+
+    /* Scroll Reveal + Counter trigger */
+    if('IntersectionObserver' in window){
+        var observer = new IntersectionObserver(function(entries){
+            entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('reveal-visible'); observer.unobserve(e.target); } });
+        }, {threshold:0.1, rootMargin:'0px 0px -50px 0px'});
+        document.querySelectorAll('.reveal-on-scroll').forEach(function(el){ el.classList.add('reveal-text'); observer.observe(el); });
+
+        var countersFired = false;
+        var statsObs = new IntersectionObserver(function(entries){
+            if(entries[0].isIntersecting && !countersFired){
+                countersFired = true;
+                runCounter('c1',50,1600); runCounter('c2',99,2000); runCounter('c3',3,1000);
+                statsObs.disconnect();
+            }
+        }, {threshold:0.4});
+        var sg = document.querySelector('.stat-box');
+        if(sg) statsObs.observe(sg.parentElement);
+    } else {
+        setTimeout(function(){ runCounter('c1',50,1600); runCounter('c2',99,2000); runCounter('c3',3,1000); }, 600);
+    }
+
+    /* Smooth scroll */
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){
+        a.addEventListener('click', function(e){ if(this.getAttribute('href')==='#')return; e.preventDefault(); var t=document.querySelector(this.getAttribute('href')); if(t)t.scrollIntoView({behavior:'smooth',block:'start'}); document.getElementById('mobile-menu').classList.add('hidden'); });
+    });
+})();
+</script>
+</body>
+</html>
