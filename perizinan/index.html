@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perizinan & Pelaporan — PT Trinity Berkah Mandiri</title>
+    <link rel="icon" type="image/png" href="../logo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { 950: '#020c1b', 900: '#0a192f', 800: '#112240', 50: '#f0f4f8', 100: '#e8edf5' },
+                        gold: { 400: '#D4AF37', 300: '#F4C430', 500: '#C5A028' },
+                    },
+                    fontFamily: {
+                        sans:   ['Inter', 'sans-serif'],
+                        header: ['Montserrat', 'sans-serif'],
+                        serif:  ['Cormorant Garamond', 'serif'],
+                    },
+                    backgroundImage: {
+                        'gold-gradient': 'linear-gradient(135deg, #D4AF37 0%, #F4C430 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #f8f9fa; color: #374151; }
+
+        .glass-nav {
+            background: rgba(10, 25, 47, 0.97);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .reveal-text    { opacity: 0; transform: translateY(24px); transition: all 0.7s ease-out; }
+        .reveal-visible { opacity: 1; transform: translateY(0); }
+
+        .btn-gold { position: relative; overflow: hidden; }
+        .btn-gold::after { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: 0.5s; }
+        .btn-gold:hover::after { left: 100%; }
+
+        .service-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        }
+        .service-card:hover {
+            transform: translateY(-6px);
+            border-color: #D4AF37;
+            box-shadow: 0 16px 36px -8px rgba(212, 175, 55, 0.18);
+        }
+
+        .pricing-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .pricing-card.featured {
+            border-color: #D4AF37;
+            box-shadow: 0 12px 40px -8px rgba(212, 175, 55, 0.25);
+        }
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px -8px rgba(212, 175, 55, 0.2);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 py-4 glass-nav">
+        <div class="container mx-auto px-6 md:px-12 flex justify-between items-center">
+            <a href="/" class="flex items-center gap-3 group">
+                <img src="../logo.png" alt="Trinity Logo" class="h-10 w-auto md:h-11 object-contain drop-shadow-[0_0_8px_rgba(212,175,55,0.3)] transition-transform duration-300 group-hover:scale-105">
+                <div class="flex flex-col">
+                    <span class="font-header font-bold text-lg text-white tracking-widest leading-none">TRINITY</span>
+                    <span class="font-header font-medium text-[10px] text-gold-400 tracking-[0.22em] leading-none mt-0.5">BERKAH MANDIRI</span>
+                </div>
+            </a>
+
+            <ul class="hidden md:flex gap-8 items-center">
+                <li><a href="/"        class="text-xs font-semibold text-gray-300 hover:text-gold-400 transition duration-300 tracking-widest uppercase">Beranda</a></li>
+                <li><a href="/#divisi" class="text-xs font-semibold text-gray-300 hover:text-gold-400 transition duration-300 tracking-widest uppercase">Divisi</a></li>
+                <li><a href="#layanan" class="text-xs font-semibold text-gray-300 hover:text-gold-400 transition duration-300 tracking-widest uppercase">Layanan</a></li>
+                <li><a href="#harga"   class="text-xs font-semibold text-gray-300 hover:text-gold-400 transition duration-300 tracking-widest uppercase">Harga</a></li>
+                <li><a href="/contact" class="text-xs font-semibold text-gray-300 hover:text-gold-400 transition duration-300 tracking-widest uppercase">Kontak</a></li>
+                <li>
+                    <a href="https://wa.me/6288984697228?text=Halo%20Trinity%2C%20saya%20ingin%20konsultasi%20layanan%20Perizinan%20%26%20Pelaporan"
+                       target="_blank"
+                       class="px-5 py-2 text-xs font-bold text-navy-950 bg-gold-gradient rounded-sm hover:brightness-110 transition duration-300 tracking-wider shadow-[0_0_12px_rgba(212,175,55,0.35)]">
+                        KONSULTASI GRATIS
+                    </a>
+                </li>
+            </ul>
+
+            <button id="mobile-menu-btn" class="md:hidden text-gold-400 text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-navy-900 border-t border-navy-800 absolute w-full shadow-2xl">
+            <ul class="flex flex-col p-6 gap-4 text-center">
+                <li><a href="/"        class="block text-gray-300 hover:text-gold-400 text-sm tracking-widest uppercase">Beranda</a></li>
+                <li><a href="/#divisi" class="block text-gray-300 hover:text-gold-400 text-sm tracking-widest uppercase">Divisi</a></li>
+                <li><a href="#layanan" class="block text-gray-300 hover:text-gold-400 text-sm tracking-widest uppercase">Layanan</a></li>
+                <li><a href="#harga"   class="block text-gray-300 hover:text-gold-400 text-sm tracking-widest uppercase">Harga</a></li>
+                <li><a href="/contact" class="block text-gray-300 hover:text-gold-400 text-sm tracking-widest uppercase">Kontak</a></li>
+                <li>
+                    <a href="https://wa.me/6288984697228" target="_blank"
+                       class="block text-navy-950 bg-gold-gradient font-bold text-sm tracking-widest uppercase py-3 rounded">
+                        Konsultasi Gratis
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="bg-navy-950 pt-36 pb-24 relative overflow-hidden">
+        <div style="position:absolute;top:-200px;right:-150px;width:600px;height:600px;background:radial-gradient(circle,rgba(212,175,55,0.06) 0%,transparent 65%);pointer-events:none;border-radius:50%"></div>
+        <div style="position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(212,175,55,0.03) 0%,transparent 65%);pointer-events:none;border-radius:50%"></div>
+
+        <div class="container mx-auto px-6 md:px-12 relative">
+            <!-- Breadcrumb -->
+            <div class="flex items-center gap-2 mb-10 reveal-on-scroll">
+                <a href="/" class="text-gray-500 hover:text-gold-400 transition text-xs tracking-widest uppercase">Trinity Berkah Mandiri</a>
+                <i class="fas fa-chevron-right text-gray-600 text-[10px]"></i>
+                <span class="text-gold-400 text-xs tracking-widest uppercase font-semibold">Perizinan & Pelaporan</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal-on-scroll">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-gold-400/10 border border-gold-400/20 rounded-full mb-6">
+                        <span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
+                        <span class="text-gold-400 text-xs font-semibold tracking-widest uppercase">Divisi Aktif</span>
+                    </div>
+                    <h1 class="font-header font-extrabold text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight">
+                        Perizinan &<br>
+                        <span class="text-transparent bg-clip-text bg-gold-gradient">Pelaporan</span>
+                    </h1>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                        Kami mengelola kewajiban pelaporan investasi dan industri perusahaan Anda secara profesional — dari analisa data, eksekusi laporan, hingga pengawalan verifikasi. <strong class="text-gray-200">Tenang tanpa kendala administratif.</strong>
+                    </p>
+
+                    <!-- Badges -->
+                    <div class="flex flex-wrap gap-3 mb-10">
+                        <span class="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full text-xs text-gray-300 font-semibold">
+                            <i class="fas fa-shield-alt text-gold-400"></i> Berlatar Hukum S2
+                        </span>
+                        <span class="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full text-xs text-gray-300 font-semibold">
+                            <i class="fas fa-clock text-gold-400"></i> Respons 1×24 Jam
+                        </span>
+                        <span class="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full text-xs text-gray-300 font-semibold">
+                            <i class="fas fa-check-double text-gold-400"></i> End-to-End Service
+                        </span>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="https://wa.me/6288984697228?text=Halo%20Trinity%2C%20saya%20ingin%20konsultasi%20layanan%20Perizinan%20%26%20Pelaporan"
+                           target="_blank"
+                           class="btn-gold px-7 py-3.5 bg-gold-gradient text-navy-950 font-bold rounded-lg hover:brightness-110 transition duration-300 tracking-wide text-sm shadow-[0_4px_20px_rgba(212,175,55,0.3)] inline-flex items-center justify-center gap-2">
+                            <i class="fab fa-whatsapp"></i> Konsultasi Gratis
+                        </a>
+                        <a href="#harga"
+                           class="px-7 py-3.5 border border-white/25 text-white font-bold rounded-lg hover:border-gold-400 hover:text-gold-400 transition duration-300 tracking-wide text-sm inline-flex items-center justify-center gap-2">
+                            <i class="fas fa-tag"></i> Lihat Paket Harga
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="reveal-on-scroll grid grid-cols-2 gap-4">
+                    <div class="bg-navy-800/60 border border-white/5 rounded-2xl p-6 text-center">
+                        <div class="text-3xl text-gold-400 mb-3"><i class="fas fa-file-signature"></i></div>
+                        <div class="font-header font-bold text-white text-lg mb-1">LKPM</div>
+                        <div class="text-gray-400 text-xs leading-relaxed">Laporan Kegiatan Penanaman Modal via OSS RBA</div>
+                    </div>
+                    <div class="bg-navy-800/60 border border-white/5 rounded-2xl p-6 text-center">
+                        <div class="text-3xl text-gold-400 mb-3"><i class="fas fa-industry"></i></div>
+                        <div class="font-header font-bold text-white text-lg mb-1">SIINAS</div>
+                        <div class="text-gray-400 text-xs leading-relaxed">Sistem Informasi Industri Nasional (Kemenperin)</div>
+                    </div>
+                    <div class="bg-navy-800/60 border border-white/5 rounded-2xl p-6 text-center">
+                        <div class="text-3xl text-gold-400 mb-3"><i class="fas fa-user-tie"></i></div>
+                        <div class="font-header font-bold text-white text-lg mb-1">S2 Hukum</div>
+                        <div class="text-gray-400 text-xs leading-relaxed">Tim berlatar belakang hukum & kepatuhan investasi</div>
+                    </div>
+                    <div class="bg-navy-800/60 border border-white/5 rounded-2xl p-6 text-center">
+                        <div class="text-3xl text-gold-400 mb-3"><i class="fas fa-sync-alt"></i></div>
+                        <div class="font-header font-bold text-white text-lg mb-1">End-to-End</div>
+                        <div class="text-gray-400 text-xs leading-relaxed">Dari analisa data hingga bukti lapor sah diterima</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ LAYANAN ═══ -->
+    <section id="layanan" class="py-24 bg-white">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="text-center mb-16 reveal-on-scroll">
+                <div class="flex items-center justify-center gap-4 mb-4">
+                    <span class="h-[1px] w-12 bg-gold-400"></span>
+                    <span class="font-header text-xs font-bold text-gold-500 tracking-widest uppercase">Scope of Work</span>
+                    <span class="h-[1px] w-12 bg-gold-400"></span>
+                </div>
+                <h2 class="font-header text-3xl md:text-4xl font-bold text-navy-900 mb-4">Apa yang Kami Kerjakan</h2>
+                <p class="text-gray-500 max-w-xl mx-auto text-base leading-relaxed">Layanan kami mencakup proses <strong>end-to-end</strong> untuk setiap periode pelaporan — dari awal hingga bukti lapor sah di tangan Anda.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <div class="service-card rounded-2xl p-7 reveal-on-scroll">
+                    <div class="w-12 h-12 bg-navy-50 rounded-xl flex items-center justify-center mb-5">
+                        <i class="fas fa-search text-gold-400 text-xl"></i>
+                    </div>
+                    <div class="text-xs font-bold tracking-widest uppercase text-gold-500 mb-2">Step 01</div>
+                    <h3 class="font-header font-bold text-navy-900 text-lg mb-3">Analisa & Validasi Data</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Memastikan data realisasi investasi/produksi sesuai dengan ketentuan teknis BKPM/Kemenperin sebelum diinput ke sistem.</p>
+                </div>
+
+                <div class="service-card rounded-2xl p-7 reveal-on-scroll">
+                    <div class="w-12 h-12 bg-navy-50 rounded-xl flex items-center justify-center mb-5">
+                        <i class="fas fa-paper-plane text-gold-400 text-xl"></i>
+                    </div>
+                    <div class="text-xs font-bold tracking-widest uppercase text-gold-500 mb-2">Step 02</div>
+                    <h3 class="font-header font-bold text-navy-900 text-lg mb-3">Eksekusi Pelaporan</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Input dan submit data melalui sistem <strong class="text-navy-900">OSS RBA</strong> (untuk LKPM) dan <strong class="text-navy-900">SIINAS</strong> (untuk laporan industri) secara tepat waktu.</p>
+                </div>
+
+                <div class="service-card rounded-2xl p-7 reveal-on-scroll">
+                    <div class="w-12 h-12 bg-navy-50 rounded-xl flex items-center justify-center mb-5">
+                        <i class="fas fa-eye text-gold-400 text-xl"></i>
+                    </div>
+                    <div class="text-xs font-bold tracking-widest uppercase text-gold-500 mb-2">Step 03</div>
+                    <h3 class="font-header font-bold text-navy-900 text-lg mb-3">Pengawalan Verifikasi</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Memantau status laporan dan merespons catatan verifikator dari BKPM/Kemenperin hingga laporan dinyatakan <strong class="text-navy-900">tuntas dan diterima</strong>.</p>
+                </div>
+
+                <div class="service-card rounded-2xl p-7 reveal-on-scroll">
+                    <div class="w-12 h-12 bg-navy-50 rounded-xl flex items-center justify-center mb-5">
+                        <i class="fas fa-file-check text-gold-400 text-xl"></i>
+                    </div>
+                    <div class="text-xs font-bold tracking-widest uppercase text-gold-500 mb-2">Step 04</div>
+                    <h3 class="font-header font-bold text-navy-900 text-lg mb-3">Bukti Lapor Sah</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Penyerahan <strong class="text-navy-900">Tanda Terima resmi</strong> sebagai arsip kepatuhan perusahaan Anda — bukti sah bahwa kewajiban pelaporan telah terpenuhi.</p>
+                </div>
+
+            </div>
+
+            <!-- 2 sub-layanan utama -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
+
+                <div class="bg-gray-50 border border-gray-100 rounded-2xl p-8 reveal-on-scroll">
+                    <div class="flex items-start gap-5">
+                        <div class="w-14 h-14 bg-navy-900 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-file-signature text-gold-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <div class="font-header font-bold text-navy-900 text-xl mb-2">LKPM</div>
+                            <p class="text-xs font-bold text-gold-500 tracking-widest uppercase mb-3">Laporan Kegiatan Penanaman Modal</p>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-4">Kewajiban pelaporan realisasi investasi kepada BKPM melalui sistem <strong class="text-navy-900">OSS RBA</strong> — dilaporkan setiap triwulan (4x per tahun).</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs font-semibold text-gray-600">Triwulan I</span>
+                                <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs font-semibold text-gray-600">Triwulan II</span>
+                                <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs font-semibold text-gray-600">Triwulan III</span>
+                                <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs font-semibold text-gray-600">Triwulan IV</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 border border-gray-100 rounded-2xl p-8 reveal-on-scroll">
+                    <div class="flex items-start gap-5">
+                        <div class="w-14 h-14 bg-navy-900 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-industry text-gold-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <div class="font-header font-bold text-navy-900 text-xl mb-2">SIINAS</div>
+                            <p class="text-xs font-bold text-gold-500 tracking-widest uppercase mb-3">Sistem Informasi Industri Nasional</p>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-4">Kewajiban pelaporan data industri kepada <strong class="text-navy-900">Kementerian Perindustrian</strong> — dilaporkan setiap triwulan (4x per tahun).</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs font-semibold text-gray-600">Triwulan I</span>
+                                <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs font-semibold text-gray-600">Triwulan II</span>
+                                <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs font-semibold text-gray-600">Triwulan III</span>
+                                <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs font-semibold text-gray-600">Triwulan IV</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ HARGA ═══ -->
+    <section id="harga" class="py-24 bg-gray-50">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="text-center mb-16 reveal-on-scroll">
+                <div class="flex items-center justify-center gap-4 mb-4">
+                    <span class="h-[1px] w-12 bg-gold-400"></span>
+                    <span class="font-header text-xs font-bold text-gold-500 tracking-widest uppercase">Penawaran Investasi</span>
+                    <span class="h-[1px] w-12 bg-gold-400"></span>
+                </div>
+                <h2 class="font-header text-3xl md:text-4xl font-bold text-navy-900 mb-4">Pilih Skema yang Sesuai</h2>
+                <p class="text-gray-500 max-w-lg mx-auto text-base leading-relaxed">Dua opsi fleksibel yang dapat disesuaikan dengan kebutuhan dan anggaran manajemen perusahaan Anda.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+
+                <!-- Opsi A -->
+                <div class="pricing-card rounded-2xl p-8 reveal-on-scroll flex flex-col">
+                    <div class="mb-6">
+                        <div class="text-xs font-bold tracking-widest uppercase text-gray-400 mb-2">Opsi A</div>
+                        <h3 class="font-header font-bold text-2xl text-navy-900 mb-1">On-Demand</h3>
+                        <p class="text-gray-500 text-sm">Per periode lapor — bayar sesuai kebutuhan</p>
+                    </div>
+
+                    <div class="flex flex-col gap-4 mb-8">
+                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 bg-navy-900 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-file-signature text-gold-400 text-sm"></i>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-navy-900 text-sm">LKPM</div>
+                                    <div class="text-xs text-gray-400">Per triwulan</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-header font-bold text-navy-900 text-lg">Rp 5 Jt</div>
+                                <div class="text-xs text-gray-400">/ periode</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 bg-navy-900 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-industry text-gold-400 text-sm"></i>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-navy-900 text-sm">SIINAS</div>
+                                    <div class="text-xs text-gray-400">Per triwulan</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-header font-bold text-navy-900 text-lg">Rp 6 Jt</div>
+                                <div class="text-xs text-gray-400">/ periode</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="flex flex-col gap-3 mb-8 flex-1">
+                        <li class="flex items-start gap-3 text-sm text-gray-600">
+                            <i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i>
+                            Analisa & validasi data investasi/produksi
+                        </li>
+                        <li class="flex items-start gap-3 text-sm text-gray-600">
+                            <i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i>
+                            Eksekusi input & submit via OSS RBA / SIINAS
+                        </li>
+                        <li class="flex items-start gap-3 text-sm text-gray-600">
+                            <i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i>
+                            Pengawalan verifikasi hingga tuntas
+                        </li>
+                        <li class="flex items-start gap-3 text-sm text-gray-600">
+                            <i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i>
+                            Bukti lapor sah (tanda terima resmi)
+                        </li>
+                        <li class="flex items-start gap-3 text-sm text-gray-400">
+                            <i class="fas fa-times text-gray-300 mt-0.5 flex-shrink-0"></i>
+                            Sistem pengingat proaktif
+                        </li>
+                        <li class="flex items-start gap-3 text-sm text-gray-400">
+                            <i class="fas fa-times text-gray-300 mt-0.5 flex-shrink-0"></i>
+                            Audit data historis OSS/SIINAS
+                        </li>
+                    </ul>
+
+                    <p class="text-xs text-gray-400 mb-5">Pembayaran dilakukan per termin setiap triwulan.</p>
+
+                    <a href="https://wa.me/6288984697228?text=Halo%20Trinity%2C%20saya%20tertarik%20dengan%20paket%20On-Demand%20LKPM%20%26%20SIINAS"
+                       target="_blank"
+                       class="w-full py-3.5 border-2 border-navy-900 text-navy-900 font-bold text-xs tracking-widest uppercase rounded-xl hover:bg-navy-900 hover:text-white transition duration-300 flex items-center justify-center gap-2">
+                        <i class="fab fa-whatsapp"></i> Pilih Opsi Ini
+                    </a>
+                </div>
+
+                <!-- Opsi B — Featured -->
+                <div class="pricing-card featured rounded-2xl p-8 reveal-on-scroll flex flex-col relative">
+                    <!-- Badge -->
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-5 py-1.5 bg-gold-gradient text-navy-950 text-xs font-bold tracking-widest uppercase rounded-full shadow-lg whitespace-nowrap">
+                        Rekomendasi Terbaik
+                    </div>
+
+                    <div class="mb-6 mt-2">
+                        <div class="text-xs font-bold tracking-widest uppercase text-gold-500 mb-2">Opsi B</div>
+                        <h3 class="font-header font-bold text-2xl text-navy-900 mb-1">Kontrak Tahunan</h3>
+                        <p class="text-gray-500 text-sm">Kelola seluruh pelaporan 1 tahun penuh — tanpa khawatir tenggat</p>
+                    </div>
+
+                    <div class="bg-navy-900 rounded-xl p-5 mb-6 text-center relative overflow-hidden">
+                        <div style="position:absolute;top:0;left:20%;right:20%;height:1px;background:linear-gradient(90deg,transparent,#D4AF37,transparent)"></div>
+                        <div class="text-gray-400 text-xs mb-1">Total Nilai Kontrak (1 Tahun)</div>
+                        <div class="font-header font-bold text-4xl text-white mb-1">Rp 36 <span class="text-2xl text-gold-400">Juta</span></div>
+                        <div class="flex items-center justify-center gap-2 mt-2">
+                            <span class="text-gray-500 text-xs line-through">Rp 44.000.000</span>
+                            <span class="px-2 py-0.5 bg-green-500/20 text-green-400 text-xs font-bold rounded-full">Hemat Rp 8 Jt</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3 mb-6">
+                        <div class="bg-gray-50 rounded-xl p-3 text-center">
+                            <div class="text-gold-500 font-bold text-lg">4×</div>
+                            <div class="text-xs text-gray-500">Laporan LKPM</div>
+                            <div class="text-xs text-gray-400">(Triwulan I–IV)</div>
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-3 text-center">
+                            <div class="text-gold-500 font-bold text-lg">4×</div>
+                            <div class="text-xs text-gray-500">Laporan SIINAS</div>
+                            <div class="text-xs text-gray-400">(Triwulan I–IV)</div>
+                        </div>
+                    </div>
+
+                    <ul class="flex flex-col gap-3 mb-8 flex-1">
+                        <li class="flex items-start gap-3 text-sm text-gray-600">
+                            <i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i>
+                            Semua layanan Opsi A (end-to-end)
+                        </li>
+                        <li class="flex items-start gap-3 text-sm text-gray-600">
+                            <i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i>
+                            <span><strong class="text-navy-900">Prioritas layanan</strong> — penanganan di awal waktu</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm text-gray-600">
+                            <i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i>
+                            <span><strong class="text-navy-900">Sistem pengingat proaktif</strong> — kami siapkan data sebelum periode dibuka</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm text-gray-600">
+                            <i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i>
+                            <span><strong class="text-navy-900">Audit data historis</strong> OSS & SIINAS</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm text-gray-600">
+                            <i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i>
+                            Konsultasi teknis OSS sepanjang tahun
+                        </li>
+                    </ul>
+
+                    <a href="https://wa.me/6288984697228?text=Halo%20Trinity%2C%20saya%20tertarik%20dengan%20Paket%20Kontrak%20Tahunan%20LKPM%20%26%20SIINAS%20senilai%20Rp%2036.000.000"
+                       target="_blank"
+                       class="btn-gold w-full py-3.5 bg-gold-gradient text-navy-950 font-bold text-xs tracking-widest uppercase rounded-xl hover:brightness-110 transition duration-300 shadow-[0_4px_20px_rgba(212,175,55,0.3)] flex items-center justify-center gap-2">
+                        <i class="fab fa-whatsapp"></i> Pilih Paket Ini
+                    </a>
+                </div>
+
+            </div>
+
+            <p class="text-center text-xs text-gray-400 mt-8">Harga belum termasuk PPN. Hubungi kami untuk diskusi lebih lanjut dan penawaran khusus.</p>
+        </div>
+    </section>
+
+    <!-- ═══ MENGAPA KAMI ═══ -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="text-center mb-16 reveal-on-scroll">
+                <div class="flex items-center justify-center gap-4 mb-4">
+                    <span class="h-[1px] w-12 bg-gold-400"></span>
+                    <span class="font-header text-xs font-bold text-gold-500 tracking-widest uppercase">Mengapa Kami</span>
+                    <span class="h-[1px] w-12 bg-gold-400"></span>
+                </div>
+                <h2 class="font-header text-3xl md:text-4xl font-bold text-navy-900">Responsif. Terpercaya.<br>Tanpa Kendala Administratif.</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-gray-50 border border-gray-100 rounded-2xl p-8 text-center reveal-on-scroll">
+                    <div class="w-16 h-16 bg-gold-400/10 rounded-full flex items-center justify-center mx-auto mb-5">
+                        <i class="fas fa-graduation-cap text-gold-500 text-2xl"></i>
+                    </div>
+                    <h3 class="font-header font-bold text-navy-900 text-lg mb-3">Berlatar Hukum S2</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Dipimpin oleh profesional bergelar S2 Hukum yang memahami regulasi investasi dan kepatuhan bisnis secara mendalam.</p>
+                </div>
+                <div class="bg-gray-50 border border-gray-100 rounded-2xl p-8 text-center reveal-on-scroll">
+                    <div class="w-16 h-16 bg-gold-400/10 rounded-full flex items-center justify-center mx-auto mb-5">
+                        <i class="fas fa-shield-alt text-gold-500 text-2xl"></i>
+                    </div>
+                    <h3 class="font-header font-bold text-navy-900 text-lg mb-3">Validitas Terjamin</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Kami memastikan validitas data, ketepatan waktu pelaporan, dan keamanan perizinan perusahaan Anda secara berkelanjutan.</p>
+                </div>
+                <div class="bg-gray-50 border border-gray-100 rounded-2xl p-8 text-center reveal-on-scroll">
+                    <div class="w-16 h-16 bg-gold-400/10 rounded-full flex items-center justify-center mx-auto mb-5">
+                        <i class="fas fa-headset text-gold-500 text-2xl"></i>
+                    </div>
+                    <h3 class="font-header font-bold text-navy-900 text-lg mb-3">Responsif 1×24 Jam</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Tim kami proaktif mempersiapkan data sebelum periode dibuka dan siap merespons pertanyaan dalam 1×24 jam kerja.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ CTA ═══ -->
+    <section class="bg-navy-900 py-24 relative overflow-hidden">
+        <div style="position:absolute;top:-200px;right:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(212,175,55,0.06) 0%,transparent 65%);pointer-events:none;border-radius:50%"></div>
+
+        <div class="container mx-auto px-6 md:px-12 text-center relative reveal-on-scroll">
+            <p class="text-gold-400 font-mono text-xs tracking-[0.25em] uppercase mb-4">Mulai Sekarang</p>
+            <h2 class="font-header text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                Pastikan Kepatuhan<br>Pelaporan Perusahaan Anda.
+            </h2>
+            <p class="text-gray-400 text-base max-w-md mx-auto mb-10 leading-relaxed">
+                Konsultasi pertama gratis. Kami siap menganalisa kebutuhan pelaporan LKPM & SIINAS perusahaan Anda.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="https://wa.me/6288984697228?text=Halo%20Trinity%2C%20saya%20ingin%20konsultasi%20layanan%20Perizinan%20%26%20Pelaporan%20LKPM%20SIINAS"
+                   target="_blank"
+                   class="btn-gold px-8 py-4 bg-gold-gradient text-navy-950 font-bold rounded-lg hover:brightness-110 transition duration-300 tracking-wide text-sm shadow-[0_0_25px_rgba(212,175,55,0.35)] inline-flex items-center justify-center gap-2">
+                    <i class="fab fa-whatsapp text-base"></i> Chat via WhatsApp
+                </a>
+                <a href="/contact"
+                   class="px-8 py-4 border border-white/25 text-white font-bold rounded-lg hover:border-gold-400 hover:text-gold-400 transition duration-300 tracking-wide text-sm inline-flex items-center justify-center gap-2">
+                    <i class="fas fa-envelope"></i> Kirim Pesan
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy-950 border-t border-navy-800 py-14">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+                <div>
+                    <a href="/" class="flex items-center gap-3 mb-4 group">
+                        <img src="../logo.png" alt="Trinity" class="h-9 w-auto opacity-90 group-hover:opacity-100 transition">
+                        <div class="flex flex-col">
+                            <span class="font-header font-bold text-white tracking-widest text-base leading-none">TRINITY</span>
+                            <span class="font-header text-[10px] text-gold-400 tracking-[0.2em] leading-none mt-0.5">BERKAH MANDIRI</span>
+                        </div>
+                    </a>
+                    <p class="text-gray-500 text-sm leading-relaxed">Holding group yang hadir untuk mendukung pertumbuhan bisnis Anda secara menyeluruh dan berkelanjutan.</p>
+                </div>
+                <div>
+                    <h4 class="font-header font-bold text-white text-xs tracking-widest uppercase mb-5">Divisi Usaha</h4>
+                    <ul class="flex flex-col gap-2.5 text-sm text-gray-500">
+                        <li><a href="/visual-creative" class="hover:text-gold-400 transition">Trinity Visual Creative</a></li>
+                        <li><a href="/talentcore" class="hover:text-gold-400 transition">TalentCore (HR &amp; ERP)</a></li>
+                        <li><a href="/perizinan" class="text-gold-400 font-semibold">Perizinan &amp; Pelaporan</a></li>
+                        <li><span class="text-gray-600">Outsourcing <span class="text-amber-600 text-xs ml-1">(soon)</span></span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-header font-bold text-white text-xs tracking-widest uppercase mb-5">Kontak</h4>
+                    <ul class="flex flex-col gap-3 text-sm text-gray-500">
+                        <li class="flex items-center gap-3"><i class="fab fa-whatsapp text-gold-400 w-4 text-base"></i><a href="https://wa.me/6288984697228" target="_blank" class="hover:text-gold-400 transition">+62 889-8469-7228</a></li>
+                        <li class="flex items-center gap-3"><i class="fab fa-whatsapp text-gold-400 w-4 text-base"></i><a href="https://wa.me/6281317819567" target="_blank" class="hover:text-gold-400 transition">+62 813-1781-9567</a></li>
+                        <li class="flex items-center gap-3"><i class="far fa-envelope text-gold-400 w-4 text-base"></i><a href="mailto:trinityberkahmandiri@gmail.com" class="hover:text-gold-400 transition break-all">trinityberkahmandiri@gmail.com</a></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-map-marker-alt text-gold-400 w-4 text-base mt-0.5"></i><span>Kp. Rawaburung RT.01/RW.06,<br>Kosambi, Tangerang, Banten.</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-navy-800 pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 gap-2">
+                <p>&copy; 2026 PT Trinity Berkah Mandiri. All Rights Reserved.</p>
+                <p>Bagian dari <a href="/" class="text-gold-400 hover:underline">Trinity Berkah Mandiri Group</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WA -->
+    <a href="https://wa.me/6288984697228?text=Halo%20Trinity%2C%20saya%20ingin%20konsultasi%20layanan%20Perizinan%20%26%20Pelaporan" target="_blank" id="wa-float" title="Chat via WhatsApp"
+       style="position:fixed;bottom:28px;right:28px;z-index:9999;width:58px;height:58px;background:linear-gradient(135deg,#25D366,#128C7E);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(37,211,102,0.45);text-decoration:none;animation:wa-bounce 2.8s ease-in-out infinite;">
+        <i class="fab fa-whatsapp" style="color:white;font-size:30px;line-height:1;"></i>
+        <span style="position:absolute;top:0px;right:0px;width:16px;height:16px;background:#D4AF37;border-radius:50%;border:2px solid white;animation:wa-pulse 2s ease-in-out infinite;"></span>
+    </a>
+    <style>
+    @keyframes wa-bounce{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-9px) scale(1.05);}}
+    @keyframes wa-pulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.5);opacity:0.5;}}
+    </style>
+
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) { nav.classList.add('shadow-lg'); nav.classList.replace('py-4','py-2'); }
+            else { nav.classList.remove('shadow-lg'); nav.classList.replace('py-2','py-4'); }
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('reveal-visible'); observer.unobserve(entry.target); } });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => { el.classList.add('reveal-text'); observer.observe(el); });
+
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', function(e) {
+                if (this.getAttribute('href') === '#') return;
+                e.preventDefault();
+                const t = document.querySelector(this.getAttribute('href'));
+                if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
