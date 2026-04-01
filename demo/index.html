@@ -4,13 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jadwalkan Demo — TalentCore by Trinity Berkah Mandiri</title>
+    <meta name="description" content="Jadwalkan demo gratis TalentCore — sistem HR & ERP enterprise dari PT Trinity Berkah Mandiri. Lihat langsung fitur absensi, payroll, rekrutmen, dan manajemen bisnis dalam satu platform.">
+    <meta name="keywords" content="demo TalentCore, HR software demo, ERP demo, software HR Indonesia">
+    <meta name="author" content="PT Trinity Berkah Mandiri">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://trinityberkahmandiri.com/demo/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://trinityberkahmandiri.com/demo/">
+    <meta property="og:title" content="Jadwalkan Demo — TalentCore by Trinity Berkah Mandiri">
+    <meta property="og:description" content="Jadwalkan demo gratis TalentCore — sistem HR & ERP enterprise dalam satu platform.">
+    <meta property="og:image" content="https://trinityberkahmandiri.com/logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Jadwalkan Demo — TalentCore by Trinity Berkah Mandiri">
+    <meta name="twitter:description" content="Jadwalkan demo gratis TalentCore — sistem HR & ERP enterprise dalam satu platform.">
+    <meta name="twitter:image" content="https://trinityberkahmandiri.com/logo.png">
     <link rel="icon" type="image/png" href="../logo.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
 
     <script>
         tailwind.config = {
@@ -206,13 +220,13 @@
                     <div class="flex flex-col gap-2">
                         <label class="text-xs font-bold tracking-widest uppercase text-gray-500">Modul yang Diminati</label>
                         <div class="flex gap-3 flex-wrap">
-                            <div class="pill rounded-lg px-4 py-2.5 text-sm font-semibold flex items-center gap-2" data-val="hr" onclick="pickPill(this)">
+                            <div class="pill rounded-lg px-4 py-2.5 text-sm font-semibold flex items-center gap-2" data-val="hr">
                                 <span class="w-1.5 h-1.5 bg-gold-400 rounded-full"></span> TalentCore.hr
                             </div>
-                            <div class="pill rounded-lg px-4 py-2.5 text-sm font-semibold flex items-center gap-2" data-val="erp" onclick="pickPill(this)">
+                            <div class="pill rounded-lg px-4 py-2.5 text-sm font-semibold flex items-center gap-2" data-val="erp">
                                 <span class="w-1.5 h-1.5 bg-gold-400 rounded-full"></span> TalentCore.erp
                             </div>
-                            <div class="pill rounded-lg px-4 py-2.5 text-sm font-semibold flex items-center gap-2" data-val="both" onclick="pickPill(this)">
+                            <div class="pill rounded-lg px-4 py-2.5 text-sm font-semibold flex items-center gap-2" data-val="both">
                                 <i class="fas fa-check text-xs text-gold-400"></i> Keduanya
                             </div>
                         </div>
@@ -260,12 +274,14 @@
     </style>
 
     <script>
-        function pickPill(el) {
-            document.querySelectorAll('.pill').forEach(p => p.classList.remove('on'));
-            el.classList.add('on');
-            document.getElementById('modul').value = el.dataset.val;
-            updateBar();
-        }
+        document.querySelectorAll('.pill').forEach(pill => {
+            pill.addEventListener('click', function() {
+                document.querySelectorAll('.pill').forEach(p => p.classList.remove('on'));
+                this.classList.add('on');
+                document.getElementById('modul').value = this.dataset.val;
+                updateBar();
+            });
+        });
 
         const inps = document.querySelectorAll('#demoForm input, #demoForm select, #demoForm textarea');
         function updateBar() {
