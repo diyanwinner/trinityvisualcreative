@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TalentCore.erp — Solusi ERP Cloud untuk Bisnis Indonesia | PT Trinity Berkah Mandiri</title>
+<meta name="description" content="TalentCore.erp adalah platform ERP berbasis cloud untuk UKM dan korporasi Indonesia. Inventori, Purchase & Sales Order, Finance AR/AP, Kasir, Produksi, dan laporan lengkap dalam satu sistem.">
+<meta name="keywords" content="ERP Indonesia, software ERP UKM, sistem inventori, purchase order, sales order, kasir cloud, TalentCore, Trinity Berkah Mandiri">
+<meta name="author" content="PT Trinity Berkah Mandiri">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://trinityberkahmandiri.com/talentcore/erp/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://trinityberkahmandiri.com/talentcore/erp/">
+<meta property="og:title" content="TalentCore.erp — Solusi ERP Cloud untuk Bisnis Indonesia">
+<meta property="og:description" content="Inventori, Purchase & Sales Order, Finance AR/AP, Kasir, Produksi, Multi-Gudang — satu platform ERP untuk semua jenis bisnis.">
+<meta property="og:image" content="https://trinityberkahmandiri.com/logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TalentCore.erp — ERP Cloud Indonesia">
+<meta name="twitter:description" content="Inventori, Finance, Kasir, Produksi — ERP lengkap untuk UKM dan korporasi Indonesia.">
+<meta name="twitter:image" content="https://trinityberkahmandiri.com/logo.png">
+<link rel="icon" type="image/png" href="../../logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+<script>
+tailwind.config = {
+    theme: {
+        extend: {
+            colors: {
+                navy: { 950: '#020c1b', 900: '#0a192f', 800: '#112240', 700: '#1a3a5c', 50: '#f0f4f8', 100: '#e8edf5' },
+                gold: { 400: '#D4AF37', 300: '#F4C430', 500: '#C5A028' },
+            },
+            fontFamily: {
+                sans:   ['Inter', 'sans-serif'],
+                header: ['Montserrat', 'sans-serif'],
+                serif:  ['Cormorant Garamond', 'serif'],
+            },
+            backgroundImage: {
+                'gold-gradient': 'linear-gradient(135deg, #D4AF37 0%, #F4C430 100%)',
+            }
+        }
+    }
+}
+</script>
+
+<style>
+body { background-color: #f8f9fa; color: #374151; }
+
+.glass-nav {
+    background: rgba(10,25,47,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(212,175,55,0.15);
+}
+
+.reveal-on-scroll { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
+.reveal-on-scroll.visible { opacity: 1; transform: translateY(0); }
+
+.btn-gold { position: relative; overflow: hidden; }
+.btn-gold::after { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent); transition:0.5s; }
+.btn-gold:hover::after { left:100%; }
+
+/* Module card */
+.feat-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    position: relative; overflow: hidden;
+}
+.feat-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background:linear-gradient(90deg,transparent,#D4AF37,transparent);
+    transform:scaleX(0); transform-origin:left;
+    transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.feat-card:hover { border-color:#D4AF37; transform:translateY(-6px); box-shadow:0 20px 50px -10px rgba(212,175,55,0.18); }
+.feat-card:hover::before { transform:scaleX(1); }
+
+/* Bisnis type card */
+.biztype-card {
+    background: rgba(17,34,64,0.55);
+    border: 1px solid rgba(212,175,55,0.15);
+    border-left: 3px solid #D4AF37;
+    transition: all 0.35s ease;
+}
+.biztype-card:hover { background: rgba(17,34,64,0.82); border-left-color:#F4C430; }
+
+/* Pricing */
+.price-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    transition: all 0.35s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.price-card:hover { border-color: #D4AF37; transform: translateY(-6px); box-shadow: 0 20px 50px -10px rgba(212,175,55,0.18); }
+.price-card.featured { border-color: #D4AF37; box-shadow: 0 8px 30px -6px rgba(212,175,55,0.25); }
+
+/* Ticker */
+.ticker-wrap { overflow: hidden; }
+.ticker-track { display: flex; gap: 60px; white-space: nowrap; animation: ticker 30s linear infinite; }
+.ticker-track:hover { animation-play-state: paused; }
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* WA float */
+@keyframes wa-bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+#wa-float { animation: wa-bounce 3s ease-in-out infinite; }
+
+::-webkit-scrollbar { width:8px; }
+::-webkit-scrollbar-track { background:#f1f5f9; }
+::-webkit-scrollbar-thumb { background:#cbd5e1; border-radius:4px; }
+::-webkit-scrollbar-thumb:hover { background:#D4AF37; }
+</style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+<!-- ═══ NAVBAR ═══ -->
+<nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 py-4 glass-nav">
+    <div class="container mx-auto px-6 md:px-12 flex justify-between items-center">
+        <a href="/" class="flex items-center gap-3 group">
+            <img src="../../logo.png" alt="Trinity Logo" class="h-10 w-auto md:h-11 object-contain drop-shadow-[0_0_8px_rgba(212,175,55,0.3)] transition-transform duration-300 group-hover:scale-105">
+            <div class="flex flex-col">
+                <span class="font-header font-bold text-base text-white tracking-widest leading-none">TALENTCORE</span>
+                <span class="font-header font-medium text-[9px] text-gold-400 tracking-[0.22em] leading-none mt-0.5">by Trinity Berkah Mandiri</span>
+            </div>
+        </a>
+
+        <ul class="hidden md:flex gap-8 items-center">
+            <li><a href="#modul"       class="text-xs font-semibold text-gray-300 hover:text-gold-400 transition duration-300 tracking-widest uppercase">Modul</a></li>
+            <li><a href="#bisnis"      class="text-xs font-semibold text-gray-300 hover:text-gold-400 transition duration-300 tracking-widest uppercase">Bisnis</a></li>
+            <li><a href="#harga"       class="text-xs font-semibold text-gray-300 hover:text-gold-400 transition duration-300 tracking-widest uppercase">Harga</a></li>
+            <li><a href="/talentcore"  class="text-xs font-semibold text-gray-500 hover:text-gold-400 transition duration-300 tracking-widest uppercase">← TalentCore</a></li>
+            <li>
+                <a href="/demo" class="px-5 py-2 text-xs font-bold text-navy-950 bg-gold-gradient rounded-sm hover:brightness-110 transition duration-300 tracking-wider shadow-[0_0_12px_rgba(212,175,55,0.35)]">
+                    Demo Gratis
+                </a>
+            </li>
+        </ul>
+
+        <button id="menu-toggle" class="md:hidden text-gray-300 hover:text-gold-400 transition" aria-label="Toggle menu">
+            <i class="fas fa-bars text-xl"></i>
+        </button>
+    </div>
+
+    <div id="mobile-menu" class="md:hidden hidden border-t border-gold-400/10 mt-4">
+        <ul class="flex flex-col py-4 px-6 gap-1">
+            <li><a href="#modul"      class="block text-gray-300 hover:text-gold-400 text-sm tracking-widest uppercase py-2.5 border-b border-white/5">Modul</a></li>
+            <li><a href="#bisnis"     class="block text-gray-300 hover:text-gold-400 text-sm tracking-widest uppercase py-2.5 border-b border-white/5">Bisnis</a></li>
+            <li><a href="#harga"      class="block text-gray-300 hover:text-gold-400 text-sm tracking-widest uppercase py-2.5 border-b border-white/5">Harga</a></li>
+            <li><a href="/talentcore" class="block text-gray-500 hover:text-gold-400 text-sm tracking-widest uppercase py-2.5 border-b border-white/5">← TalentCore</a></li>
+            <li class="pt-2"><a href="/demo" class="block text-navy-950 bg-gold-gradient font-bold text-sm tracking-widest uppercase py-3 rounded text-center">Demo Gratis</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="home" class="bg-navy-900 pt-36 pb-24 relative overflow-hidden">
+    <div class="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none" style="background:radial-gradient(circle,rgba(212,175,55,0.07) 0%,transparent 70%);"></div>
+    <div class="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full pointer-events-none" style="background:radial-gradient(circle,rgba(212,175,55,0.05) 0%,transparent 70%);"></div>
+
+    <div class="container mx-auto px-6 md:px-12">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+            <!-- Left -->
+            <div>
+                <div class="flex items-center gap-2 mb-8 text-xs text-gray-500 tracking-widest uppercase font-semibold">
+                    <a href="/" class="hover:text-gold-400 transition">Trinity</a>
+                    <span class="text-gray-700">/</span>
+                    <a href="/talentcore" class="hover:text-gold-400 transition">TalentCore</a>
+                    <span class="text-gray-700">/</span>
+                    <span class="text-gold-400">ERP</span>
+                </div>
+
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-gold-400/10 border border-gold-400/20 rounded-full mb-6">
+                    <span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
+                    <span class="text-gold-400 text-xs font-semibold tracking-widest uppercase">Modul Aktif · ERP Cloud</span>
+                </div>
+
+                <h1 class="font-header font-extrabold text-4xl md:text-5xl lg:text-6xl text-white mb-4 leading-tight">
+                    TalentCore<span class="text-gold-400">.erp</span>
+                </h1>
+                <p class="font-serif text-2xl md:text-3xl text-gray-300 mb-6 leading-snug italic">
+                    Solusi ERP Modern untuk Bisnis Indonesia — dari FnB hingga Manufaktur
+                </p>
+                <p class="text-gray-400 text-base leading-relaxed mb-8 max-w-lg">
+                    Inventori real-time, purchase & sales order, finance AR/AP, kasir, hingga produksi — semua terintegrasi dalam satu platform berbasis cloud yang bisa live dalam satu hari kerja.
+                </p>
+
+                <div class="flex flex-wrap gap-4">
+                    <a href="/demo" class="btn-gold px-7 py-3.5 bg-gold-gradient text-navy-950 font-bold rounded-lg hover:brightness-110 transition duration-300 tracking-wide text-sm shadow-[0_4px_20px_rgba(212,175,55,0.3)] inline-flex items-center gap-2">
+                        <i class="fas fa-calendar-check text-sm"></i> Mulai Demo Gratis
+                    </a>
+                    <a href="#modul" class="px-7 py-3.5 border border-white/25 text-white font-bold rounded-lg hover:border-gold-400 hover:text-gold-400 transition duration-300 tracking-wide text-sm inline-flex items-center gap-2">
+                        <i class="fas fa-th-large text-sm"></i> Lihat Modul
+                    </a>
+                </div>
+
+                <div class="flex flex-wrap gap-4 mt-8 pt-8 border-t border-white/10">
+                    <span class="text-xs text-gray-500 flex items-center gap-1.5"><i class="fas fa-check-circle text-green-400"></i> Go live &lt; 1 hari kerja</span>
+                    <span class="text-xs text-gray-500 flex items-center gap-1.5"><i class="fas fa-check-circle text-green-400"></i> Multi-tenant & multi-gudang</span>
+                    <span class="text-xs text-gray-500 flex items-center gap-1.5"><i class="fas fa-check-circle text-green-400"></i> Data terisolasi & aman</span>
+                    <span class="text-xs text-gray-500 flex items-center gap-1.5"><i class="fas fa-check-circle text-green-400"></i> Support Bahasa Indonesia</span>
+                </div>
+            </div>
+
+            <!-- Right: Stats -->
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-navy-800/60 border border-white/8 rounded-2xl p-6 text-center">
+                    <div class="font-header font-extrabold text-4xl text-gold-400 mb-1"><span id="erp-c1">0</span><span class="text-2xl">+</span></div>
+                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Modul Terintegrasi</div>
+                </div>
+                <div class="bg-navy-800/60 border border-white/8 rounded-2xl p-6 text-center">
+                    <div class="font-header font-extrabold text-4xl text-gold-400 mb-1"><span id="erp-c2">0</span><span class="text-2xl">+</span></div>
+                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Jenis Bisnis Didukung</div>
+                </div>
+                <div class="bg-navy-800/60 border border-white/8 rounded-2xl p-6 text-center">
+                    <div class="font-header font-extrabold text-4xl text-gold-400 mb-1">&lt;1</div>
+                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Hari Go Live</div>
+                </div>
+                <div class="bg-navy-800/60 border border-white/8 rounded-2xl p-6 text-center">
+                    <div class="font-header font-extrabold text-4xl text-gold-400 mb-1">99.9<span class="text-2xl">%</span></div>
+                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Uptime Guarantee</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ TICKER ═══ -->
+<div class="bg-navy-950 border-y border-gold-400/15 py-4 overflow-hidden">
+    <div class="ticker-wrap">
+        <div class="ticker-track">
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-400 flex-shrink-0">Dashboard Eksekutif</span>
+            <span class="text-gold-400 flex-shrink-0">·</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-400 flex-shrink-0">Manajemen Inventori</span>
+            <span class="text-gold-400 flex-shrink-0">·</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-400 flex-shrink-0">Purchase Order</span>
+            <span class="text-gold-400 flex-shrink-0">·</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-400 flex-shrink-0">Sales Order</span>
+            <span class="text-gold-400 flex-shrink-0">·</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-400 flex-shrink-0">Kasir / POS</span>
+            <span class="text-gold-400 flex-shrink-0">·</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-400 flex-shrink-0">Finance AR/AP</span>
+            <span class="text-gold-400 flex-shrink-0">·</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-400 flex-shrink-0">Modul Produksi</span>
+            <span class="text-gold-400 flex-shrink-0">·</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-400 flex-shrink-0">Multi-Gudang</span>
+            <span class="text-gold-400 flex-shrink-0">·</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-400 flex-shrink-0">Laporan Komprehensif</span>
+            <span class="text-gold-400 flex-shrink-0">·</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-400 flex-shrink-0">Export Excel</span>
+            <span class="text-gold-400 flex-shrink-0">·</span>
+            <!-- duplicate for seamless loop -->
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-400 flex-shrink-0">Dashboard Eksekutif</span>
+            <span class="text-gold-400 flex-shrink-0">·</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-400 flex-shrink-0">Manajemen Inventori</span>
+            <span class="text-gold-400 flex-shrink-0">·</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-400 flex-shrink-0">Purchase Order</span>
+            <span class="text-gold-400 flex-shrink-0">·</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-400 flex-shrink-0">Sales Order</span>
+            <span class="text-gold-400 flex-shrink-0">·</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-400 flex-shrink-0">Kasir / POS</span>
+            <span class="text-gold-400 flex-shrink-0">·</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-400 flex-shrink-0">Finance AR/AP</span>
+            <span class="text-gold-400 flex-shrink-0">·</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-400 flex-shrink-0">Modul Produksi</span>
+            <span class="text-gold-400 flex-shrink-0">·</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-400 flex-shrink-0">Multi-Gudang</span>
+            <span class="text-gold-400 flex-shrink-0">·</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-400 flex-shrink-0">Laporan Komprehensif</span>
+            <span class="text-gold-400 flex-shrink-0">·</span>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-gray-400 flex-shrink-0">Export Excel</span>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ MASALAH ═══ -->
+<section class="bg-navy-950 py-20 relative overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(ellipse at 70% 50%,rgba(212,175,55,0.04) 0%,transparent 70%);"></div>
+    <div class="container mx-auto px-6 md:px-12">
+        <div class="text-center mb-14 reveal-on-scroll">
+            <span class="text-xs font-bold tracking-[0.2em] text-gold-400 uppercase mb-3 block">Masalah yang Kami Selesaikan</span>
+            <h2 class="font-header font-bold text-3xl md:text-4xl text-white mb-4">Tantangan Operasional yang Sering Dihadapi</h2>
+            <p class="text-gray-400 max-w-xl mx-auto text-sm leading-relaxed">Banyak bisnis di Indonesia masih bergulat dengan masalah yang sama — dan semuanya bisa diselesaikan dengan sistem yang tepat.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
+            <div class="biztype-card rounded-xl p-6 reveal-on-scroll">
+                <i class="fas fa-table text-red-400 text-2xl mb-4 block"></i>
+                <h3 class="font-header font-bold text-white text-sm mb-2">Stok Tidak Akurat</h3>
+                <p class="text-gray-400 text-xs leading-relaxed">Pencatatan stok masih manual di Excel, rawan salah input, tidak real-time, dan sering menyebabkan selisih fisik vs sistem.</p>
+            </div>
+            <div class="biztype-card rounded-xl p-6 reveal-on-scroll" style="transition-delay:0.08s">
+                <i class="fas fa-eye-slash text-orange-400 text-2xl mb-4 block"></i>
+                <h3 class="font-header font-bold text-white text-sm mb-2">Tidak Ada Visibilitas Real-Time</h3>
+                <p class="text-gray-400 text-xs leading-relaxed">Pemilik bisnis tidak tahu kondisi penjualan, stok, dan keuangan hari ini — harus tunggu laporan manual yang bisa memakan waktu berhari-hari.</p>
+            </div>
+            <div class="biztype-card rounded-xl p-6 reveal-on-scroll" style="transition-delay:0.16s">
+                <i class="fas fa-money-bill-wave text-yellow-400 text-2xl mb-4 block"></i>
+                <h3 class="font-header font-bold text-white text-sm mb-2">Piutang & Hutang Tidak Terpantau</h3>
+                <p class="text-gray-400 text-xs leading-relaxed">AR/AP tidak terkelola dengan baik sehingga arus kas bermasalah — ada tagihan yang lupa dikejar atau hutang yang tidak tercatat.</p>
+            </div>
+            <div class="biztype-card rounded-xl p-6 reveal-on-scroll" style="transition-delay:0.04s">
+                <i class="fas fa-random text-blue-400 text-2xl mb-4 block"></i>
+                <h3 class="font-header font-bold text-white text-sm mb-2">Proses Tidak Terintegrasi</h3>
+                <p class="text-gray-400 text-xs leading-relaxed">Pembelian, penjualan, stok, dan keuangan berjalan di sistem terpisah — data harus diinput ulang berkali-kali, rawan error dan duplikasi.</p>
+            </div>
+            <div class="biztype-card rounded-xl p-6 reveal-on-scroll" style="transition-delay:0.12s">
+                <i class="fas fa-chart-bar text-purple-400 text-2xl mb-4 block"></i>
+                <h3 class="font-header font-bold text-white text-sm mb-2">Laporan Tidak Bisa Diandalkan</h3>
+                <p class="text-gray-400 text-xs leading-relaxed">Tidak ada laporan yang akurat untuk pengambilan keputusan. Data tersebar di banyak file yang tidak konsisten satu sama lain.</p>
+            </div>
+            <div class="biztype-card rounded-xl p-6 reveal-on-scroll" style="transition-delay:0.2s">
+                <i class="fas fa-dollar-sign text-teal-400 text-2xl mb-4 block"></i>
+                <h3 class="font-header font-bold text-white text-sm mb-2">ERP Mahal & Rumit</h3>
+                <p class="text-gray-400 text-xs leading-relaxed">Solusi ERP enterprise yang ada di pasaran terlalu mahal dan butuh implementasi berbulan-bulan — tidak cocok untuk UKM yang butuh solusi cepat.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ MODUL ═══ -->
+<section id="modul" class="bg-white py-20">
+    <div class="container mx-auto px-6 md:px-12">
+        <div class="text-center mb-14 reveal-on-scroll">
+            <span class="text-xs font-bold tracking-[0.2em] text-gold-400 uppercase mb-3 block">18 Modul Terintegrasi</span>
+            <h2 class="font-header font-bold text-3xl md:text-4xl text-navy-900 mb-4">Semua Proses Bisnis dalam Satu Platform</h2>
+            <p class="text-gray-500 max-w-xl mx-auto text-sm leading-relaxed">Dari dashboard CEO hingga kasir di lantai toko — setiap bagian bisnis Anda terhubung dan saling update secara otomatis.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+
+            <div class="feat-card rounded-2xl p-7 reveal-on-scroll">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-gold-400/10 border border-gold-400/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-tachometer-alt text-gold-400"></i>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-gold-500 font-bold tracking-widest uppercase">01</div>
+                        <h3 class="font-header font-bold text-navy-900 text-sm">Dashboard Eksekutif</h3>
+                    </div>
+                </div>
+                <p class="text-gray-500 text-xs leading-relaxed">Ringkasan bisnis real-time: penjualan, pembelian, stok, piutang, hutang dalam satu tampilan. Dirancang untuk CEO & Manager yang butuh gambaran cepat tanpa buka banyak laporan.</p>
+            </div>
+
+            <div class="feat-card rounded-2xl p-7 reveal-on-scroll" style="transition-delay:0.07s">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-gold-400/10 border border-gold-400/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-boxes text-gold-400"></i>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-gold-500 font-bold tracking-widest uppercase">02</div>
+                        <h3 class="font-header font-bold text-navy-900 text-sm">Manajemen Inventori</h3>
+                    </div>
+                </div>
+                <p class="text-gray-500 text-xs leading-relaxed">Master item dengan konversi satuan beli otomatis (1 BOTOL = 750 ML), kategori produk, reorder alert saat stok minimum. Kritis untuk FnB & distribusi.</p>
+            </div>
+
+            <div class="feat-card rounded-2xl p-7 reveal-on-scroll" style="transition-delay:0.14s">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-gold-400/10 border border-gold-400/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-shopping-cart text-gold-400"></i>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-gold-500 font-bold tracking-widest uppercase">03</div>
+                        <h3 class="font-header font-bold text-navy-900 text-sm">Purchase Order</h3>
+                    </div>
+                </div>
+                <p class="text-gray-500 text-xs leading-relaxed">Input pembelian dengan konversi satuan otomatis, approval workflow, nomor PO otomatis, cetak PO PDF, dan export Excel. Semua pembelian tercatat dan bisa ditelusuri.</p>
+            </div>
+
+            <div class="feat-card rounded-2xl p-7 reveal-on-scroll" style="transition-delay:0.03s">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-gold-400/10 border border-gold-400/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-file-invoice-dollar text-gold-400"></i>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-gold-500 font-bold tracking-widest uppercase">04</div>
+                        <h3 class="font-header font-bold text-navy-900 text-sm">Sales Order</h3>
+                    </div>
+                </div>
+                <p class="text-gray-500 text-xs leading-relaxed">Input penjualan dengan pengecekan stok otomatis, cetak Invoice & Surat Jalan (DO) PDF, dan export Excel. Dari order hingga pengiriman terdokumentasi dengan rapi.</p>
+            </div>
+
+            <div class="feat-card rounded-2xl p-7 reveal-on-scroll" style="transition-delay:0.1s">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-gold-400/10 border border-gold-400/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-cash-register text-gold-400"></i>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-gold-500 font-bold tracking-widest uppercase">05</div>
+                        <h3 class="font-header font-bold text-navy-900 text-sm">Kasir / Point of Sale</h3>
+                    </div>
+                </div>
+                <p class="text-gray-500 text-xs leading-relaxed">Interface kasir touch-friendly untuk FnB & retail. Cart persisten, pilih akun kas/bank, proses transaksi cepat. Langsung terintegrasi dengan stok dan laporan keuangan.</p>
+            </div>
+
+            <div class="feat-card rounded-2xl p-7 reveal-on-scroll" style="transition-delay:0.17s">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-gold-400/10 border border-gold-400/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-warehouse text-gold-400"></i>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-gold-500 font-bold tracking-widest uppercase">06</div>
+                        <h3 class="font-header font-bold text-navy-900 text-sm">Multi-Gudang</h3>
+                    </div>
+                </div>
+                <p class="text-gray-500 text-xs leading-relaxed">Kelola banyak gudang atau cabang sekaligus. Transfer stok antar gudang dengan dokumen resmi dan audit trail lengkap. Kartu stok per item tersedia untuk setiap lokasi.</p>
+            </div>
+
+            <div class="feat-card rounded-2xl p-7 reveal-on-scroll">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-gold-400/10 border border-gold-400/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-landmark text-gold-400"></i>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-gold-500 font-bold tracking-widest uppercase">07</div>
+                        <h3 class="font-header font-bold text-navy-900 text-sm">Finance & Akuntansi</h3>
+                    </div>
+                </div>
+                <p class="text-gray-500 text-xs leading-relaxed">Manajemen piutang (AR) dan hutang (AP) dengan aging report detail: Current / 1-30 / 31-60 / 61-90 / 91+ hari. Arus kas terpantau, tidak ada tagihan yang terlewat.</p>
+            </div>
+
+            <div class="feat-card rounded-2xl p-7 reveal-on-scroll" style="transition-delay:0.07s">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-gold-400/10 border border-gold-400/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-industry text-gold-400"></i>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-gold-500 font-bold tracking-widest uppercase">08</div>
+                        <h3 class="font-header font-bold text-navy-900 text-sm">Modul Produksi</h3>
+                    </div>
+                </div>
+                <p class="text-gray-500 text-xs leading-relaxed">Work Order, Bill of Materials (BOM), input hasil produksi, quality control & defect tracking, approval produksi. Khusus untuk bisnis manufaktur dan pabrik.</p>
+            </div>
+
+            <div class="feat-card rounded-2xl p-7 reveal-on-scroll" style="transition-delay:0.14s">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-gold-400/10 border border-gold-400/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-chart-pie text-gold-400"></i>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-gold-500 font-bold tracking-widest uppercase">09</div>
+                        <h3 class="font-header font-bold text-navy-900 text-sm">Laporan Komprehensif</h3>
+                    </div>
+                </div>
+                <p class="text-gray-500 text-xs leading-relaxed">Purchase Report, Sales Report, AR/AP Aging, Customer & Supplier Statement, P&L Summary, QC Analytics, Sales Target vs Realisasi — semua bisa diexport ke Excel.</p>
+            </div>
+
+        </div>
+
+        <!-- Extra modules row -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 max-w-6xl mx-auto">
+            <div class="bg-gray-50 rounded-xl p-4 flex items-center gap-3 reveal-on-scroll border border-gray-100">
+                <i class="fas fa-undo-alt text-gold-400 flex-shrink-0"></i>
+                <span class="text-xs font-semibold text-gray-700">Retur Pembelian & Penjualan</span>
+            </div>
+            <div class="bg-gray-50 rounded-xl p-4 flex items-center gap-3 reveal-on-scroll border border-gray-100" style="transition-delay:0.07s">
+                <i class="fas fa-user-shield text-gold-400 flex-shrink-0"></i>
+                <span class="text-xs font-semibold text-gray-700">Role-Based Access (9+ Peran)</span>
+            </div>
+            <div class="bg-gray-50 rounded-xl p-4 flex items-center gap-3 reveal-on-scroll border border-gray-100" style="transition-delay:0.14s">
+                <i class="fas fa-print text-gold-400 flex-shrink-0"></i>
+                <span class="text-xs font-semibold text-gray-700">Cetak Dokumen Profesional</span>
+            </div>
+            <div class="bg-gray-50 rounded-xl p-4 flex items-center gap-3 reveal-on-scroll border border-gray-100" style="transition-delay:0.21s">
+                <i class="fas fa-history text-gold-400 flex-shrink-0"></i>
+                <span class="text-xs font-semibold text-gray-700">Audit Log Aktivitas User</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ JENIS BISNIS ═══ -->
+<section id="bisnis" class="bg-navy-950 py-20 relative overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(ellipse at 30% 50%,rgba(212,175,55,0.05) 0%,transparent 70%);"></div>
+    <div class="container mx-auto px-6 md:px-12">
+        <div class="text-center mb-14 reveal-on-scroll">
+            <span class="text-xs font-bold tracking-[0.2em] text-gold-400 uppercase mb-3 block">Multi-Industri</span>
+            <h2 class="font-header font-bold text-3xl md:text-4xl text-white mb-4">Cocok untuk Berbagai Jenis Bisnis</h2>
+            <p class="text-gray-400 max-w-xl mx-auto text-sm leading-relaxed">Satu platform yang fleksibel — setiap bisnis mendapatkan konfigurasi yang sesuai dengan proses operasionalnya.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <div class="biztype-card rounded-2xl p-8 reveal-on-scroll">
+                <div class="w-12 h-12 bg-blue-900/40 rounded-xl flex items-center justify-center mb-5">
+                    <i class="fas fa-cogs text-blue-400 text-xl"></i>
+                </div>
+                <h3 class="font-header font-bold text-white text-base mb-3">Manufaktur & Pabrik</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">Full ERP dengan modul produksi lengkap: Work Order, Bill of Materials (BOM), Quality Control & defect tracking, dan laporan produksi yang bisa diandalkan.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-2.5 py-1 bg-white/5 text-gray-400 text-xs rounded-full border border-white/10">Work Order</span>
+                    <span class="px-2.5 py-1 bg-white/5 text-gray-400 text-xs rounded-full border border-white/10">BOM</span>
+                    <span class="px-2.5 py-1 bg-white/5 text-gray-400 text-xs rounded-full border border-white/10">QC</span>
+                </div>
+            </div>
+
+            <div class="biztype-card rounded-2xl p-8 reveal-on-scroll" style="transition-delay:0.1s">
+                <div class="w-12 h-12 bg-green-900/40 rounded-xl flex items-center justify-center mb-5">
+                    <i class="fas fa-truck text-green-400 text-xl"></i>
+                </div>
+                <h3 class="font-header font-bold text-white text-base mb-3">Distribusi & Trading</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">Purchase-Sales cycle lengkap, multi-gudang dengan transfer stok, retur pembelian & penjualan, serta laporan piutang/hutang yang akurat.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-2.5 py-1 bg-white/5 text-gray-400 text-xs rounded-full border border-white/10">Multi-gudang</span>
+                    <span class="px-2.5 py-1 bg-white/5 text-gray-400 text-xs rounded-full border border-white/10">AR/AP</span>
+                    <span class="px-2.5 py-1 bg-white/5 text-gray-400 text-xs rounded-full border border-white/10">Retur</span>
+                </div>
+            </div>
+
+            <div class="biztype-card rounded-2xl p-8 reveal-on-scroll" style="transition-delay:0.05s">
+                <div class="w-12 h-12 bg-orange-900/40 rounded-xl flex items-center justify-center mb-5">
+                    <i class="fas fa-coffee text-orange-400 text-xl"></i>
+                </div>
+                <h3 class="font-header font-bold text-white text-base mb-3">FnB & Coffee Shop</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">Kasir touch-friendly, manajemen bahan baku dengan konversi satuan otomatis (1 BOTOL = 750 ML), laporan penjualan harian, dan rekap per outlet.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-2.5 py-1 bg-white/5 text-gray-400 text-xs rounded-full border border-white/10">Kasir POS</span>
+                    <span class="px-2.5 py-1 bg-white/5 text-gray-400 text-xs rounded-full border border-white/10">Konversi Satuan</span>
+                    <span class="px-2.5 py-1 bg-white/5 text-gray-400 text-xs rounded-full border border-white/10">Multi-outlet</span>
+                </div>
+            </div>
+
+            <div class="biztype-card rounded-2xl p-8 reveal-on-scroll" style="transition-delay:0.15s">
+                <div class="w-12 h-12 bg-purple-900/40 rounded-xl flex items-center justify-center mb-5">
+                    <i class="fas fa-store text-purple-400 text-xl"></i>
+                </div>
+                <h3 class="font-header font-bold text-white text-base mb-3">Retail & Toko</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">Kasir yang cepat, manajemen stok produk, purchase order ke supplier, dan laporan penjualan per periode — semua terintegrasi tanpa sistem terpisah.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-2.5 py-1 bg-white/5 text-gray-400 text-xs rounded-full border border-white/10">Kasir POS</span>
+                    <span class="px-2.5 py-1 bg-white/5 text-gray-400 text-xs rounded-full border border-white/10">Stok</span>
+                    <span class="px-2.5 py-1 bg-white/5 text-gray-400 text-xs rounded-full border border-white/10">Supplier PO</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ KEUNGGULAN ═══ -->
+<section class="bg-white py-20">
+    <div class="container mx-auto px-6 md:px-12">
+        <div class="text-center mb-14 reveal-on-scroll">
+            <span class="text-xs font-bold tracking-[0.2em] text-gold-400 uppercase mb-3 block">Kenapa TalentCore.erp?</span>
+            <h2 class="font-header font-bold text-3xl md:text-4xl text-navy-900 mb-4">Keunggulan Kompetitif</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div class="feat-card rounded-2xl p-7 reveal-on-scroll">
+                <i class="fas fa-rocket text-gold-400 text-2xl mb-4 block"></i>
+                <h3 class="font-header font-bold text-navy-900 text-sm mb-2">Onboarding Cepat</h3>
+                <p class="text-gray-500 text-xs leading-relaxed">Dari tanda tangan kontrak hingga live, bisnis Anda beroperasi dalam 1 hari kerja — bukan berminggu-minggu seperti ERP konvensional.</p>
+            </div>
+            <div class="feat-card rounded-2xl p-7 reveal-on-scroll" style="transition-delay:0.08s">
+                <i class="fas fa-tags text-gold-400 text-2xl mb-4 block"></i>
+                <h3 class="font-header font-bold text-navy-900 text-sm mb-2">Harga Transparan</h3>
+                <p class="text-gray-500 text-xs leading-relaxed">Tidak ada biaya lisensi tersembunyi atau biaya hardware. Cukup biaya setup awal dan subscription bulanan yang jelas dan terjangkau untuk UKM.</p>
+            </div>
+            <div class="feat-card rounded-2xl p-7 reveal-on-scroll" style="transition-delay:0.16s">
+                <i class="fas fa-exchange-alt text-gold-400 text-2xl mb-4 block"></i>
+                <h3 class="font-header font-bold text-navy-900 text-sm mb-2">Konversi Satuan Otomatis</h3>
+                <p class="text-gray-500 text-xs leading-relaxed">Fitur unik: sistem otomatis mengkonversi satuan beli ke satuan stok (BOTOL → ML). Sangat kritis untuk bisnis FnB dan distribusi.</p>
+            </div>
+            <div class="feat-card rounded-2xl p-7 reveal-on-scroll" style="transition-delay:0.04s">
+                <i class="fas fa-user-lock text-gold-400 text-2xl mb-4 block"></i>
+                <h3 class="font-header font-bold text-navy-900 text-sm mb-2">Role-Based Access Fleksibel</h3>
+                <p class="text-gray-500 text-xs leading-relaxed">9+ peran siap pakai: CEO, Director, Manager, Finance, Sales, Purchasing, QC, Supervisor, Staff. Hak akses dikustomisasi per kebutuhan.</p>
+            </div>
+            <div class="feat-card rounded-2xl p-7 reveal-on-scroll" style="transition-delay:0.12s">
+                <i class="fas fa-language text-gold-400 text-2xl mb-4 block"></i>
+                <h3 class="font-header font-bold text-navy-900 text-sm mb-2">Sepenuhnya Bahasa Indonesia</h3>
+                <p class="text-gray-500 text-xs leading-relaxed">Antarmuka, laporan, dokumen, dan dukungan teknis sepenuhnya dalam Bahasa Indonesia. Tim Anda bisa langsung pakai tanpa pelatihan panjang.</p>
+            </div>
+            <div class="feat-card rounded-2xl p-7 reveal-on-scroll" style="transition-delay:0.2s">
+                <i class="fas fa-shield-alt text-gold-400 text-2xl mb-4 block"></i>
+                <h3 class="font-header font-bold text-navy-900 text-sm mb-2">Keamanan Enterprise</h3>
+                <p class="text-gray-500 text-xs leading-relaxed">Cloudflare DDoS protection, enkripsi HTTPS, isolasi data per tenant, backup otomatis, dan audit log — keamanan setara enterprise dengan harga UKM.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ HARGA ═══ -->
+<section id="harga" class="bg-gray-50 py-20">
+    <div class="container mx-auto px-6 md:px-12">
+        <div class="text-center mb-14 reveal-on-scroll">
+            <span class="text-xs font-bold tracking-[0.2em] text-gold-400 uppercase mb-3 block">Transparan & Skalabel</span>
+            <h2 class="font-header font-bold text-3xl md:text-4xl text-navy-900 mb-4">Paket Harga TalentCore.erp</h2>
+            <p class="text-gray-500 max-w-xl mx-auto text-sm leading-relaxed">Semua paket sudah termasuk hosting, backup data otomatis, dan dukungan teknis. Diskon 15% untuk pembayaran tahunan.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
+
+            <!-- Starter -->
+            <div class="price-card rounded-2xl p-7 reveal-on-scroll flex flex-col">
+                <div class="mb-5">
+                    <span class="text-[10px] font-bold text-gray-400 tracking-widest uppercase block mb-2">Starter</span>
+                    <div class="font-header font-extrabold text-3xl text-navy-900">Rp 299K</div>
+                    <div class="text-gray-400 text-xs mt-1">per bulan</div>
+                </div>
+                <div class="text-xs font-semibold text-gray-500 mb-4">FnB & Retail · s/d 3 user · 1 gudang</div>
+                <ul class="flex flex-col gap-2 mb-6 text-xs text-gray-600 flex-1">
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i> Dashboard, Inventori, Kasir</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i> Purchase & Sales Order</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i> Manajemen Stok</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i> Laporan dasar</li>
+                    <li class="flex items-start gap-2 text-gray-300"><i class="fas fa-times mt-0.5 flex-shrink-0"></i> Finance AR/AP</li>
+                    <li class="flex items-start gap-2 text-gray-300"><i class="fas fa-times mt-0.5 flex-shrink-0"></i> Modul Produksi</li>
+                </ul>
+                <a href="https://wa.me/6285156397948?text=Halo%20Trinity%2C%20saya%20ingin%20info%20TalentCore.erp%20paket%20Starter" target="_blank" class="block w-full py-2.5 border-2 border-navy-900 text-navy-900 font-bold rounded-lg text-xs text-center hover:bg-navy-900 hover:text-white transition tracking-wide">
+                    Pilih Starter
+                </a>
+            </div>
+
+            <!-- Business (Featured) -->
+            <div class="price-card featured rounded-2xl p-7 reveal-on-scroll flex flex-col relative" style="transition-delay:0.1s">
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                    <span class="px-3 py-1 bg-gold-gradient text-navy-950 text-[10px] font-extrabold rounded-full tracking-widest shadow">POPULER</span>
+                </div>
+                <div class="mb-5 mt-2">
+                    <span class="text-[10px] font-bold text-gold-500 tracking-widest uppercase block mb-2">Business</span>
+                    <div class="font-header font-extrabold text-3xl text-navy-900">Rp 599K</div>
+                    <div class="text-gray-400 text-xs mt-1">per bulan</div>
+                </div>
+                <div class="text-xs font-semibold text-gray-500 mb-4">UKM · s/d 10 user · 3 gudang</div>
+                <ul class="flex flex-col gap-2 mb-6 text-xs text-gray-600 flex-1">
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i> Semua fitur Starter</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i> Finance AR/AP + Aging</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i> Retur beli & jual</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i> Laporan lengkap + Export Excel</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i> Cetak dokumen profesional</li>
+                    <li class="flex items-start gap-2 text-gray-300"><i class="fas fa-times mt-0.5 flex-shrink-0"></i> Modul Produksi</li>
+                </ul>
+                <a href="https://wa.me/6285156397948?text=Halo%20Trinity%2C%20saya%20ingin%20info%20TalentCore.erp%20paket%20Business" target="_blank" class="btn-gold block w-full py-2.5 bg-gold-gradient text-navy-950 font-bold rounded-lg text-xs text-center hover:brightness-110 transition tracking-wide shadow-[0_4px_16px_rgba(212,175,55,0.35)]">
+                    Pilih Business
+                </a>
+            </div>
+
+            <!-- Professional -->
+            <div class="price-card rounded-2xl p-7 reveal-on-scroll flex flex-col" style="transition-delay:0.2s">
+                <div class="mb-5">
+                    <span class="text-[10px] font-bold text-gray-400 tracking-widest uppercase block mb-2">Professional</span>
+                    <div class="font-header font-extrabold text-3xl text-navy-900">Rp 999K</div>
+                    <div class="text-gray-400 text-xs mt-1">per bulan</div>
+                </div>
+                <div class="text-xs font-semibold text-gray-500 mb-4">Manufaktur & Distribusi · Unlimited user & gudang</div>
+                <ul class="flex flex-col gap-2 mb-6 text-xs text-gray-600 flex-1">
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i> Semua fitur Business</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i> Modul Produksi (BOM, WO, QC)</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i> Sales Target vs Realisasi</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i> Audit Log lengkap</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i> Priority support WA & email</li>
+                </ul>
+                <a href="https://wa.me/6285156397948?text=Halo%20Trinity%2C%20saya%20ingin%20info%20TalentCore.erp%20paket%20Professional" target="_blank" class="block w-full py-2.5 border-2 border-navy-900 text-navy-900 font-bold rounded-lg text-xs text-center hover:bg-navy-900 hover:text-white transition tracking-wide">
+                    Pilih Professional
+                </a>
+            </div>
+
+            <!-- Enterprise -->
+            <div class="price-card rounded-2xl p-7 reveal-on-scroll flex flex-col" style="transition-delay:0.3s">
+                <div class="mb-5">
+                    <span class="text-[10px] font-bold text-gray-400 tracking-widest uppercase block mb-2">Enterprise</span>
+                    <div class="font-header font-extrabold text-3xl text-navy-900">Custom</div>
+                    <div class="text-gray-400 text-xs mt-1">disesuaikan kebutuhan</div>
+                </div>
+                <div class="text-xs font-semibold text-gray-500 mb-4">Korporasi · Dedicated server · SLA tertulis</div>
+                <ul class="flex flex-col gap-2 mb-6 text-xs text-gray-600 flex-1">
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i> Dedicated server</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i> Kustomisasi fitur</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i> SLA + garansi uptime</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i> On-site training & implementasi</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-gold-400 mt-0.5 flex-shrink-0"></i> Dedicated account manager</li>
+                </ul>
+                <a href="https://wa.me/6285156397948?text=Halo%20Trinity%2C%20saya%20ingin%20info%20TalentCore.erp%20paket%20Enterprise" target="_blank" class="block w-full py-2.5 border-2 border-navy-900 text-navy-900 font-bold rounded-lg text-xs text-center hover:bg-navy-900 hover:text-white transition tracking-wide">
+                    Diskusi Custom
+                </a>
+            </div>
+        </div>
+
+        <p class="text-center text-xs text-gray-400 mt-6 reveal-on-scroll">* Harga belum termasuk PPN 11%. Diskon 15% untuk pembayaran tahunan. Harga berlaku pada saat penandatanganan kontrak.</p>
+    </div>
+</section>
+
+<!-- ═══ ONBOARDING ═══ -->
+<section class="bg-white py-20">
+    <div class="container mx-auto px-6 md:px-12">
+        <div class="text-center mb-14 reveal-on-scroll">
+            <span class="text-xs font-bold tracking-[0.2em] text-gold-400 uppercase mb-3 block">Mulai Hari Ini</span>
+            <h2 class="font-header font-bold text-3xl md:text-4xl text-navy-900 mb-4">Go Live dalam 3 Langkah</h2>
+            <p class="text-gray-500 max-w-xl mx-auto text-sm leading-relaxed">Rata-rata waktu dari kontrak hingga go live: kurang dari 1 hari kerja. Kami yang handle setup — Anda tinggal pakai.</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+            <div class="hidden md:flex items-start gap-0 reveal-on-scroll">
+                <div class="flex-1 text-center px-4">
+                    <div class="w-16 h-16 bg-navy-900 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg">
+                        <span class="font-header font-bold text-2xl text-gold-400">1</span>
+                    </div>
+                    <h3 class="font-header font-bold text-navy-900 text-sm mb-2">Konsultasi & Pemilihan Paket</h3>
+                    <p class="text-gray-500 text-xs leading-relaxed">Tim kami memahami kebutuhan bisnis Anda dan merekomendasikan paket yang paling sesuai. Gratis, tanpa kewajiban.</p>
+                    <div class="mt-3 text-xs text-gold-500 font-semibold">Hari ke-1</div>
+                </div>
+                <div class="flex-shrink-0 mt-8">
+                    <div class="w-10 h-0.5 bg-gradient-to-r from-gold-400 to-gold-400/30"></div>
+                    <i class="fas fa-chevron-right text-gold-400 text-xs -mt-1.5 ml-8"></i>
+                </div>
+                <div class="flex-1 text-center px-4">
+                    <div class="w-16 h-16 bg-navy-900 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg">
+                        <span class="font-header font-bold text-2xl text-gold-400">2</span>
+                    </div>
+                    <h3 class="font-header font-bold text-navy-900 text-sm mb-2">Setup & Konfigurasi</h3>
+                    <p class="text-gray-500 text-xs leading-relaxed">Kami menyiapkan akun perusahaan, konfigurasi master data awal (warehouse, item, user), dan import data jika diperlukan.</p>
+                    <div class="mt-3 text-xs text-gold-500 font-semibold">Hari ke-1 s/d 2</div>
+                </div>
+                <div class="flex-shrink-0 mt-8">
+                    <div class="w-10 h-0.5 bg-gradient-to-r from-gold-400 to-gold-400/30"></div>
+                    <i class="fas fa-chevron-right text-gold-400 text-xs -mt-1.5 ml-8"></i>
+                </div>
+                <div class="flex-1 text-center px-4">
+                    <div class="w-16 h-16 bg-gold-400 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg shadow-gold-400/20">
+                        <span class="font-header font-bold text-2xl text-navy-900">3</span>
+                    </div>
+                    <h3 class="font-header font-bold text-navy-900 text-sm mb-2">Go Live & Training</h3>
+                    <p class="text-gray-500 text-xs leading-relaxed">Perusahaan langsung beroperasi dengan sistem baru. Sesi training singkat untuk tim, lalu support WhatsApp terus tersedia.</p>
+                    <div class="mt-3 text-xs text-gold-500 font-semibold">Hari ke-2 s/d 3</div>
+                </div>
+            </div>
+
+            <!-- Mobile steps -->
+            <div class="md:hidden flex flex-col gap-6 reveal-on-scroll">
+                <div class="flex gap-5 items-start"><div class="w-12 h-12 bg-navy-900 rounded-xl flex items-center justify-center flex-shrink-0"><span class="font-header font-bold text-lg text-gold-400">1</span></div><div><h3 class="font-header font-bold text-navy-900 text-sm mb-1">Konsultasi & Pemilihan Paket</h3><p class="text-gray-500 text-xs">Gratis, memahami kebutuhan spesifik bisnis Anda.</p></div></div>
+                <div class="flex gap-5 items-start"><div class="w-12 h-12 bg-navy-900 rounded-xl flex items-center justify-center flex-shrink-0"><span class="font-header font-bold text-lg text-gold-400">2</span></div><div><h3 class="font-header font-bold text-navy-900 text-sm mb-1">Setup & Konfigurasi</h3><p class="text-gray-500 text-xs">Kami setup sistem, import data, konfigurasi awal.</p></div></div>
+                <div class="flex gap-5 items-start"><div class="w-12 h-12 bg-gold-400 rounded-xl flex items-center justify-center flex-shrink-0"><span class="font-header font-bold text-lg text-navy-900">3</span></div><div><h3 class="font-header font-bold text-navy-900 text-sm mb-1">Go Live & Training</h3><p class="text-gray-500 text-xs">Langsung beroperasi dengan training singkat untuk tim.</p></div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="bg-navy-900 py-20 relative overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(ellipse at 50% 0%,rgba(212,175,55,0.08) 0%,transparent 70%);"></div>
+    <div class="container mx-auto px-6 md:px-12">
+        <div class="text-center max-w-3xl mx-auto reveal-on-scroll">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-gold-400/10 border border-gold-400/20 rounded-full mb-6">
+                <span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
+                <span class="text-gold-400 text-xs font-semibold tracking-widest uppercase">Demo Gratis Tersedia</span>
+            </div>
+            <h2 class="font-header font-bold text-3xl md:text-4xl text-white mb-4">Siap Transformasi Operasional Bisnis Anda?</h2>
+            <p class="text-gray-400 text-sm leading-relaxed mb-8 max-w-xl mx-auto">Jadwalkan demo gratis 30 menit bersama tim kami — tanpa kewajiban apapun. Lihat sendiri bagaimana TalentCore.erp menyelesaikan tantangan operasional spesifik bisnis Anda.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/demo" class="btn-gold px-8 py-4 bg-gold-gradient text-navy-950 font-bold rounded-lg hover:brightness-110 transition duration-300 tracking-wide text-sm shadow-[0_4px_20px_rgba(212,175,55,0.4)] inline-flex items-center justify-center gap-2">
+                    <i class="fas fa-calendar-check"></i> Jadwalkan Demo Gratis
+                </a>
+                <a href="https://wa.me/6285156397948?text=Halo%20Trinity%2C%20saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20TalentCore.erp" target="_blank" class="px-8 py-4 border border-white/20 text-white font-bold rounded-lg hover:border-gold-400 hover:text-gold-400 transition duration-300 tracking-wide text-sm inline-flex items-center justify-center gap-2">
+                    <i class="fab fa-whatsapp"></i> Chat via WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="bg-navy-950 border-t border-white/8 pt-14 pb-8">
+    <div class="container mx-auto px-6 md:px-12">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+            <div class="md:col-span-2">
+                <div class="flex items-center gap-3 mb-5">
+                    <img src="../../logo.png" alt="Trinity Logo" class="h-10 w-auto object-contain opacity-90">
+                    <div>
+                        <div class="font-header font-bold text-white text-sm tracking-widest">TALENTCORE.ERP</div>
+                        <div class="font-header text-[9px] text-gold-400 tracking-[0.2em]">by PT Trinity Berkah Mandiri</div>
+                    </div>
+                </div>
+                <p class="text-gray-500 text-xs leading-relaxed max-w-xs">Platform ERP cloud untuk bisnis Indonesia — inventori, kasir, finance, produksi, dan laporan terintegrasi dalam satu sistem yang bisa live dalam sehari.</p>
+            </div>
+            <div>
+                <h4 class="font-header font-bold text-white text-xs tracking-widest uppercase mb-5">Modul TalentCore</h4>
+                <ul class="flex flex-col gap-2.5 text-sm text-gray-500">
+                    <li><a href="/talentcore/hr" class="hover:text-gold-400 transition">TalentCore.hr</a></li>
+                    <li><a href="/talentcore/erp" class="hover:text-gold-400 transition text-gold-400/80">TalentCore.erp ← Anda di sini</a></li>
+                    <li><span class="text-gray-600">TalentCore.pos <span class="text-amber-600 text-xs ml-1">(segera)</span></span></li>
+                    <li><span class="text-gray-600">TalentCore.clinic <span class="text-amber-600 text-xs ml-1">(segera)</span></span></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-header font-bold text-white text-xs tracking-widest uppercase mb-5">Kontak</h4>
+                <ul class="flex flex-col gap-3 text-sm text-gray-500">
+                    <li class="flex items-start gap-2.5"><i class="fas fa-phone text-gold-400 mt-0.5 text-xs flex-shrink-0"></i><a href="https://wa.me/6285156397948" target="_blank" class="hover:text-gold-400 transition">+62 851-5639-7948</a></li>
+                    <li class="flex items-start gap-2.5"><i class="fas fa-envelope text-gold-400 mt-0.5 text-xs flex-shrink-0"></i><a href="mailto:trinityberkahmandiri@gmail.com" class="hover:text-gold-400 transition text-xs">trinityberkahmandiri@gmail.com</a></li>
+                    <li class="flex items-start gap-2.5"><i class="fas fa-map-marker-alt text-gold-400 mt-0.5 text-xs flex-shrink-0"></i><span class="text-xs leading-relaxed">Jl. Kapuk Raya Gg Jambu Rt.005 Rw.011,<br>Cengkareng, Jakarta Barat 11720</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-white/8 pt-6 flex flex-col md:flex-row justify-between items-center gap-3">
+            <p class="text-gray-600 text-xs">© 2026 PT Trinity Berkah Mandiri · TalentCore Division</p>
+            <div class="flex gap-4 text-xs text-gray-600">
+                <a href="/" class="hover:text-gold-400 transition">Trinity Home</a>
+                <a href="/talentcore" class="hover:text-gold-400 transition">TalentCore</a>
+                <a href="/contact" class="hover:text-gold-400 transition">Kontak</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ═══ WA FLOAT ═══ -->
+<a href="https://wa.me/6285156397948?text=Halo%20Trinity%2C%20saya%20tertarik%20dengan%20TalentCore.erp" target="_blank" id="wa-float"
+   class="fixed bottom-8 right-8 z-50 w-14 h-14 bg-[#25D366] rounded-full shadow-[0_4px_20px_rgba(37,211,102,0.45)] flex items-center justify-center hover:scale-110 transition-transform duration-300"
+   title="Chat via WhatsApp">
+    <i class="fab fa-whatsapp text-white text-2xl"></i>
+</a>
+
+<!-- ═══ SCRIPTS ═══ -->
+<script>
+// Mobile menu
+document.getElementById('menu-toggle').addEventListener('click', function() {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+});
+document.querySelectorAll('#mobile-menu a').forEach(function(l) {
+    l.addEventListener('click', function() { document.getElementById('mobile-menu').classList.add('hidden'); });
+});
+
+// Scroll reveal
+var revObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal-on-scroll').forEach(function(el) { revObs.observe(el); });
+
+// Counter animation
+function runCounter(id, target, duration) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var startTime = null;
+    function step(ts) {
+        if (!startTime) startTime = ts;
+        var p = Math.min((ts - startTime) / duration, 1);
+        var ease = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.floor(ease * target);
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = target;
+    }
+    requestAnimationFrame(step);
+}
+var counterDone = false;
+new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+        if (e.isIntersecting && !counterDone) {
+            counterDone = true;
+            setTimeout(function() {
+                runCounter('erp-c1', 18, 1400);
+                runCounter('erp-c2', 4, 800);
+            }, 300);
+        }
+    });
+}, { threshold: 0.5 }).observe(document.getElementById('erp-c1').closest('.grid'));
+
+// Navbar shrink
+window.addEventListener('scroll', function() {
+    var nav = document.getElementById('navbar');
+    if (window.scrollY > 40) { nav.classList.add('py-2'); nav.classList.remove('py-4'); }
+    else { nav.classList.add('py-4'); nav.classList.remove('py-2'); }
+});
+</script>
+</body>
+</html>
