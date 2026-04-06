@@ -226,7 +226,7 @@ body { background-color: #f8f9fa; color: #374151; }
             <!-- Right: Stats -->
             <div class="grid grid-cols-2 gap-4">
                 <div class="bg-navy-800/60 border border-white/8 rounded-2xl p-6 text-center">
-                    <div class="font-header font-extrabold text-4xl text-gold-400 mb-1">50<span class="text-2xl">+</span></div>
+                    <div class="font-header font-extrabold text-4xl text-gold-400 mb-1"><span id="hr-c1">0</span><span class="text-2xl">+</span></div>
                     <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Klien Aktif</div>
                 </div>
                 <div class="bg-navy-800/60 border border-white/8 rounded-2xl p-6 text-center">
@@ -234,7 +234,7 @@ body { background-color: #f8f9fa; color: #374151; }
                     <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Hari Setup</div>
                 </div>
                 <div class="bg-navy-800/60 border border-white/8 rounded-2xl p-6 text-center">
-                    <div class="font-header font-extrabold text-4xl text-gold-400 mb-1">99<span class="text-2xl">%</span></div>
+                    <div class="font-header font-extrabold text-4xl text-gold-400 mb-1"><span id="hr-c2">0</span><span class="text-2xl">%</span></div>
                     <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Akurasi Payroll</div>
                 </div>
                 <div class="bg-navy-800/60 border border-white/8 rounded-2xl p-6 text-center">
@@ -854,6 +854,38 @@ const revealObserver = new IntersectionObserver(function(entries) {
 document.querySelectorAll('.reveal-on-scroll').forEach(function(el) {
     revealObserver.observe(el);
 });
+
+// Counter animation
+function runCounter(id, target, duration) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var start = 0, startTime = null;
+    function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        var progress = Math.min((timestamp - startTime) / duration, 1);
+        var ease = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(ease * target);
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = target;
+    }
+    requestAnimationFrame(step);
+}
+
+var counterTriggered = false;
+var statsObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+        if (entry.isIntersecting && !counterTriggered) {
+            counterTriggered = true;
+            setTimeout(function() {
+                runCounter('hr-c1', 50, 1600);
+                runCounter('hr-c2', 99, 2000);
+            }, 300);
+        }
+    });
+}, { threshold: 0.5 });
+
+var statsGrid = document.getElementById('hr-c1');
+if (statsGrid) statsObserver.observe(statsGrid.closest('.grid'));
 
 // Navbar shrink on scroll
 window.addEventListener('scroll', function() {
