@@ -119,6 +119,17 @@ body { background-color: #f8f9fa; color: #374151; font-family: 'Inter', sans-ser
 
 details summary::-webkit-details-marker { display: none; }
 details[open] .faq-icon { transform: rotate(180deg); }
+
+/* WA float */
+@keyframes wa-bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+@keyframes wa-pulse  { 0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,0.5)} 70%{box-shadow:0 0 0 14px rgba(37,211,102,0)} }
+#wa-float { animation: wa-bounce 3s ease-in-out infinite; }
+#wa-float:hover { animation: wa-pulse 1s ease-out; }
+
+::-webkit-scrollbar { width:8px; }
+::-webkit-scrollbar-track { background:#f1f5f9; }
+::-webkit-scrollbar-thumb { background:#cbd5e1; border-radius:4px; }
+::-webkit-scrollbar-thumb:hover { background:#D4AF37; }
 </style>
 </head>
 <body class="antialiased">
@@ -216,11 +227,11 @@ details[open] .faq-icon { transform: rotate(180deg); }
             <!-- Right: Stats -->
             <div class="grid grid-cols-2 gap-4">
                 <div class="bg-navy-800/60 border border-white/8 rounded-2xl p-6 text-center">
-                    <div class="font-header font-extrabold text-4xl text-gold-400 mb-1">30</div>
+                    <div class="font-header font-extrabold text-4xl text-gold-400 mb-1"><span id="pos-c1">0</span></div>
                     <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Hari Trial Gratis</div>
                 </div>
                 <div class="bg-navy-800/60 border border-white/8 rounded-2xl p-6 text-center">
-                    <div class="font-header font-extrabold text-4xl text-gold-400 mb-1">5</div>
+                    <div class="font-header font-extrabold text-4xl text-gold-400 mb-1"><span id="pos-c2">0</span></div>
                     <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Menit Setup Awal</div>
                 </div>
                 <div class="bg-navy-800/60 border border-white/8 rounded-2xl p-6 text-center">
@@ -775,12 +786,11 @@ details[open] .faq-icon { transform: rotate(180deg); }
     </div>
 </footer>
 
-<!-- ═══ WA FLOAT ══════════════════════════════════════════════════════════ -->
-<a href="https://wa.me/6285156397948?text=Halo%20Trinity%2C%20saya%20tertarik%20dengan%20TalentCore.POS" target="_blank" rel="noopener"
-   class="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 text-white font-bold text-sm px-4 py-3 rounded-2xl shadow-xl hover:scale-105 transition-all duration-200"
-   style="background: linear-gradient(135deg,#25D366,#128C7E); box-shadow: 0 8px 24px rgba(37,211,102,0.35);">
-    <i class="fa-brands fa-whatsapp text-xl"></i>
-    <span class="hidden sm:inline">Tanya via WhatsApp</span>
+<!-- ═══ WA FLOAT ═══ -->
+<a href="https://wa.me/6285156397948?text=Halo%20Trinity%2C%20saya%20tertarik%20dengan%20TalentCore.POS" target="_blank" rel="noopener" id="wa-float"
+   class="fixed bottom-8 right-8 z-50 w-14 h-14 bg-[#25D366] rounded-full shadow-[0_4px_20px_rgba(37,211,102,0.45)] flex items-center justify-center hover:scale-110 transition-transform duration-300"
+   title="Chat via WhatsApp">
+    <i class="fab fa-whatsapp text-white text-2xl"></i>
 </a>
 
 <!-- ═══ JS ═════════════════════════════════════════════════════════════════ -->
@@ -813,6 +823,50 @@ document.querySelectorAll('details').forEach(function(el) {
         var icon = el.querySelector('.faq-icon');
         if (icon) icon.style.transform = el.open ? 'rotate(180deg)' : '';
     });
+});
+
+// Counter animation
+function runCounter(id, target, duration) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var startTime = null;
+    function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        var progress = Math.min((timestamp - startTime) / duration, 1);
+        var ease = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(ease * target);
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = target;
+    }
+    requestAnimationFrame(step);
+}
+
+var counterTriggered = false;
+var statsObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+        if (entry.isIntersecting && !counterTriggered) {
+            counterTriggered = true;
+            setTimeout(function() {
+                runCounter('pos-c1', 30, 1400);
+                runCounter('pos-c2', 5, 900);
+            }, 300);
+        }
+    });
+}, { threshold: 0.5 });
+
+var statsGrid = document.getElementById('pos-c1');
+if (statsGrid) statsObserver.observe(statsGrid.closest('.grid'));
+
+// Navbar shrink on scroll
+window.addEventListener('scroll', function() {
+    var nav = document.getElementById('navbar');
+    if (window.scrollY > 40) {
+        nav.classList.add('py-2');
+        nav.classList.remove('py-4');
+    } else {
+        nav.classList.add('py-4');
+        nav.classList.remove('py-2');
+    }
 });
 </script>
 
