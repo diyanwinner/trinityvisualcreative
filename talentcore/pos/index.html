@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TalentCore.pos — Kasir Digital untuk UMKM Indonesia | PT Trinity Berkah Mandiri</title>
+<meta name="description" content="Sistem kasir digital yang mudah, lengkap, dan terjangkau untuk UMKM Indonesia. Kontrol stok otomatis, laporan laba instan, manajemen shift — semua dari browser, tanpa instalasi.">
+<meta name="keywords" content="kasir digital, POS UMKM, sistem kasir online, kasir cloud, TalentCore POS, Trinity Berkah Mandiri, kasir warung, kasir cafe">
+<meta name="author" content="PT Trinity Berkah Mandiri">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://trinityberkahmandiri.com/talentcore/pos/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://trinityberkahmandiri.com/talentcore/pos/">
+<meta property="og:title" content="TalentCore.pos — Kasir Digital untuk UMKM Indonesia">
+<meta property="og:description" content="Sistem kasir digital mudah dipakai. Stok otomatis, laporan laba, multi shift — langsung dari browser tanpa instalasi.">
+<meta property="og:image" content="https://trinityberkahmandiri.com/logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TalentCore.pos — Kasir Digital UMKM Indonesia">
+<meta name="twitter:description" content="Kasir digital cloud untuk warung, café, toko fashion, apotek — setup 5 menit, gratis 30 hari.">
+<meta name="twitter:image" content="https://trinityberkahmandiri.com/logo.png">
+<link rel="icon" type="image/png" href="../../logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+<script>
+tailwind.config = {
+    theme: {
+        extend: {
+            colors: {
+                navy: { 950: '#020c1b', 900: '#0a192f', 800: '#112240', 700: '#1a3a5c', 50: '#f0f4f8', 100: '#e8edf5' },
+                gold: { 400: '#D4AF37', 300: '#F4C430', 500: '#C5A028' },
+            },
+            fontFamily: {
+                sans:   ['Inter', 'sans-serif'],
+                header: ['Montserrat', 'sans-serif'],
+                serif:  ['Cormorant Garamond', 'serif'],
+            },
+            backgroundImage: {
+                'gold-gradient': 'linear-gradient(135deg, #D4AF37 0%, #F4C430 100%)',
+            }
+        }
+    }
+}
+</script>
+
+<style>
+body { background-color: #f8f9fa; color: #374151; font-family: 'Inter', sans-serif; }
+
+.glass-nav {
+    background: rgba(10,25,47,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(212,175,55,0.15);
+}
+
+.reveal-on-scroll { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
+.reveal-on-scroll.visible { opacity: 1; transform: translateY(0); }
+
+.btn-gold { position: relative; overflow: hidden; }
+.btn-gold::after { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent); transition:0.5s; }
+.btn-gold:hover::after { left:100%; }
+
+.feat-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    position: relative; overflow: hidden;
+}
+.feat-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background:linear-gradient(90deg,transparent,#D4AF37,transparent);
+    transform:scaleX(0); transform-origin:left;
+    transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.feat-card:hover { border-color:#D4AF37; transform:translateY(-6px); box-shadow:0 20px 50px -10px rgba(212,175,55,0.18); }
+.feat-card:hover::before { transform:scaleX(1); }
+
+.price-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    transition: all 0.35s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.price-card:hover { border-color: #D4AF37; transform: translateY(-6px); box-shadow: 0 20px 50px -10px rgba(212,175,55,0.18); }
+.price-card.featured { border-color: #D4AF37; box-shadow: 0 8px 30px -6px rgba(212,175,55,0.25); }
+
+.masalah-card {
+    background: rgba(17,34,64,0.6);
+    border: 1px solid rgba(212,175,55,0.12);
+    border-left: 3px solid #D4AF37;
+    transition: all 0.35s ease;
+}
+.masalah-card:hover { background: rgba(17,34,64,0.85); border-left-color: #F4C430; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-8px); }
+}
+@keyframes pulse-gold {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(212,175,55,0.4); }
+    50%       { box-shadow: 0 0 0 10px rgba(212,175,55,0); }
+}
+.animate-float { animation: float 4s ease-in-out infinite; }
+.animate-glow-gold { animation: pulse-gold 2s ease-in-out infinite; }
+
+.grid-dots {
+    background-image: radial-gradient(rgba(212,175,55,0.07) 1px, transparent 1px);
+    background-size: 32px 32px;
+}
+
+.ticker-wrap { overflow: hidden; white-space: nowrap; }
+.ticker-track { display: inline-flex; animation: ticker 28s linear infinite; }
+.ticker-track:hover { animation-play-state: paused; }
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+details summary::-webkit-details-marker { display: none; }
+details[open] .faq-icon { transform: rotate(180deg); }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ═══ NAVBAR ═══════════════════════════════════════════════════════════ -->
+<nav class="glass-nav fixed top-0 inset-x-0 z-50">
+    <div class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-2.5">
+            <img src="../../logo.png" alt="Trinity" class="w-8 h-8 rounded-lg object-contain bg-white/10 p-1">
+            <span class="font-header font-bold text-white text-base tracking-tight hidden sm:block">PT Trinity <span class="text-gold-400">Berkah Mandiri</span></span>
+        </a>
+        <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-400">
+            <a href="#fitur"    class="hover:text-white transition">Fitur</a>
+            <a href="#harga"    class="hover:text-white transition">Harga</a>
+            <a href="#faq"      class="hover:text-white transition">FAQ</a>
+            <a href="/talentcore" class="hover:text-gold-400 transition">← TalentCore</a>
+        </div>
+        <a href="https://wa.me/6285156397948?text=Halo%20Trinity%2C%20saya%20tertarik%20dengan%20TalentCore.POS" target="_blank" rel="noopener"
+           class="btn-gold bg-gold-gradient text-navy-900 font-header font-bold text-sm px-4 py-2 rounded-xl animate-glow-gold">
+            Coba Gratis
+        </a>
+    </div>
+</nav>
+
+<!-- ═══ HERO ══════════════════════════════════════════════════════════════ -->
+<section class="min-h-screen flex flex-col items-center justify-center text-center px-5 pt-24 pb-16 relative overflow-hidden"
+         style="background: linear-gradient(135deg, #020c1b 0%, #0a192f 50%, #020c1b 100%);">
+    <div class="absolute inset-0 grid-dots pointer-events-none"></div>
+    <div class="absolute top-1/4 -left-40 w-96 h-96 bg-gold-400/8 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-1/4 -right-40 w-96 h-96 bg-blue-500/8 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="relative max-w-4xl mx-auto">
+        <!-- Breadcrumb -->
+        <nav class="flex items-center justify-center gap-2 text-xs text-slate-500 font-semibold mb-5">
+            <a href="/"          class="hover:text-gold-400 transition">Trinity</a>
+            <span class="text-slate-700">/</span>
+            <a href="/talentcore" class="hover:text-gold-400 transition">TalentCore</a>
+            <span class="text-slate-700">/</span>
+            <span class="text-gold-400">POS</span>
+        </nav>
+
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 bg-gold-400/10 border border-gold-400/25 text-gold-400 text-xs font-bold px-4 py-2 rounded-full mb-6 font-header">
+            <span class="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse inline-block"></span>
+            Modul Aktif &nbsp;·&nbsp; Kasir Cloud
+        </div>
+
+        <!-- Headline -->
+        <h1 class="font-header font-black text-4xl sm:text-5xl md:text-6xl text-white leading-tight mb-6">
+            Jualan Makin Rapi.<br>
+            <span class="text-gold-400">Untung Makin Jelas.</span>
+        </h1>
+        <p class="text-slate-400 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+            Sistem kasir digital yang mudah dipakai, stok terkontrol otomatis, dan laporan laba langsung terlihat —
+            semua dari browser, tanpa instalasi, mulai dari warung hingga café yang sedang berkembang.
+        </p>
+
+        <!-- CTA -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+            <a href="https://wa.me/6285156397948?text=Halo%20Trinity%2C%20saya%20mau%20coba%20TalentCore.POS%20gratis%2030%20hari" target="_blank" rel="noopener"
+               class="btn-gold inline-flex items-center gap-2 bg-gold-gradient text-navy-900 font-header font-black px-8 py-4 rounded-2xl text-base shadow-lg hover:-translate-y-0.5 transition-all duration-200 animate-glow-gold">
+                <i class="fa-brands fa-whatsapp text-lg"></i>
+                Coba Gratis 30 Hari
+            </a>
+            <a href="#fitur"
+               class="inline-flex items-center gap-2 border-2 border-white/20 hover:border-gold-400/50 text-white font-bold px-6 py-3.5 rounded-2xl text-sm transition-all duration-200 hover:bg-white/5">
+                Lihat Fitur Lengkap &rarr;
+            </a>
+        </div>
+
+        <!-- Stats strip -->
+        <div class="grid grid-cols-3 gap-6 max-w-xl mx-auto">
+            <div class="text-center">
+                <div class="font-header font-black text-2xl text-white">30 Hari</div>
+                <div class="text-xs text-slate-500 font-semibold mt-0.5">Trial Gratis</div>
+            </div>
+            <div class="text-center border-x border-white/10">
+                <div class="font-header font-black text-2xl text-white">5 Menit</div>
+                <div class="text-xs text-slate-500 font-semibold mt-0.5">Setup Awal</div>
+            </div>
+            <div class="text-center">
+                <div class="font-header font-black text-2xl text-white">0 Instal</div>
+                <div class="text-xs text-slate-500 font-semibold mt-0.5">Langsung Pakai</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mock POS Screen -->
+    <div class="relative mt-20 max-w-3xl mx-auto w-full animate-float">
+        <div class="rounded-3xl overflow-hidden" style="background:#0f1e3d; border: 1px solid rgba(212,175,55,0.15); box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 60px rgba(212,175,55,0.08);">
+            <!-- Browser bar -->
+            <div class="px-4 py-3 flex items-center gap-2 border-b border-white/5" style="background:#0a192f;">
+                <div class="flex gap-1.5">
+                    <div class="w-3 h-3 rounded-full bg-red-500/60"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500/60"></div>
+                    <div class="w-3 h-3 rounded-full bg-gold-400/60"></div>
+                </div>
+                <div class="flex-1 bg-white/5 rounded-lg h-6 mx-4 flex items-center px-3">
+                    <span class="text-slate-500 text-xs">trinityberkahmandiri.com/pos</span>
+                </div>
+            </div>
+            <!-- Mock POS UI -->
+            <div class="flex" style="height:320px;">
+                <!-- Sidebar -->
+                <div class="w-48 border-r border-white/5 p-4 shrink-0" style="background:#0a192f;">
+                    <div class="font-header font-black text-sm mb-1 text-gold-400">TalentCore.POS</div>
+                    <div class="text-slate-600 text-xs mb-6">Warung Alesha</div>
+                    <div class="space-y-1">
+                        <div class="text-xs font-bold px-3 py-2 rounded-lg" style="background:rgba(212,175,55,0.15); color:#D4AF37;">📋 Kasir</div>
+                        <div class="text-slate-600 text-xs px-3 py-2">📒 Buku Hutang</div>
+                        <div class="text-slate-600 text-xs px-3 py-2">🕐 Histori Shift</div>
+                    </div>
+                    <div class="mt-8 rounded-xl p-2.5" style="background:rgba(212,175,55,0.08); border:1px solid rgba(212,175,55,0.2);">
+                        <div class="text-[10px] font-bold text-gold-400">● SHIFT AKTIF</div>
+                        <div class="text-slate-400 text-[9px]">Buka: 08:00</div>
+                    </div>
+                </div>
+                <!-- Main area -->
+                <div class="flex-1 bg-slate-50 p-4 overflow-hidden">
+                    <div class="flex gap-2 mb-3">
+                        <div class="flex-1 bg-white border border-slate-200 rounded-lg h-8 flex items-center px-3">
+                            <span class="text-slate-300 text-xs">Cari menu...</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-2 mb-3">
+                        <div class="text-white text-xs font-bold px-3 py-1 rounded-full" style="background:#0a192f;">Semua</div>
+                        <div class="bg-white border text-slate-500 text-xs font-semibold px-3 py-1 rounded-full">Makanan</div>
+                        <div class="bg-white border text-slate-500 text-xs font-semibold px-3 py-1 rounded-full">Minuman</div>
+                        <div class="bg-white border text-slate-500 text-xs font-semibold px-3 py-1 rounded-full">Rokok</div>
+                    </div>
+                    <div class="grid grid-cols-4 gap-2">
+                        <div class="bg-white border-2 border-slate-100 rounded-xl p-2 text-center">
+                            <div class="w-7 h-7 rounded-full flex items-center justify-center mx-auto mb-1 text-xs font-black" style="background:#f0f4f8;color:#0a192f;">A</div>
+                            <div class="text-[9px] font-bold text-slate-700 leading-tight mb-0.5">Air Mineral</div>
+                            <div class="text-[9px] font-black text-gold-500">Rp 5.000</div>
+                        </div>
+                        <div class="bg-white border-2 border-slate-100 rounded-xl p-2 text-center">
+                            <div class="w-7 h-7 rounded-full flex items-center justify-center mx-auto mb-1 text-xs font-black" style="background:#f0f4f8;color:#0a192f;">D</div>
+                            <div class="text-[9px] font-bold text-slate-700 leading-tight mb-0.5">Djarum Super</div>
+                            <div class="text-[9px] font-black text-gold-500">Rp 25.000</div>
+                        </div>
+                        <div class="bg-white border-2 border-slate-100 rounded-xl p-2 text-center">
+                            <div class="w-7 h-7 rounded-full flex items-center justify-center mx-auto mb-1 text-xs font-black" style="background:#f0f4f8;color:#0a192f;">I</div>
+                            <div class="text-[9px] font-bold text-slate-700 leading-tight mb-0.5">Indomie</div>
+                            <div class="text-[9px] font-black text-gold-500">Rp 3.500</div>
+                        </div>
+                        <div class="bg-white border-2 border-slate-100 rounded-xl p-2 text-center relative">
+                            <span class="absolute top-1 right-1 bg-red-500 text-white text-[7px] font-black px-1 py-0.5 rounded-full leading-none">HABIS</span>
+                            <div class="w-7 h-7 rounded-full bg-red-100 text-red-400 flex items-center justify-center mx-auto mb-1 text-xs font-black">G</div>
+                            <div class="text-[9px] font-bold text-slate-700 leading-tight mb-0.5">Gas LPG</div>
+                            <div class="text-[9px] font-black text-red-400">Rp 18.000</div>
+                        </div>
+                        <div class="bg-white border-2 border-slate-100 rounded-xl p-2 text-center">
+                            <div class="w-7 h-7 rounded-full flex items-center justify-center mx-auto mb-1 text-xs font-black" style="background:#f0f4f8;color:#0a192f;">M</div>
+                            <div class="text-[9px] font-bold text-slate-700 leading-tight mb-0.5">Mie Goreng</div>
+                            <div class="text-[9px] font-black text-gold-500">Rp 3.500</div>
+                        </div>
+                        <div class="bg-white border-2 border-slate-100 rounded-xl p-2 text-center">
+                            <div class="w-7 h-7 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center mx-auto mb-1 text-xs font-black">S</div>
+                            <div class="text-[9px] font-bold text-slate-700 leading-tight mb-0.5">Surya 12</div>
+                            <div class="text-[9px] font-black text-gold-500">Rp 27.000</div>
+                        </div>
+                        <div class="bg-white border-2 border-slate-100 rounded-xl p-2 text-center">
+                            <div class="w-7 h-7 rounded-full flex items-center justify-center mx-auto mb-1 text-xs font-black" style="background:#f0f4f8;color:#0a192f;">K</div>
+                            <div class="text-[9px] font-bold text-slate-700 leading-tight mb-0.5">Kopi Hitam</div>
+                            <div class="text-[9px] font-black text-gold-500">Rp 5.000</div>
+                        </div>
+                        <div class="bg-white border-2 border-slate-100 rounded-xl p-2 text-center">
+                            <div class="w-7 h-7 rounded-full flex items-center justify-center mx-auto mb-1 text-xs font-black" style="background:#f0f4f8;color:#0a192f;">T</div>
+                            <div class="text-[9px] font-bold text-slate-700 leading-tight mb-0.5">Teh Manis</div>
+                            <div class="text-[9px] font-black text-gold-500">Rp 4.000</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Cart -->
+                <div class="w-52 bg-white border-l border-slate-200 flex flex-col shrink-0">
+                    <div class="px-4 py-3 flex items-center justify-between" style="background:#0a192f;">
+                        <span class="text-white font-bold text-xs uppercase tracking-wider">Pesanan</span>
+                    </div>
+                    <div class="flex-1 p-3 space-y-2">
+                        <div class="flex items-center gap-2 py-1 border-b border-slate-50">
+                            <div class="flex-1">
+                                <div class="text-xs font-bold text-slate-800">Air Mineral</div>
+                                <div class="text-[10px] text-gold-500">Rp 5.000</div>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <div class="w-5 h-5 bg-slate-100 rounded-full text-center text-xs font-black leading-5">−</div>
+                                <span class="text-xs font-black w-4 text-center">2</span>
+                                <div class="w-5 h-5 rounded-full text-center text-xs font-black leading-5" style="background:rgba(212,175,55,0.15);color:#C5A028;">+</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 py-1">
+                            <div class="flex-1">
+                                <div class="text-xs font-bold text-slate-800">Djarum Super</div>
+                                <div class="text-[10px] text-gold-500">Rp 25.000</div>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <div class="w-5 h-5 bg-slate-100 rounded-full text-center text-xs font-black leading-5">−</div>
+                                <span class="text-xs font-black w-4 text-center">1</span>
+                                <div class="w-5 h-5 rounded-full text-center text-xs font-black leading-5" style="background:rgba(212,175,55,0.15);color:#C5A028;">+</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-t border-slate-100 px-3 py-2 bg-slate-50">
+                        <div class="flex justify-between text-xs font-black">
+                            <span>TOTAL</span>
+                            <span style="color:#C5A028;">Rp 35.000</span>
+                        </div>
+                    </div>
+                    <div class="px-3 pb-3 pt-2">
+                        <div class="w-full text-navy-900 font-black text-xs py-3 rounded-xl text-center" style="background: linear-gradient(135deg,#D4AF37,#F4C430); color:#0a192f;">BAYAR [ENTER]</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="absolute inset-x-10 -bottom-6 h-12 rounded-full blur-2xl" style="background:rgba(212,175,55,0.15);"></div>
+    </div>
+</section>
+
+<!-- ═══ JENIS USAHA STRIP ═════════════════════════════════════════════════ -->
+<div class="bg-white border-y border-slate-100 py-5">
+    <div class="max-w-4xl mx-auto px-5 text-center">
+        <p class="text-slate-400 text-xs font-semibold uppercase tracking-widest mb-4">Cocok untuk berbagai jenis usaha</p>
+        <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-slate-500 text-sm font-bold">
+            <span>🛒 Warung Kelontong</span>
+            <span>☕ Café &amp; FnB</span>
+            <span>👗 Toko Fashion</span>
+            <span>💊 Apotek Kecil</span>
+            <span>📱 Counter HP</span>
+            <span>🍜 Kantin &amp; Warteg</span>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ MASALAH SECTION ═══════════════════════════════════════════════════ -->
+<section class="py-24 px-5" style="background:#0a192f;">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-14 reveal-on-scroll">
+            <div class="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-4 font-header" style="background:rgba(212,175,55,0.12); color:#D4AF37;">⚠️ Masalah Umum UMKM</div>
+            <h2 class="font-header font-black text-3xl sm:text-4xl text-white mb-4">Masih Kelola Kasir <span class="text-gold-400">Secara Manual?</span></h2>
+            <p class="text-slate-400 max-w-xl mx-auto">Banyak UMKM rugi bukan karena sepi pembeli, tapi karena kontrol yang lemah.</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div class="masalah-card rounded-2xl p-6 reveal-on-scroll">
+                <div class="text-2xl mb-3">😵</div>
+                <h3 class="font-header font-bold text-white text-base mb-2">Tidak Tahu Untung Berapa</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Omset masuk, tapi modal dan laba tidak pernah jelas. Akhir bulan bingung uang ke mana.</p>
+            </div>
+            <div class="masalah-card rounded-2xl p-6 reveal-on-scroll">
+                <div class="text-2xl mb-3">📦</div>
+                <h3 class="font-header font-bold text-white text-base mb-2">Stok Habis Tak Terduga</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Barang habis baru ketahuan saat pelanggan minta. Kehilangan penjualan karena stok tidak terpantau.</p>
+            </div>
+            <div class="masalah-card rounded-2xl p-6 reveal-on-scroll">
+                <div class="text-2xl mb-3">💸</div>
+                <h3 class="font-header font-bold text-white text-base mb-2">Kasir Tidak Bisa Dipantau</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Tidak ada histori transaksi yang jelas. Selisih kas ditemukan tapi tidak tahu penyebabnya.</p>
+            </div>
+            <div class="masalah-card rounded-2xl p-6 reveal-on-scroll">
+                <div class="text-2xl mb-3">📝</div>
+                <h3 class="font-header font-bold text-white text-base mb-2">Hutang Pelanggan Berantakan</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Hutang pelanggan dicatat di buku tulis. Sering lupa, sering hilang, sulit ditagih.</p>
+            </div>
+            <div class="masalah-card rounded-2xl p-6 reveal-on-scroll">
+                <div class="text-2xl mb-3">📊</div>
+                <h3 class="font-header font-bold text-white text-base mb-2">Laporan Butuh Waktu Lama</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Rekap penjualan harian dikerjakan manual di Excel. Menghabiskan waktu dan rawan salah hitung.</p>
+            </div>
+            <div class="masalah-card rounded-2xl p-6 reveal-on-scroll">
+                <div class="text-2xl mb-3">📱</div>
+                <h3 class="font-header font-bold text-white text-base mb-2">Tidak Bisa Pantau dari Jauh</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Pemilik harus hadir di toko untuk tahu kondisi penjualan. Tidak ada akses real-time dari HP.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ FITUR UTAMA ═══════════════════════════════════════════════════════ -->
+<section id="fitur" class="py-24 px-5 bg-white">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16 reveal-on-scroll">
+            <div class="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-4 font-header" style="background:rgba(212,175,55,0.12); color:#D4AF37;">✨ Fitur Unggulan</div>
+            <h2 class="font-header font-black text-3xl sm:text-4xl text-navy-900 mb-4">Semua yang Dibutuhkan,<br><span class="text-gold-400">Tidak Lebih, Tidak Kurang</span></h2>
+            <p class="text-slate-500 max-w-xl mx-auto">Dirancang khusus untuk UMKM — fitur yang tepat guna, bukan yang bikin bingung.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="feat-card rounded-2xl p-6 reveal-on-scroll">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-4 text-2xl" style="background:rgba(212,175,55,0.1);">🖥️</div>
+                <h3 class="font-header font-black text-navy-900 text-lg mb-2">Kasir Super Mudah</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">Tampilan menu visual, pencarian dan filter kategori. Shortcut keyboard [Enter] langsung proses bayar. Bisa di HP, tablet, dan laptop.</p>
+            </div>
+            <div class="feat-card rounded-2xl p-6 reveal-on-scroll">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-4 text-2xl" style="background:rgba(99,102,241,0.1);">💳</div>
+                <h3 class="font-header font-black text-navy-900 text-lg mb-2">Fleksibel di Pembayaran</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">Tunai, Transfer, QRIS, dan Hutang. Diskon % atau nominal. Kembalian otomatis terhitung. Struk thermal langsung cetak.</p>
+            </div>
+            <div class="feat-card rounded-2xl p-6 reveal-on-scroll">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-4 text-2xl" style="background:rgba(245,158,11,0.1);">📦</div>
+                <h3 class="font-header font-black text-navy-900 text-lg mb-2">Stok Real-Time</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">Stok berkurang otomatis tiap transaksi. Notif langsung saat stok habis atau menipis. Tidak bisa jual barang yang sudah habis.</p>
+            </div>
+            <div class="feat-card rounded-2xl p-6 reveal-on-scroll">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-4 text-2xl" style="background:rgba(139,92,246,0.1);">👥</div>
+                <h3 class="font-header font-black text-navy-900 text-lg mb-2">Multi Role &amp; Shift</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">4 role: Kasir, Supervisor, Admin, Owner. Setiap kasir buka dan tutup shift. Laporan selisih kas otomatis. Owner pantau semua dari mana saja.</p>
+            </div>
+            <div class="feat-card rounded-2xl p-6 reveal-on-scroll">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-4 text-2xl" style="background:rgba(239,68,68,0.1);">📊</div>
+                <h3 class="font-header font-black text-navy-900 text-lg mb-2">Laporan Bisnis Instan</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">Omset harian, laba kotor, laporan per kasir dan metode bayar. Retur transaksi tercatat rapi. Export Excel dan PDF kapan saja.</p>
+            </div>
+            <div class="feat-card rounded-2xl p-6 reveal-on-scroll" style="border-color:rgba(212,175,55,0.3); background:rgba(212,175,55,0.03);">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-4 text-2xl" style="background:rgba(212,175,55,0.1);">🔗</div>
+                <h3 class="font-header font-black text-navy-900 text-lg mb-2">Bisa Connect ke ERP</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">Bisnis makin besar? Hubungkan ke TalentCore.ERP — stok dan produk sinkron otomatis. Purchase Order, supplier, laporan pajak, semua tersedia.</p>
+                <div class="mt-3">
+                    <a href="/talentcore/erp" class="inline-block text-xs font-bold px-3 py-1 rounded-full hover:opacity-80 transition" style="background:rgba(212,175,55,0.15); color:#D4AF37;">Lihat TalentCore.ERP →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ CARA MULAI ═════════════════════════════════════════════════════════ -->
+<section class="py-24 px-5" style="background:#f0f4f8;">
+    <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16 reveal-on-scroll">
+            <div class="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-4 font-header" style="background:rgba(10,25,47,0.08); color:#0a192f;">🚀 Cara Mulai</div>
+            <h2 class="font-header font-black text-3xl text-navy-900 mb-4">Mulai Jualan dalam <span class="text-gold-400">5 Menit</span></h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+            <div class="hidden md:block absolute h-0.5" style="background:linear-gradient(90deg,rgba(212,175,55,0.3),rgba(212,175,55,0.3)); left:20%;right:20%;top:2rem;"></div>
+
+            <div class="text-center relative reveal-on-scroll">
+                <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl" style="background:rgba(212,175,55,0.1); border:2px solid rgba(212,175,55,0.3);">🏪</div>
+                <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-6 h-6 text-white text-xs font-black rounded-full flex items-center justify-center font-header" style="background:#D4AF37; color:#0a192f;">1</div>
+                <h3 class="font-header font-black text-navy-900 text-lg mb-2">Daftar &amp; Setup</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">Buat akun, isi nama toko, tambahkan menu dan harga. Selesai dalam 5 menit.</p>
+            </div>
+
+            <div class="text-center relative reveal-on-scroll">
+                <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl" style="background:rgba(212,175,55,0.1); border:2px solid rgba(212,175,55,0.3);">👤</div>
+                <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-6 h-6 text-white text-xs font-black rounded-full flex items-center justify-center font-header" style="background:#D4AF37; color:#0a192f;">2</div>
+                <h3 class="font-header font-black text-navy-900 text-lg mb-2">Tambah Kasir</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">Buat akun kasir, atur role sesuai tanggung jawab. Kasir langsung bisa login dan mulai bekerja.</p>
+            </div>
+
+            <div class="text-center relative reveal-on-scroll">
+                <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl" style="background:rgba(212,175,55,0.1); border:2px solid rgba(212,175,55,0.3);">🎉</div>
+                <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-6 h-6 text-white text-xs font-black rounded-full flex items-center justify-center font-header" style="background:#D4AF37; color:#0a192f;">3</div>
+                <h3 class="font-header font-black text-navy-900 text-lg mb-2">Mulai Jualan</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">Buka shift, pilih item, pilih pembayaran, cetak struk. Semudah itu.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ PRICING ═══════════════════════════════════════════════════════════ -->
+<section id="harga" class="py-24 px-5 bg-white">
+    <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-16 reveal-on-scroll">
+            <div class="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-4 font-header" style="background:rgba(212,175,55,0.12); color:#D4AF37;">💰 Harga Transparan</div>
+            <h2 class="font-header font-black text-3xl sm:text-4xl text-navy-900 mb-4">Investasi yang Masuk Akal<br><span class="text-gold-400">untuk Bisnis Kamu</span></h2>
+            <div class="inline-flex items-center gap-2 text-sm font-bold px-5 py-2 rounded-full" style="background:#fefce8; border:1px solid #fde68a; color:#92400e;">
+                🎁 Coba semua fitur gratis selama 30 hari — tanpa kartu kredit
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+            <!-- Starter -->
+            <div class="price-card rounded-3xl p-8 reveal-on-scroll">
+                <div class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-1 font-header">Starter</div>
+                <div class="font-header font-black text-4xl text-navy-900 mb-1">Rp 99<span class="text-lg font-bold text-slate-400">.000</span></div>
+                <div class="text-slate-400 text-sm mb-6">per bulan</div>
+                <ul class="space-y-3 mb-8 text-sm text-slate-600">
+                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400 w-4 shrink-0"></i> 1 outlet / toko</li>
+                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400 w-4 shrink-0"></i> Kasir unlimited</li>
+                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400 w-4 shrink-0"></i> Semua fitur POS</li>
+                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400 w-4 shrink-0"></i> Manajemen shift</li>
+                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400 w-4 shrink-0"></i> Stok real-time</li>
+                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400 w-4 shrink-0"></i> Laporan &amp; export</li>
+                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400 w-4 shrink-0"></i> Support via chat</li>
+                </ul>
+                <a href="https://wa.me/6285156397948?text=Halo%20Trinity%2C%20saya%20tertarik%20paket%20Starter%20TalentCore.POS" target="_blank" rel="noopener"
+                   class="block w-full text-center border-2 border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white font-header font-black py-3 rounded-2xl transition-all duration-200">
+                    Mulai Gratis
+                </a>
+            </div>
+
+            <!-- Growth (POPULAR) -->
+            <div class="price-card featured rounded-3xl p-8 reveal-on-scroll relative scale-105" style="background:#0a192f;">
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2 text-navy-900 text-xs font-black px-5 py-1.5 rounded-full font-header whitespace-nowrap" style="background: linear-gradient(135deg,#D4AF37,#F4C430); color:#0a192f;">⭐ PALING POPULER</div>
+                <div class="text-sm font-bold text-gold-400 uppercase tracking-wider mb-1 font-header">Growth</div>
+                <div class="font-header font-black text-4xl text-white mb-1">Rp 199<span class="text-lg font-bold text-slate-500">.000</span></div>
+                <div class="text-slate-500 text-sm mb-6">per bulan</div>
+                <ul class="space-y-3 mb-8 text-sm text-slate-300">
+                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400 w-4 shrink-0"></i> Semua fitur Starter</li>
+                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400 w-4 shrink-0"></i> Koneksi ke TalentCore.ERP</li>
+                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400 w-4 shrink-0"></i> Sinkron stok &amp; produk</li>
+                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400 w-4 shrink-0"></i> Purchase Order otomatis</li>
+                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400 w-4 shrink-0"></i> Laporan keuangan lengkap</li>
+                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400 w-4 shrink-0"></i> Multi outlet (segera)</li>
+                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400 w-4 shrink-0"></i> Priority support</li>
+                </ul>
+                <a href="https://wa.me/6285156397948?text=Halo%20Trinity%2C%20saya%20tertarik%20paket%20Growth%20TalentCore.POS" target="_blank" rel="noopener"
+                   class="btn-gold block w-full text-center font-header font-black py-3 rounded-2xl transition-all duration-200 hover:-translate-y-0.5 animate-glow-gold" style="background: linear-gradient(135deg,#D4AF37,#F4C430); color:#0a192f;">
+                    Mulai Gratis
+                </a>
+            </div>
+
+            <!-- Business -->
+            <div class="price-card rounded-3xl p-8 reveal-on-scroll">
+                <div class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-1 font-header">Business</div>
+                <div class="font-header font-black text-4xl text-navy-900 mb-1">Custom</div>
+                <div class="text-slate-400 text-sm mb-6">hubungi kami</div>
+                <ul class="space-y-3 mb-8 text-sm text-slate-600">
+                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400 w-4 shrink-0"></i> Semua fitur Growth</li>
+                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400 w-4 shrink-0"></i> Multi outlet</li>
+                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400 w-4 shrink-0"></i> Custom setup &amp; training</li>
+                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400 w-4 shrink-0"></i> Dedicated account manager</li>
+                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400 w-4 shrink-0"></i> SLA support</li>
+                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400 w-4 shrink-0"></i> Integrasi custom</li>
+                </ul>
+                <a href="https://wa.me/6285156397948?text=Halo%20Trinity%2C%20saya%20tertarik%20paket%20Business%20TalentCore.POS" target="_blank" rel="noopener"
+                   class="block w-full text-center border-2 border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white font-header font-black py-3 rounded-2xl transition-all duration-200">
+                    Hubungi Kami
+                </a>
+            </div>
+        </div>
+
+        <p class="text-center text-slate-400 text-sm mt-8">
+            💡 Harga belum termasuk PPN. Bisa bayar bulanan atau tahunan (hemat 2 bulan).
+        </p>
+    </div>
+</section>
+
+<!-- ═══ COMPARISON TABLE ══════════════════════════════════════════════════ -->
+<section class="py-20 px-5" style="background:#f0f4f8;">
+    <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-12 reveal-on-scroll">
+            <h2 class="font-header font-black text-3xl text-navy-900 mb-3">Kenapa <span class="text-gold-400">TalentCore.POS</span>?</h2>
+        </div>
+        <div class="overflow-hidden rounded-3xl border border-slate-200 shadow-sm reveal-on-scroll">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr style="background:#0a192f;">
+                        <th class="text-left px-6 py-4 text-slate-400 font-bold">Fitur</th>
+                        <th class="px-6 py-4 font-black font-header text-gold-400">TalentCore.POS</th>
+                        <th class="px-6 py-4 text-slate-500 font-bold">Kasir Lain</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white">
+                    <tr class="border-t border-slate-100 hover:bg-slate-50 transition">
+                        <td class="px-6 py-3.5 font-semibold text-slate-700">Harga terjangkau</td>
+                        <td class="px-6 py-3.5 text-center"><span class="font-black text-base" style="color:#D4AF37;">✓</span></td>
+                        <td class="px-6 py-3.5 text-center"><span class="text-slate-300 text-base">✗</span></td>
+                    </tr>
+                    <tr class="border-t border-slate-100 hover:bg-slate-50 transition">
+                        <td class="px-6 py-3.5 font-semibold text-slate-700">Tanpa instalasi</td>
+                        <td class="px-6 py-3.5 text-center"><span class="font-black text-base" style="color:#D4AF37;">✓</span></td>
+                        <td class="px-6 py-3.5 text-center"><span class="text-amber-400 text-xs font-bold">Kadang</span></td>
+                    </tr>
+                    <tr class="border-t border-slate-100 hover:bg-slate-50 transition">
+                        <td class="px-6 py-3.5 font-semibold text-slate-700">Bisa di HP &amp; laptop</td>
+                        <td class="px-6 py-3.5 text-center"><span class="font-black text-base" style="color:#D4AF37;">✓</span></td>
+                        <td class="px-6 py-3.5 text-center"><span class="text-amber-400 text-xs font-bold">Kadang</span></td>
+                    </tr>
+                    <tr class="border-t border-slate-100 hover:bg-slate-50 transition">
+                        <td class="px-6 py-3.5 font-semibold text-slate-700">Manajemen shift kasir</td>
+                        <td class="px-6 py-3.5 text-center"><span class="font-black text-base" style="color:#D4AF37;">✓</span></td>
+                        <td class="px-6 py-3.5 text-center"><span class="text-slate-300 text-base">✗</span></td>
+                    </tr>
+                    <tr class="border-t border-slate-100 hover:bg-slate-50 transition">
+                        <td class="px-6 py-3.5 font-semibold text-slate-700">Diskon fleksibel (% / Rp)</td>
+                        <td class="px-6 py-3.5 text-center"><span class="font-black text-base" style="color:#D4AF37;">✓</span></td>
+                        <td class="px-6 py-3.5 text-center"><span class="text-amber-400 text-xs font-bold">Kadang</span></td>
+                    </tr>
+                    <tr class="border-t border-slate-100 hover:bg-slate-50 transition">
+                        <td class="px-6 py-3.5 font-semibold text-slate-700">Laporan laba kotor</td>
+                        <td class="px-6 py-3.5 text-center"><span class="font-black text-base" style="color:#D4AF37;">✓</span></td>
+                        <td class="px-6 py-3.5 text-center"><span class="text-slate-300 text-base">✗</span></td>
+                    </tr>
+                    <tr class="border-t border-slate-100 hover:bg-slate-50 transition">
+                        <td class="px-6 py-3.5 font-semibold text-slate-700">Retur transaksi</td>
+                        <td class="px-6 py-3.5 text-center"><span class="font-black text-base" style="color:#D4AF37;">✓</span></td>
+                        <td class="px-6 py-3.5 text-center"><span class="text-slate-300 text-base">✗</span></td>
+                    </tr>
+                    <tr class="border-t border-slate-100 hover:bg-slate-50 transition">
+                        <td class="px-6 py-3.5 font-semibold text-slate-700">Buku hutang pelanggan</td>
+                        <td class="px-6 py-3.5 text-center"><span class="font-black text-base" style="color:#D4AF37;">✓</span></td>
+                        <td class="px-6 py-3.5 text-center"><span class="text-slate-300 text-base">✗</span></td>
+                    </tr>
+                    <tr class="border-t border-slate-100 hover:bg-slate-50 transition">
+                        <td class="px-6 py-3.5 font-semibold text-slate-700">Upgrade ke ERP</td>
+                        <td class="px-6 py-3.5 text-center"><span class="font-black text-base" style="color:#D4AF37;">✓</span></td>
+                        <td class="px-6 py-3.5 text-center"><span class="text-slate-300 text-base">✗</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ FAQ ════════════════════════════════════════════════════════════════ -->
+<section id="faq" class="py-20 px-5 bg-white">
+    <div class="max-w-2xl mx-auto">
+        <div class="text-center mb-12 reveal-on-scroll">
+            <div class="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-4 font-header" style="background:rgba(212,175,55,0.12); color:#D4AF37;">❓ FAQ</div>
+            <h2 class="font-header font-black text-3xl text-navy-900 mb-3">Pertanyaan Umum</h2>
+        </div>
+        <div class="space-y-4 reveal-on-scroll">
+            <details class="bg-white rounded-2xl border border-slate-200 overflow-hidden group">
+                <summary class="px-6 py-4 font-bold text-slate-800 cursor-pointer flex items-center justify-between list-none hover:text-gold-400 transition">
+                    Apakah perlu install aplikasi?
+                    <i class="fa-solid fa-chevron-down text-slate-400 faq-icon transition-transform shrink-0 ml-4 text-sm"></i>
+                </summary>
+                <div class="px-6 pb-5 text-slate-500 text-sm leading-relaxed border-t border-slate-100 pt-3">Tidak perlu. TalentCore.POS berjalan langsung di browser — Chrome, Safari, atau browser apapun. Buka link, login, langsung pakai.</div>
+            </details>
+            <details class="bg-white rounded-2xl border border-slate-200 overflow-hidden group">
+                <summary class="px-6 py-4 font-bold text-slate-800 cursor-pointer flex items-center justify-between list-none hover:text-gold-400 transition">
+                    Bagaimana kalau internet mati?
+                    <i class="fa-solid fa-chevron-down text-slate-400 faq-icon transition-transform shrink-0 ml-4 text-sm"></i>
+                </summary>
+                <div class="px-6 pb-5 text-slate-500 text-sm leading-relaxed border-t border-slate-100 pt-3">TalentCore.POS membutuhkan koneksi internet. Untuk bisnis yang butuh offline mode, kami rekomendasikan menggunakan koneksi mobile data sebagai backup.</div>
+            </details>
+            <details class="bg-white rounded-2xl border border-slate-200 overflow-hidden group">
+                <summary class="px-6 py-4 font-bold text-slate-800 cursor-pointer flex items-center justify-between list-none hover:text-gold-400 transition">
+                    Berapa banyak kasir yang bisa dibuat?
+                    <i class="fa-solid fa-chevron-down text-slate-400 faq-icon transition-transform shrink-0 ml-4 text-sm"></i>
+                </summary>
+                <div class="px-6 pb-5 text-slate-500 text-sm leading-relaxed border-t border-slate-100 pt-3">Unlimited kasir di semua plan. Tidak ada batasan jumlah user.</div>
+            </details>
+            <details class="bg-white rounded-2xl border border-slate-200 overflow-hidden group">
+                <summary class="px-6 py-4 font-bold text-slate-800 cursor-pointer flex items-center justify-between list-none hover:text-gold-400 transition">
+                    Apakah data saya aman?
+                    <i class="fa-solid fa-chevron-down text-slate-400 faq-icon transition-transform shrink-0 ml-4 text-sm"></i>
+                </summary>
+                <div class="px-6 pb-5 text-slate-500 text-sm leading-relaxed border-t border-slate-100 pt-3">Data tersimpan di server kami yang aman, backup otomatis setiap hari. Setiap toko terisolasi datanya — tidak bisa diakses oleh toko lain.</div>
+            </details>
+            <details class="bg-white rounded-2xl border border-slate-200 overflow-hidden group">
+                <summary class="px-6 py-4 font-bold text-slate-800 cursor-pointer flex items-center justify-between list-none hover:text-gold-400 transition">
+                    Setelah 30 hari trial, bagaimana?
+                    <i class="fa-solid fa-chevron-down text-slate-400 faq-icon transition-transform shrink-0 ml-4 text-sm"></i>
+                </summary>
+                <div class="px-6 pb-5 text-slate-500 text-sm leading-relaxed border-t border-slate-100 pt-3">Kamu bisa pilih plan Starter atau Growth untuk melanjutkan. Kalau tidak lanjut, data tetap tersimpan selama 90 hari.</div>
+            </details>
+            <details class="bg-white rounded-2xl border border-slate-200 overflow-hidden group">
+                <summary class="px-6 py-4 font-bold text-slate-800 cursor-pointer flex items-center justify-between list-none hover:text-gold-400 transition">
+                    Bisa pindah ke ERP nanti?
+                    <i class="fa-solid fa-chevron-down text-slate-400 faq-icon transition-transform shrink-0 ml-4 text-sm"></i>
+                </summary>
+                <div class="px-6 pb-5 text-slate-500 text-sm leading-relaxed border-t border-slate-100 pt-3">Bisa! Cukup hubungkan akun POS ke TalentCore.ERP. Semua produk dan transaksi langsung tersinkron otomatis.</div>
+            </details>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ FINAL CTA ══════════════════════════════════════════════════════════ -->
+<section class="py-24 px-5 text-center relative overflow-hidden" style="background: linear-gradient(135deg, #020c1b 0%, #0a192f 50%, #020c1b 100%);">
+    <div class="absolute inset-0 grid-dots pointer-events-none"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-40 rounded-full blur-3xl pointer-events-none" style="background:rgba(212,175,55,0.12);"></div>
+    <div class="relative max-w-2xl mx-auto reveal-on-scroll">
+        <div class="text-5xl mb-6">🚀</div>
+        <h2 class="font-header font-black text-3xl sm:text-4xl text-white mb-4">Siap Mulai Jualan Lebih Rapi?</h2>
+        <p class="text-slate-400 mb-10 text-lg">
+            Bergabung dan rasakan bedanya. Gratis 30 hari, setup 5 menit, tanpa kartu kredit.
+        </p>
+        <a href="https://wa.me/6285156397948?text=Halo%20Trinity%2C%20saya%20ingin%20coba%20TalentCore.POS%20gratis%2030%20hari" target="_blank" rel="noopener"
+           class="btn-gold inline-flex items-center gap-3 bg-gold-gradient font-header font-black px-8 py-4 rounded-2xl text-lg shadow-lg hover:-translate-y-0.5 transition-all duration-200 animate-glow-gold" style="color:#0a192f;">
+            <i class="fa-brands fa-whatsapp text-xl"></i>
+            Coba Gratis 30 Hari Sekarang
+        </a>
+        <p class="text-slate-600 text-sm mt-6">Tidak perlu kartu kredit &nbsp;·&nbsp; Cancel kapan saja &nbsp;·&nbsp; Support siap bantu</p>
+    </div>
+</section>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════════════════ -->
+<footer style="background:#020c1b;" class="pt-14 pb-10 px-5">
+    <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
+            <div class="md:col-span-2">
+                <a href="/" class="flex items-center gap-3 mb-4">
+                    <img src="../../logo.png" alt="Trinity" class="w-10 h-10 rounded-xl object-contain bg-white/10 p-1">
+                    <div>
+                        <div class="font-header font-black text-white text-base leading-none">PT Trinity Berkah Mandiri</div>
+                        <div class="text-gold-400 text-xs font-semibold mt-0.5">TalentCore.POS</div>
+                    </div>
+                </a>
+                <p class="text-slate-500 text-sm leading-relaxed max-w-xs">
+                    Sistem kasir digital cloud untuk UMKM Indonesia. Setup 5 menit, tanpa instalasi, langsung dari browser.
+                </p>
+                <a href="https://wa.me/6285156397948" target="_blank" rel="noopener" class="inline-flex items-center gap-2 mt-4 text-sm font-semibold text-gold-400 hover:text-gold-300 transition">
+                    <i class="fa-brands fa-whatsapp"></i> +62 851-5639-7948
+                </a>
+            </div>
+            <div>
+                <h4 class="font-header font-bold text-white text-sm uppercase tracking-wider mb-4">TalentCore</h4>
+                <ul class="space-y-2.5 text-sm text-slate-500">
+                    <li><a href="/talentcore"     class="hover:text-gold-400 transition">Semua Modul</a></li>
+                    <li><a href="/talentcore/hr"  class="hover:text-gold-400 transition">TalentCore.HR</a></li>
+                    <li><a href="/talentcore/erp" class="hover:text-gold-400 transition">TalentCore.ERP</a></li>
+                    <li><a href="/talentcore/pos" class="text-gold-400 font-semibold">TalentCore.POS</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-header font-bold text-white text-sm uppercase tracking-wider mb-4">Trinity</h4>
+                <ul class="space-y-2.5 text-sm text-slate-500">
+                    <li><a href="/"                  class="hover:text-gold-400 transition">Beranda</a></li>
+                    <li><a href="/perizinan"          class="hover:text-gold-400 transition">Perizinan</a></li>
+                    <li><a href="/visual-creative"    class="hover:text-gold-400 transition">Visual &amp; Creative</a></li>
+                    <li><a href="/contact"            class="hover:text-gold-400 transition">Kontak</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-white/5 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p class="text-slate-600 text-xs">&copy; 2025 PT Trinity Berkah Mandiri. All rights reserved.</p>
+            <div class="flex gap-6 text-slate-600 text-xs font-semibold">
+                <a href="/contact" class="hover:text-slate-400 transition">Kontak</a>
+                <a href="/"        class="hover:text-slate-400 transition">Beranda</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ═══ WA FLOAT ══════════════════════════════════════════════════════════ -->
+<a href="https://wa.me/6285156397948?text=Halo%20Trinity%2C%20saya%20tertarik%20dengan%20TalentCore.POS" target="_blank" rel="noopener"
+   class="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 text-white font-bold text-sm px-4 py-3 rounded-2xl shadow-xl hover:scale-105 transition-all duration-200"
+   style="background: linear-gradient(135deg,#25D366,#128C7E); box-shadow: 0 8px 24px rgba(37,211,102,0.35);">
+    <i class="fa-brands fa-whatsapp text-xl"></i>
+    <span class="hidden sm:inline">Tanya via WhatsApp</span>
+</a>
+
+<!-- ═══ JS ═════════════════════════════════════════════════════════════════ -->
+<script>
+// Scroll reveal
+var revealEls = document.querySelectorAll('.reveal-on-scroll');
+var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.12 });
+revealEls.forEach(function(el) { revealObserver.observe(el); });
+
+// FAQ chevron toggle via details event
+document.querySelectorAll('details').forEach(function(el) {
+    el.addEventListener('toggle', function() {
+        var icon = el.querySelector('.faq-icon');
+        if (icon) icon.style.transform = el.open ? 'rotate(180deg)' : '';
+    });
+});
+</script>
+
+</body>
+</html>
