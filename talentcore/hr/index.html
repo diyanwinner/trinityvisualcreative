@@ -220,23 +220,23 @@ body { background-color: #f8f9fa; color: #374151; }
                 </div>
             </div>
 
-            <!-- Right: Stats -->
+            <!-- Right: Service proof -->
             <div class="grid grid-cols-2 gap-4">
                 <div class="bg-navy-800/60 border border-white/8 rounded-2xl p-6 text-center">
-                    <div class="font-header font-extrabold text-4xl text-gold-400 mb-1"><span id="hr-c1">0</span><span class="text-2xl">+</span></div>
-                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Klien Aktif</div>
+                    <div class="font-header font-extrabold text-3xl text-gold-400 mb-1">HR</div>
+                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Data Karyawan</div>
                 </div>
                 <div class="bg-navy-800/60 border border-white/8 rounded-2xl p-6 text-center">
-                    <div class="font-header font-extrabold text-4xl text-gold-400 mb-1">&lt;1</div>
-                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Hari Setup</div>
+                    <div class="font-header font-extrabold text-3xl text-gold-400 mb-1">Cuti</div>
+                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Workflow Approval</div>
                 </div>
                 <div class="bg-navy-800/60 border border-white/8 rounded-2xl p-6 text-center">
-                    <div class="font-header font-extrabold text-4xl text-gold-400 mb-1"><span id="hr-c2">0</span><span class="text-2xl">%</span></div>
-                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Akurasi Payroll</div>
+                    <div class="font-header font-extrabold text-3xl text-gold-400 mb-1">Payroll</div>
+                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Komponen Gaji</div>
                 </div>
                 <div class="bg-navy-800/60 border border-white/8 rounded-2xl p-6 text-center">
-                    <div class="font-header font-extrabold text-4xl text-gold-400 mb-1">24/7</div>
-                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Akses Dashboard</div>
+                    <div class="font-header font-extrabold text-3xl text-gold-400 mb-1">Absensi</div>
+                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Monitoring Harian</div>
                 </div>
             </div>
         </div>
@@ -801,7 +801,7 @@ body { background-color: #f8f9fa; color: #374151; }
             <div>
                 <h4 class="font-header font-bold text-white text-xs tracking-widest uppercase mb-5">Kontak</h4>
                 <ul class="flex flex-col gap-3 text-sm text-gray-500">
-                    <li class="flex items-start gap-2.5"><i class="fas fa-phone text-gold-400 mt-0.5 text-xs flex-shrink-0"></i><a href="https://wa.me/6285156397948" target="_blank" class="hover:text-gold-400 transition">+62 851-5639-7948</a></li>
+                    <li class="flex items-start gap-2.5"><i class="fas fa-phone text-gold-400 mt-0.5 text-xs flex-shrink-0"></i><a href="https://wa.me/6285156397948?text=Halo%20Trinity%2C%20saya%20ingin%20konsultasi%20TalentCore.HR%20untuk%20kebutuhan%20HR%20perusahaan%20saya." target="_blank" rel="noopener" class="hover:text-gold-400 transition">+62 851-5639-7948</a></li>
                     <li class="flex items-start gap-2.5"><i class="fas fa-envelope text-gold-400 mt-0.5 text-xs flex-shrink-0"></i><a href="mailto:trinityberkahmandiri@gmail.com" class="hover:text-gold-400 transition text-xs">trinityberkahmandiri@gmail.com</a></li>
                     <li class="flex items-start gap-2.5"><i class="fas fa-map-marker-alt text-gold-400 mt-0.5 text-xs flex-shrink-0"></i><span class="text-xs leading-relaxed">Jl. Kapuk Raya Gg Jambu Rt.005 Rw.011,<br>Cengkareng, Jakarta Barat 11720</span></li>
                 </ul>
@@ -852,37 +852,6 @@ document.querySelectorAll('.reveal-on-scroll').forEach(function(el) {
     revealObserver.observe(el);
 });
 
-// Counter animation
-function runCounter(id, target, duration) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    var start = 0, startTime = null;
-    function step(timestamp) {
-        if (!startTime) startTime = timestamp;
-        var progress = Math.min((timestamp - startTime) / duration, 1);
-        var ease = 1 - Math.pow(1 - progress, 3);
-        el.textContent = Math.floor(ease * target);
-        if (progress < 1) requestAnimationFrame(step);
-        else el.textContent = target;
-    }
-    requestAnimationFrame(step);
-}
-
-var counterTriggered = false;
-var statsObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-        if (entry.isIntersecting && !counterTriggered) {
-            counterTriggered = true;
-            setTimeout(function() {
-                runCounter('hr-c1', 50, 1600);
-                runCounter('hr-c2', 99, 2000);
-            }, 300);
-        }
-    });
-}, { threshold: 0.5 });
-
-var statsGrid = document.getElementById('hr-c1');
-if (statsGrid) statsObserver.observe(statsGrid.closest('.grid'));
 
 // Navbar shrink on scroll
 window.addEventListener('scroll', function() {
