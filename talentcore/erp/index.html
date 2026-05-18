@@ -195,30 +195,30 @@ body { background-color: #f8f9fa; color: #374151; }
                 </div>
 
                 <div class="flex flex-wrap gap-4 mt-8 pt-8 border-t border-white/10">
-                    <span class="text-xs text-gray-500 flex items-center gap-1.5"><i class="fas fa-check-circle text-green-400"></i> Go live &lt; 1 hari kerja</span>
-                    <span class="text-xs text-gray-500 flex items-center gap-1.5"><i class="fas fa-check-circle text-green-400"></i> Data tiap perusahaan terisolasi & aman</span>
-                    <span class="text-xs text-gray-500 flex items-center gap-1.5"><i class="fas fa-check-circle text-green-400"></i> Data terisolasi & aman</span>
+                    <span class="text-xs text-gray-500 flex items-center gap-1.5"><i class="fas fa-check-circle text-green-400"></i> Data tiap perusahaan terisolasi</span>
+                    <span class="text-xs text-gray-500 flex items-center gap-1.5"><i class="fas fa-check-circle text-green-400"></i> Alur ERP modular</span>
+                    <span class="text-xs text-gray-500 flex items-center gap-1.5"><i class="fas fa-check-circle text-green-400"></i> Backup database terarah</span>
                     <span class="text-xs text-gray-500 flex items-center gap-1.5"><i class="fas fa-check-circle text-green-400"></i> Support Bahasa Indonesia</span>
                 </div>
             </div>
 
-            <!-- Right: Stats -->
+            <!-- Right: Service proof -->
             <div class="grid grid-cols-2 gap-4">
                 <div class="bg-navy-800/60 border border-white/8 rounded-2xl p-6 text-center">
-                    <div class="font-header font-extrabold text-4xl text-gold-400 mb-1"><span id="erp-c1">0</span><span class="text-2xl">+</span></div>
-                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Modul Terintegrasi</div>
+                    <div class="font-header font-extrabold text-3xl text-gold-400 mb-1">Sales</div>
+                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Penjualan</div>
                 </div>
                 <div class="bg-navy-800/60 border border-white/8 rounded-2xl p-6 text-center">
-                    <div class="font-header font-extrabold text-4xl text-gold-400 mb-1"><span id="erp-c2">0</span><span class="text-2xl">+</span></div>
-                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Jenis Bisnis Didukung</div>
+                    <div class="font-header font-extrabold text-3xl text-gold-400 mb-1">Stock</div>
+                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Inventory</div>
                 </div>
                 <div class="bg-navy-800/60 border border-white/8 rounded-2xl p-6 text-center">
-                    <div class="font-header font-extrabold text-4xl text-gold-400 mb-1">&lt;1</div>
-                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Hari Go Live</div>
+                    <div class="font-header font-extrabold text-3xl text-gold-400 mb-1">Finance</div>
+                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Laporan</div>
                 </div>
                 <div class="bg-navy-800/60 border border-white/8 rounded-2xl p-6 text-center">
-                    <div class="font-header font-extrabold text-4xl text-gold-400 mb-1">99.9<span class="text-2xl">%</span></div>
-                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Uptime Guarantee</div>
+                    <div class="font-header font-extrabold text-3xl text-gold-400 mb-1">BOM</div>
+                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Produksi</div>
                 </div>
             </div>
         </div>
@@ -783,7 +783,7 @@ body { background-color: #f8f9fa; color: #374151; }
             <div>
                 <h4 class="font-header font-bold text-white text-xs tracking-widest uppercase mb-5">Kontak</h4>
                 <ul class="flex flex-col gap-3 text-sm text-gray-500">
-                    <li class="flex items-start gap-2.5"><i class="fas fa-phone text-gold-400 mt-0.5 text-xs flex-shrink-0"></i><a href="https://wa.me/6285156397948" target="_blank" class="hover:text-gold-400 transition">+62 851-5639-7948</a></li>
+                    <li class="flex items-start gap-2.5"><i class="fas fa-phone text-gold-400 mt-0.5 text-xs flex-shrink-0"></i><a href="https://wa.me/6285156397948?text=Halo%20Trinity%2C%20saya%20ingin%20konsultasi%20TalentCore.ERP%20untuk%20kebutuhan%20operasional%20perusahaan%20saya." target="_blank" rel="noopener" class="hover:text-gold-400 transition">+62 851-5639-7948</a></li>
                     <li class="flex items-start gap-2.5"><i class="fas fa-envelope text-gold-400 mt-0.5 text-xs flex-shrink-0"></i><a href="mailto:trinityberkahmandiri@gmail.com" class="hover:text-gold-400 transition text-xs">trinityberkahmandiri@gmail.com</a></li>
                     <li class="flex items-start gap-2.5"><i class="fas fa-map-marker-alt text-gold-400 mt-0.5 text-xs flex-shrink-0"></i><span class="text-xs leading-relaxed">Jl. Kapuk Raya Gg Jambu Rt.005 Rw.011,<br>Cengkareng, Jakarta Barat 11720</span></li>
                 </ul>
@@ -823,33 +823,6 @@ var revObs = new IntersectionObserver(function(entries) {
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal-on-scroll').forEach(function(el) { revObs.observe(el); });
 
-// Counter animation
-function runCounter(id, target, duration) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    var startTime = null;
-    function step(ts) {
-        if (!startTime) startTime = ts;
-        var p = Math.min((ts - startTime) / duration, 1);
-        var ease = 1 - Math.pow(1 - p, 3);
-        el.textContent = Math.floor(ease * target);
-        if (p < 1) requestAnimationFrame(step);
-        else el.textContent = target;
-    }
-    requestAnimationFrame(step);
-}
-var counterDone = false;
-new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-        if (e.isIntersecting && !counterDone) {
-            counterDone = true;
-            setTimeout(function() {
-                runCounter('erp-c1', 18, 1400);
-                runCounter('erp-c2', 4, 800);
-            }, 300);
-        }
-    });
-}, { threshold: 0.5 }).observe(document.getElementById('erp-c1').closest('.grid'));
 
 // Navbar shrink
 window.addEventListener('scroll', function() {
