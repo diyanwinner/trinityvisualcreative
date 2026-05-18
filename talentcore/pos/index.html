@@ -219,28 +219,28 @@ details[open] .faq-icon { transform: rotate(180deg); }
                 <div class="flex flex-wrap gap-4 mt-8 pt-8 border-t border-white/10">
                     <span class="text-xs text-gray-500 flex items-center gap-1.5"><i class="fas fa-check-circle text-green-400"></i> 30 Hari Gratis</span>
                     <span class="text-xs text-gray-500 flex items-center gap-1.5"><i class="fas fa-check-circle text-green-400"></i> Tanpa Kartu Kredit</span>
-                    <span class="text-xs text-gray-500 flex items-center gap-1.5"><i class="fas fa-check-circle text-green-400"></i> Setup 5 Menit</span>
+                    <span class="text-xs text-gray-500 flex items-center gap-1.5"><i class="fas fa-check-circle text-green-400"></i> Setup dibantu tim</span>
                     <span class="text-xs text-gray-500 flex items-center gap-1.5"><i class="fas fa-check-circle text-green-400"></i> Support WhatsApp</span>
                 </div>
             </div>
 
-            <!-- Right: Stats -->
+            <!-- Right: Service proof -->
             <div class="grid grid-cols-2 gap-4">
                 <div class="bg-navy-800/60 border border-white/8 rounded-2xl p-6 text-center">
-                    <div class="font-header font-extrabold text-4xl text-gold-400 mb-1"><span id="pos-c1">0</span></div>
-                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Hari Trial Gratis</div>
+                    <div class="font-header font-extrabold text-3xl text-gold-400 mb-1">Kasir</div>
+                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Transaksi Cepat</div>
                 </div>
                 <div class="bg-navy-800/60 border border-white/8 rounded-2xl p-6 text-center">
-                    <div class="font-header font-extrabold text-4xl text-gold-400 mb-1"><span id="pos-c2">0</span></div>
-                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Menit Setup Awal</div>
+                    <div class="font-header font-extrabold text-3xl text-gold-400 mb-1">Stok</div>
+                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Real-time</div>
                 </div>
                 <div class="bg-navy-800/60 border border-white/8 rounded-2xl p-6 text-center">
-                    <div class="font-header font-extrabold text-4xl text-gold-400 mb-1">∞</div>
-                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Kasir Unlimited</div>
+                    <div class="font-header font-extrabold text-3xl text-gold-400 mb-1">Shift</div>
+                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Multi-role</div>
                 </div>
                 <div class="bg-navy-800/60 border border-white/8 rounded-2xl p-6 text-center">
-                    <div class="font-header font-extrabold text-4xl text-gold-400 mb-1">99.9<span class="text-2xl">%</span></div>
-                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Uptime Guarantee</div>
+                    <div class="font-header font-extrabold text-3xl text-gold-400 mb-1">Laba</div>
+                    <div class="text-gray-400 text-xs tracking-widest uppercase font-semibold">Laporan Harian</div>
                 </div>
             </div>
         </div>
@@ -815,7 +815,7 @@ details[open] .faq-icon { transform: rotate(180deg); }
                 <p class="text-slate-500 text-sm leading-relaxed max-w-xs">
                     Sistem kasir digital cloud untuk UMKM Indonesia. Setup 5 menit, tanpa instalasi, langsung dari browser.
                 </p>
-                <a href="https://wa.me/6285156397948" target="_blank" rel="noopener" class="inline-flex items-center gap-2 mt-4 text-sm font-semibold text-gold-400 hover:text-gold-300 transition">
+                <a href="https://wa.me/6285156397948?text=Halo%20Trinity%2C%20saya%20ingin%20konsultasi%20TalentCore.POS%20untuk%20kebutuhan%20transaksi%2FPOS%20bisnis%20saya." target="_blank" rel="noopener" class="inline-flex items-center gap-2 mt-4 text-sm font-semibold text-gold-400 hover:text-gold-300 transition">
                     <i class="fa-brands fa-whatsapp"></i> +62 851-5639-7948
                 </a>
             </div>
@@ -887,37 +887,6 @@ document.querySelectorAll('details').forEach(function(el) {
     });
 });
 
-// Counter animation
-function runCounter(id, target, duration) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    var startTime = null;
-    function step(timestamp) {
-        if (!startTime) startTime = timestamp;
-        var progress = Math.min((timestamp - startTime) / duration, 1);
-        var ease = 1 - Math.pow(1 - progress, 3);
-        el.textContent = Math.floor(ease * target);
-        if (progress < 1) requestAnimationFrame(step);
-        else el.textContent = target;
-    }
-    requestAnimationFrame(step);
-}
-
-var counterTriggered = false;
-var statsObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-        if (entry.isIntersecting && !counterTriggered) {
-            counterTriggered = true;
-            setTimeout(function() {
-                runCounter('pos-c1', 30, 1400);
-                runCounter('pos-c2', 5, 900);
-            }, 300);
-        }
-    });
-}, { threshold: 0.5 });
-
-var statsGrid = document.getElementById('pos-c1');
-if (statsGrid) statsObserver.observe(statsGrid.closest('.grid'));
 
 // Navbar shrink on scroll
 window.addEventListener('scroll', function() {
