@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hubungi Kami — PT Trinity Berkah Mandiri</title>
-    <meta name="description" content="Hubungi PT Trinity Berkah Mandiri untuk konsultasi visual creative, TalentCore, perizinan, dan kebutuhan solusi bisnis. Tersedia via WhatsApp, email, dan kunjungan terjadwal di Jakarta Barat.">
+    <meta name="description" content="Hubungi PT Trinity Berkah Mandiri untuk konsultasi visual creative, TalentCore, perizinan, industrial solution, injection plastic, dan kebutuhan solusi bisnis lainnya.">
     <meta name="keywords" content="kontak Trinity Berkah Mandiri, hubungi kami, konsultasi bisnis Jakarta">
     <meta name="author" content="PT Trinity Berkah Mandiri">
     <meta name="robots" content="index, follow">
@@ -12,11 +12,11 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://trinityberkahmandiri.com/contact/">
     <meta property="og:title" content="Hubungi Kami — PT Trinity Berkah Mandiri">
-    <meta property="og:description" content="Mulai diskusi kebutuhan bisnis bersama Trinity: visual creative, TalentCore, perizinan, dan konsultasi solusi operasional.">
+    <meta property="og:description" content="Mulai diskusi kebutuhan bisnis bersama Trinity: visual creative, TalentCore, perizinan, industrial solution, dan konsultasi solusi operasional.">
     <meta property="og:image" content="https://trinityberkahmandiri.com/logo.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Hubungi Kami — PT Trinity Berkah Mandiri">
-    <meta name="twitter:description" content="Mulai diskusi kebutuhan bisnis bersama Trinity: visual creative, TalentCore, perizinan, dan solusi operasional.">
+    <meta name="twitter:description" content="Mulai diskusi kebutuhan bisnis bersama Trinity: visual creative, TalentCore, perizinan, industrial solution, dan solusi operasional.">
     <meta name="twitter:image" content="https://trinityberkahmandiri.com/logo.png">
     <link rel="icon" type="image/png" href="../logo.png">
 
@@ -269,7 +269,7 @@
                     <span class="text-transparent bg-clip-text bg-gold-gradient">Bisnis.</span>
                 </h1>
                 <p class="text-gray-500 text-lg leading-relaxed">
-                    Ceritakan kebutuhan Anda, mulai dari company profile, website, TalentCore, perizinan, sampai konsultasi solusi bisnis. Tim Trinity akan membantu memetakan jalur yang paling relevan sebelum masuk ke penawaran.
+                    Ceritakan kebutuhan Anda, mulai dari company profile, website, TalentCore, perizinan, industrial solution/injection plastic, sampai konsultasi solusi bisnis. Tim Trinity akan membantu memetakan jalur yang paling relevan sebelum masuk ke penawaran.
                 </p>
             </div>
         </div>
@@ -384,6 +384,8 @@
                                 <option value="content">Social Media / Konten Digital</option>
                                 <option value="talentcore">TalentCore HR / ERP / POS</option>
                                 <option value="perizinan">Perizinan &amp; Pelaporan</option>
+                                <option value="industrial-solution">Industrial Solution / Injection Plastic</option>
+                                <option value="business-support">Business Support / Kolaborasi</option>
                                 <option value="business-consulting">Konsultasi Solusi Bisnis</option>
                                 <option value="lainnya">Lainnya</option>
                             </select>
@@ -391,7 +393,7 @@
 
                         <div class="flex flex-col gap-2">
                             <label class="text-xs font-semibold text-gray-600 uppercase tracking-widest">Pesan</label>
-                            <textarea id="pesan" rows="5" placeholder="Contoh: Kami butuh company profile untuk tender / ingin demo POS untuk outlet F&B / perlu pendampingan LKPM-SIINAS..." required
+                            <textarea id="pesan" rows="5" placeholder="Contoh: Kami butuh company profile untuk tender / ingin demo POS untuk outlet F&B / perlu pendampingan LKPM-SIINAS / ingin diskusi produksi injection plastic..." required
                                 class="form-input rounded-lg px-4 py-3 text-sm w-full resize-none"></textarea>
                         </div>
 
@@ -532,15 +534,16 @@
             const pesan      = document.getElementById('pesan').value.trim();
 
             const layananLabel = {
-                'company-profile': 'Company Profile',
-                'video':           'Video Korporasi',
-                'branding':        'Branding Identity',
-                'sosmed':          'Social Media',
-                'dokumentasi':     'Dokumentasi & Fotografi',
-                'talentcore':      'TalentCore (HR & ERP)',
-                'perizinan':       'Perizinan & Pelaporan',
-                'outsourcing':     'Outsourcing',
-                'lainnya':         'Lainnya'
+                'visual-creative':     'Visual Creative / Company Profile',
+                'website':             'Website & Landing Page',
+                'branding':            'Branding Identity',
+                'content':             'Social Media / Konten Digital',
+                'talentcore':          'TalentCore HR / ERP / POS',
+                'perizinan':           'Perizinan & Pelaporan',
+                'industrial-solution': 'Industrial Solution / Injection Plastic',
+                'business-support':    'Business Support / Kolaborasi',
+                'business-consulting': 'Konsultasi Solusi Bisnis',
+                'lainnya':             'Lainnya'
             };
 
             const msg = `Halo Trinity Berkah Mandiri 👋\n\n*Nama:* ${nama}\n*Perusahaan:* ${perusahaan || '-'}\n*Email:* ${email}\n*Layanan:* ${layananLabel[layanan] || '-'}\n\n*Pesan:*\n${pesan}`;
