@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pristine Accounting | Accounting, Tax, and Business Consulting</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <meta name="description" content="Pristine Accounting provides accounting, tax, and business management consulting services for individuals and companies." />
   <style>
     :root {
@@ -690,14 +691,17 @@
       flex-shrink: 0;
       width: 36px;
       height: 36px;
-      display: grid;
-      place-items: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       border-radius: 12px;
       background: var(--purple);
-      color: #fff;
+      color: #ffffff;
       font-size: 12px;
       font-weight: 950;
-      letter-spacing: .04em;
+      line-height: 1;
+      letter-spacing: 0;
+      text-align: center;
     }
     .testi-label b {
       display: block;
@@ -1573,7 +1577,7 @@
       font-size: clamp(54px, 4.75vw, 78px) !important;
       line-height: 1.055 !important;
       letter-spacing: -.035em !important;
-      font-weight: 900 !important;
+      font-weight: 700 !important;
     }
 
     .hero p {
@@ -2128,7 +2132,7 @@
           </div>
         </div>
         <div class="testi-label">
-          <span class="testi-num">${num}</span>
+          <div class="testi-num">${num}</div>
           <div><b>${v.judul}</b><span>${v.sub}</span></div>
         </div>
       `;
@@ -2163,6 +2167,17 @@
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeVideoLB();
   });
+
+  /* ── Netlify Identity redirect ── */
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on('init', user => {
+      if (!user) {
+        window.netlifyIdentity.on('login', () => {
+          document.location.href = '/admin/';
+        });
+      }
+    });
+  }
 
   /* ── Certificate Lightbox + Zoom ── */
   const _cz = { scale: 1, x: 0, y: 0, dragging: false, sx: 0, sy: 0 };
