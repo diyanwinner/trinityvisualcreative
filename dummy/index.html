@@ -230,7 +230,7 @@
       color: #fff;
       background:
         linear-gradient(to right, rgba(18,0,65,.88) 0%, rgba(37,0,125,.72) 45%, rgba(53,0,168,.22) 100%),
-        url('assets/header.png') center center / cover no-repeat;
+        url('https://res.cloudinary.com/dsl0n8dxb/image/upload/f_auto,q_auto/v1780331100/ChatGPT_Image_1_Jun_2026_23.23.06_y0g0eo.png') center center / cover no-repeat;
       padding: clamp(24px, 4.8vw, 50px) 0 clamp(44px, 6vw, 68px);
     }
     .hero-grid { display: grid; grid-template-columns: 1fr; align-items: center; }
@@ -545,24 +545,7 @@
       color: rgba(255,255,255,.72);
       padding: 58px 0 30px;
     }
-    footer::before {
-      content: "";
-      position: absolute;
-      inset: -160px -120px auto auto;
-      width: 780px;
-      height: 420px;
-      transform: rotate(-36deg);
-      opacity: .28;
-      background:
-        repeating-linear-gradient(
-          90deg,
-          transparent 0 34px,
-          rgba(255,255,255,.08) 34px 48px,
-          transparent 48px 86px,
-          rgba(0,0,0,.22) 86px 100px,
-          transparent 100px 144px
-        );
-    }
+    footer::before { display: none; }
     .footer-grid { display: grid; grid-template-columns: 1.25fr repeat(3, 1fr); gap: 30px; padding-bottom: 34px; border-bottom: 1px solid rgba(255,255,255,.12); }
     .footer-logo { width: 220px; filter: brightness(0) invert(1); opacity: .95; }
     .footer-col h3 { margin: 0 0 14px; color: #fff; font-size: 16px; }
@@ -1135,7 +1118,7 @@
           rgba(47,0,148,.45) 68%,
           rgba(47,0,148,.32) 100%
         ),
-        url('assets/header.png') center center / cover no-repeat;
+        url('https://res.cloudinary.com/dsl0n8dxb/image/upload/f_auto,q_auto/v1780331100/ChatGPT_Image_1_Jun_2026_23.23.06_y0g0eo.png') center center / cover no-repeat;
       border-bottom: 0;
     }
     .hero > .brand-pattern {
@@ -1525,7 +1508,7 @@
           rgba(55,0,160,.58) 46%,
           rgba(53,0,150,.50) 100%
         ),
-        url('assets/header.png') center center / cover no-repeat !important;
+        url('https://res.cloudinary.com/dsl0n8dxb/image/upload/f_auto,q_auto/v1780331100/ChatGPT_Image_1_Jun_2026_23.23.06_y0g0eo.png') center center / cover no-repeat !important;
     }
 
     .hero .brand-pattern,
@@ -1557,9 +1540,9 @@
       letter-spacing: .075em !important;
       padding: 10px 18px !important;
       border-radius: 0 !important;
-      background: rgba(22,0,78,.78) !important;
-      border: 1px solid rgba(255,255,255,.10) !important;
-      box-shadow: 0 14px 26px rgba(14,0,50,.18) !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
       animation: none !important;
     }
 
@@ -1590,11 +1573,11 @@
     .hero-actions {
       margin-top: 22px !important;
       gap: 10px !important;
-      background: rgba(22,0,78,.76) !important;
+      background: transparent !important;
       display: inline-flex !important;
-      padding: 10px !important;
+      padding: 0 !important;
       border-radius: 0 !important;
-      box-shadow: 0 14px 26px rgba(14,0,50,.18) !important;
+      box-shadow: none !important;
     }
 
     .hero-actions .btn {
@@ -1622,6 +1605,33 @@
       .hero h1, h1 { font-size: clamp(44px, 5.4vw, 64px) !important; }
     }
 
+    /* ── CLIENTS BRAND PATTERN: diagonal stripes + scattered circles ── */
+    .clients .brand-pattern {
+      opacity: 1;
+      background:
+        radial-gradient(circle at  4% 12%, rgba(40,0,120,.42) 0 72px,  transparent 73px),
+        radial-gradient(circle at 96%  8%, rgba(40,0,120,.38) 0 105px, transparent 106px),
+        radial-gradient(circle at -1% 52%, rgba(40,0,120,.36) 0 88px,  transparent 89px),
+        radial-gradient(circle at 101% 48%,rgba(40,0,120,.34) 0 115px, transparent 116px),
+        radial-gradient(circle at 14% 90%, rgba(40,0,120,.32) 0 92px,  transparent 93px),
+        radial-gradient(circle at 80% 82%, rgba(40,0,120,.30) 0 78px,  transparent 79px),
+        radial-gradient(circle at 50% 50%, rgba(40,0,120,.18) 0 60px,  transparent 61px),
+        radial-gradient(circle at 30% 30%, rgba(40,0,120,.20) 0 50px,  transparent 51px),
+        radial-gradient(circle at 68% 22%, rgba(40,0,120,.24) 0 68px,  transparent 69px),
+        radial-gradient(circle at 88% 60%, rgba(40,0,120,.28) 0 82px,  transparent 83px),
+        repeating-linear-gradient(
+          -45deg,
+          transparent       0px,
+          transparent      30px,
+          rgba(0,0,60,.22) 30px,
+          rgba(0,0,60,.22) 46px
+        );
+    }
+    .clients .brand-pattern::before,
+    .clients .brand-pattern::after {
+      display: none;
+    }
+
     @media (max-width: 940px) {
       .nav { min-height: 64px !important; }
       .brand-mark, .brand-logo { width: 158px !important; max-width: 50vw !important; }
@@ -1633,7 +1643,7 @@
             rgba(55,0,160,.64) 56%,
             rgba(53,0,150,.48) 100%
           ),
-          url('assets/header.png') center center / cover no-repeat !important;
+          url('https://res.cloudinary.com/dsl0n8dxb/image/upload/f_auto,q_auto/v1780331100/ChatGPT_Image_1_Jun_2026_23.23.06_y0g0eo.png') center center / cover no-repeat !important;
       }
       .hero-grid { min-height: auto !important; }
       .hero-copy { max-width: 760px !important; padding: 110px 0 116px !important; }
@@ -1868,7 +1878,34 @@
     </section>
 
     <section id="clients" class="clients">
-      <div class="brand-pattern"></div>
+      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:hidden;">
+        <defs>
+          <pattern id="clientPat" width="200" height="200" patternUnits="userSpaceOnUse" patternTransform="rotate(-45 0 0)">
+            <rect x="0" y="0"   width="200" height="12" fill="rgba(0,0,50,.22)"/>
+            <rect x="0" y="40"  width="200" height="12" fill="rgba(0,0,50,.22)"/>
+            <rect x="0" y="80"  width="200" height="12" fill="rgba(0,0,50,.22)"/>
+            <rect x="0" y="120" width="200" height="12" fill="rgba(0,0,50,.22)"/>
+            <rect x="0" y="160" width="200" height="12" fill="rgba(0,0,50,.22)"/>
+            <rect x="10"  y="16" width="78" height="20" rx="10" fill="rgba(25,0,80,.28)" stroke="rgba(50,0,130,.36)" stroke-width="1.5"/>
+            <circle cx="130" cy="26" r="9"  fill="rgba(25,0,80,.28)" stroke="rgba(50,0,130,.36)" stroke-width="1.5"/>
+            <rect x="145" y="18" width="50" height="18" rx="9"  fill="rgba(25,0,80,.18)" stroke="rgba(60,0,150,.44)" stroke-width="1.8"/>
+            <circle cx="28" cy="66" r="8" fill="rgba(25,0,80,.25)" stroke="rgba(50,0,130,.34)" stroke-width="1.5"/>
+            <rect x="45"  y="57" width="62" height="20" rx="10" fill="rgba(25,0,80,.22)" stroke="rgba(50,0,130,.32)" stroke-width="1.5"/>
+            <rect x="130" y="58" width="65" height="20" rx="10" fill="rgba(25,0,80,.18)" stroke="rgba(60,0,150,.44)" stroke-width="1.8"/>
+            <rect x="8"   y="95" width="55" height="18" rx="9"  fill="rgba(25,0,80,.28)" stroke="rgba(50,0,130,.36)" stroke-width="1.5"/>
+            <circle cx="100" cy="106" r="10" fill="rgba(25,0,80,.22)" stroke="rgba(50,0,130,.30)" stroke-width="1.5"/>
+            <rect x="120" y="96" width="72" height="20" rx="10" fill="rgba(25,0,80,.25)" stroke="rgba(50,0,130,.34)" stroke-width="1.5"/>
+            <circle cx="20" cy="148" r="12" fill="rgba(25,0,80,.22)" stroke="rgba(50,0,130,.30)" stroke-width="1.5"/>
+            <rect x="40"  y="136" width="68" height="20" rx="10" fill="rgba(25,0,80,.28)" stroke="rgba(50,0,130,.36)" stroke-width="1.5"/>
+            <circle cx="148" cy="148" r="8" fill="rgba(25,0,80,.25)" stroke="rgba(50,0,130,.34)" stroke-width="1.5"/>
+            <rect x="162" y="137" width="35" height="18" rx="9"  fill="rgba(25,0,80,.18)" stroke="rgba(60,0,150,.42)" stroke-width="1.8"/>
+            <rect x="14"  y="175" width="42" height="18" rx="9"  fill="rgba(25,0,80,.28)" stroke="rgba(50,0,130,.36)" stroke-width="1.5"/>
+            <circle cx="84" cy="186" r="9" fill="rgba(25,0,80,.22)" stroke="rgba(50,0,130,.30)" stroke-width="1.5"/>
+            <rect x="100" y="176" width="80" height="20" rx="10" fill="rgba(25,0,80,.25)" stroke="rgba(50,0,130,.34)" stroke-width="1.5"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#clientPat)"/>
+      </svg>
       <div class="shell">
         <div class="section-head">
           <div>
@@ -1940,6 +1977,34 @@
   </main>
 
   <footer>
+    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:hidden;">
+      <defs>
+        <pattern id="footerPat" width="200" height="200" patternUnits="userSpaceOnUse" patternTransform="rotate(-45 0 0)">
+          <rect x="0" y="0"   width="200" height="12" fill="rgba(0,0,50,.22)"/>
+          <rect x="0" y="40"  width="200" height="12" fill="rgba(0,0,50,.22)"/>
+          <rect x="0" y="80"  width="200" height="12" fill="rgba(0,0,50,.22)"/>
+          <rect x="0" y="120" width="200" height="12" fill="rgba(0,0,50,.22)"/>
+          <rect x="0" y="160" width="200" height="12" fill="rgba(0,0,50,.22)"/>
+          <rect x="10"  y="16" width="78" height="20" rx="10" fill="rgba(25,0,80,.28)" stroke="rgba(50,0,130,.36)" stroke-width="1.5"/>
+          <circle cx="130" cy="26" r="9"  fill="rgba(25,0,80,.28)" stroke="rgba(50,0,130,.36)" stroke-width="1.5"/>
+          <rect x="145" y="18" width="50" height="18" rx="9"  fill="rgba(25,0,80,.18)" stroke="rgba(60,0,150,.44)" stroke-width="1.8"/>
+          <circle cx="28" cy="66" r="8" fill="rgba(25,0,80,.25)" stroke="rgba(50,0,130,.34)" stroke-width="1.5"/>
+          <rect x="45"  y="57" width="62" height="20" rx="10" fill="rgba(25,0,80,.22)" stroke="rgba(50,0,130,.32)" stroke-width="1.5"/>
+          <rect x="130" y="58" width="65" height="20" rx="10" fill="rgba(25,0,80,.18)" stroke="rgba(60,0,150,.44)" stroke-width="1.8"/>
+          <rect x="8"   y="95" width="55" height="18" rx="9"  fill="rgba(25,0,80,.28)" stroke="rgba(50,0,130,.36)" stroke-width="1.5"/>
+          <circle cx="100" cy="106" r="10" fill="rgba(25,0,80,.22)" stroke="rgba(50,0,130,.30)" stroke-width="1.5"/>
+          <rect x="120" y="96" width="72" height="20" rx="10" fill="rgba(25,0,80,.25)" stroke="rgba(50,0,130,.34)" stroke-width="1.5"/>
+          <circle cx="20" cy="148" r="12" fill="rgba(25,0,80,.22)" stroke="rgba(50,0,130,.30)" stroke-width="1.5"/>
+          <rect x="40"  y="136" width="68" height="20" rx="10" fill="rgba(25,0,80,.28)" stroke="rgba(50,0,130,.36)" stroke-width="1.5"/>
+          <circle cx="148" cy="148" r="8" fill="rgba(25,0,80,.25)" stroke="rgba(50,0,130,.34)" stroke-width="1.5"/>
+          <rect x="162" y="137" width="35" height="18" rx="9"  fill="rgba(25,0,80,.18)" stroke="rgba(60,0,150,.42)" stroke-width="1.8"/>
+          <rect x="14"  y="175" width="42" height="18" rx="9"  fill="rgba(25,0,80,.28)" stroke="rgba(50,0,130,.36)" stroke-width="1.5"/>
+          <circle cx="84" cy="186" r="9" fill="rgba(25,0,80,.22)" stroke="rgba(50,0,130,.30)" stroke-width="1.5"/>
+          <rect x="100" y="176" width="80" height="20" rx="10" fill="rgba(25,0,80,.25)" stroke="rgba(50,0,130,.34)" stroke-width="1.5"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#footerPat)"/>
+    </svg>
     <div class="shell">
       <div class="footer-grid">
         <div class="footer-col">
