@@ -13,11 +13,10 @@
   <div id="setup" class="setup" hidden>
     <div class="card"><small>TRINITY CLIENT BRIEF</small><h1>Portal belum dihubungkan</h1><p>Administrator perlu menempel URL Google Apps Script pada file <code>brief/config.js</code>.</p></div>
   </div>
-  <iframe id="portal" title="Trinity Client Brief" allow="clipboard-read; clipboard-write"></iframe>
-  <script src="config.js?v=20260720-2"></script>
+  <iframe id="portal" title="Trinity Client Brief" allow="clipboard-read; clipboard-write"></iframe>  
   <script>
     (function(){
-      const config=window.TRINITY_BRIEF_CONFIG||{};
+      const config={appScriptUrl:'https://script.google.com/macros/s/AKfycbzf-eWVTW3_5s9OHRo9CQwVIhufSd-Z2ejbsRfhR8HH0rvfV6drvLLZbvYHWexYiZKKMA/exec'};
       const project=new URLSearchParams(location.search).get('project')||'';
       if(!config.appScriptUrl||config.appScriptUrl.indexOf('PASTE_')===0){
         document.getElementById('portal').hidden=true;
