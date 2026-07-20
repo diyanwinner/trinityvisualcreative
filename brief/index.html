@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portal pengumpulan kebutuhan website klien Trinity Berkah Mandiri">
+  <title>Trinity Client Brief</title>
+  <style>
+    *{box-sizing:border-box}html,body{height:100%;margin:0;background:#081522;font-family:Arial,sans-serif}iframe{display:block;width:100%;height:100%;border:0;background:#fcfaf5}.setup{min-height:100%;display:grid;place-items:center;padding:30px;background:#fcfaf5;color:#0b1f33}.card{max-width:620px;padding:38px;border:1px solid #e6dfd4;border-radius:16px;background:#fff;box-shadow:0 20px 55px #08152218}.card small{color:#976812;font-weight:700;letter-spacing:.15em}.card h1{margin:12px 0;font-family:Georgia,serif;font-size:36px}.card p{color:#667383;line-height:1.65}.card code{display:block;padding:12px;border-radius:7px;background:#f7f3ea;color:#0b1f33;overflow:auto}
+  </style>
+</head>
+<body>
+  <div id="setup" class="setup" hidden>
+    <div class="card"><small>TRINITY CLIENT BRIEF</small><h1>Portal belum dihubungkan</h1><p>Administrator perlu menempel URL Google Apps Script pada file <code>brief/config.js</code>.</p></div>
+  </div>
+  <iframe id="portal" title="Trinity Client Brief" allow="clipboard-read; clipboard-write"></iframe>
+  <script src="config.js"></script>
+  <script>
+    (function(){
+      const config=window.TRINITY_BRIEF_CONFIG||{};
+      const project=new URLSearchParams(location.search).get('project')||'';
+      if(!config.appScriptUrl||config.appScriptUrl.indexOf('PASTE_')===0){
+        document.getElementById('portal').hidden=true;
+        document.getElementById('setup').hidden=false;
+        return;
+      }
+      const separator=config.appScriptUrl.indexOf('?')>=0?'&':'?';
+      document.getElementById('portal').src=config.appScriptUrl+separator+'project='+encodeURIComponent(project);
+    })();
+  </script>
+</body>
+</html>
